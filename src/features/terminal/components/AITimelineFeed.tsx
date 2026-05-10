@@ -1,6 +1,8 @@
 import { motion } from 'motion/react';
 import { Radio, Cpu, ShieldAlert, Zap, Layers, Activity } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { TerminalPanel } from '@/components/ui/surfaces/TerminalPanel';
+import { StatusBadge } from '@/components/ui/surfaces/StatusBadge';
 import { terminalTimelineEvents } from '../data';
 import type { TerminalTimelineIcon } from '../types';
 
@@ -16,19 +18,19 @@ export default function AITimelineFeed() {
   const { t } = useTranslation();
 
   return (
-    <div className="flex flex-col h-full bg-black/40 border border-white/5 rounded-xl overflow-hidden backdrop-blur-md relative min-h-0">
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-accent-blue/5 to-transparent h-12 w-full animate-scanline pointer-events-none" />
-
-      <div className="p-3 border-b border-white/5 flex items-center justify-between bg-white/[0.02] shrink-0">
+    <TerminalPanel
+      className="h-full min-h-0 bg-black/40 backdrop-blur-md"
+      title={t('terminal.timeline.title')}
+      actions={
         <div className="flex items-center gap-2">
           <Radio className="w-3.5 h-3.5 text-accent-violet" />
-          <h3 className="text-[10px] font-bold uppercase tracking-widest text-text-secondary">{t('terminal.timeline.title')}</h3>
+          <StatusBadge tone="violet" className="border-0 bg-transparent px-0 text-[9px] text-accent-violet">
+            {t('terminal.timeline.liveFeed')}
+          </StatusBadge>
         </div>
-        <div className="flex items-center gap-2">
-          <div className="w-1.5 h-1.5 rounded-full bg-accent-violet animate-pulse" />
-          <span className="text-[9px] uppercase text-accent-violet font-mono tracking-widest">{t('terminal.timeline.liveFeed')}</span>
-        </div>
-      </div>
+      }
+    >
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-accent-blue/5 to-transparent h-12 w-full animate-scanline pointer-events-none" />
       <div className="flex-1 overflow-y-auto p-4 font-mono relative">
         <div className="absolute left-6 top-4 bottom-4 w-px bg-white/5" />
 
@@ -70,6 +72,6 @@ export default function AITimelineFeed() {
           })}
         </div>
       </div>
-    </div>
+    </TerminalPanel>
   );
 }

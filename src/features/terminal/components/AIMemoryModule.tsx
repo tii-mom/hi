@@ -1,25 +1,26 @@
 import { motion } from 'motion/react';
 import { Database, Clock } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { TerminalPanel } from '@/components/ui/surfaces/TerminalPanel';
+import { StatusBadge } from '@/components/ui/surfaces/StatusBadge';
 import { aiMemoryItems } from '../data';
 
 export default function AIMemoryModule() {
   const { t } = useTranslation();
 
   return (
-    <div className="glass rounded-xl p-4 flex flex-col relative overflow-hidden h-full min-h-0">
-      <div className="flex items-center justify-between border-b border-white/5 pb-3 mb-4 shrink-0 relative z-10">
+    <TerminalPanel
+      className="h-full min-h-0"
+      title={t('terminal.memory.title')}
+      actions={
         <div className="flex items-center gap-2">
           <Database className="w-3.5 h-3.5 text-text-secondary" />
-          <h3 className="text-[10px] font-bold uppercase tracking-widest text-text-secondary">
-            {t('terminal.memory.title')}
-          </h3>
+          <StatusBadge tone="blue" className="border-0 bg-transparent px-0 text-[9px] text-text-secondary">
+            {t('terminal.memory.scanning')}
+          </StatusBadge>
         </div>
-        <div className="flex items-center gap-1">
-          <span className="w-1.5 h-1.5 rounded-full bg-accent-blue animate-pulse" />
-          <span className="text-[9px] font-mono text-text-secondary uppercase">{t('terminal.memory.scanning')}</span>
-        </div>
-      </div>
+      }
+    >
 
       <div className="flex-1 overflow-y-auto space-y-3 relative z-10 min-h-0 pr-1">
         {aiMemoryItems.map((item, index) => (
@@ -55,6 +56,6 @@ export default function AIMemoryModule() {
           </motion.div>
         ))}
       </div>
-    </div>
+    </TerminalPanel>
   );
 }

@@ -1,21 +1,28 @@
 import { motion } from 'motion/react';
 import { Network } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { TerminalPanel } from '@/components/ui/surfaces/TerminalPanel';
+import { StatusBadge } from '@/components/ui/surfaces/StatusBadge';
 
 export default function AgentConsensusGraph() {
   const { t } = useTranslation();
 
   return (
-    <div className="glass rounded-xl p-4 flex flex-col relative overflow-hidden h-full min-h-0">
+    <TerminalPanel
+      className="h-full min-h-0"
+      title={t('terminal.consensus.title')}
+      actions={
+        <StatusBadge tone="emerald" className="text-[9px] font-mono">
+          {t('terminal.consensus.aligned')}
+        </StatusBadge>
+      }
+    >
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-accent-violet/10 rounded-full blur-[60px] pointer-events-none" />
       <div className="flex items-center justify-between border-b border-white/5 pb-3 mb-4 shrink-0 relative z-10">
         <div className="flex items-center gap-2">
           <Network className="w-3.5 h-3.5 text-accent-violet" />
           <h3 className="text-[10px] font-bold uppercase tracking-widest text-text-secondary">{t('terminal.consensus.title')}</h3>
         </div>
-        <span className="text-[9px] font-mono text-accent-emerald bg-accent-emerald/10 px-2 py-0.5 rounded border border-accent-emerald/20">
-          {t('terminal.consensus.aligned')}
-        </span>
       </div>
 
       <div className="flex-1 relative min-h-0 flex items-center justify-center">
@@ -68,6 +75,6 @@ export default function AgentConsensusGraph() {
           <line x1="50%" y1="50%" x2="20%" y2="50%" stroke="var(--color-accent-violet)" strokeWidth="1" strokeDasharray="4 4" className="opacity-50 animate-pulse" />
         </svg>
       </div>
-    </div>
+    </TerminalPanel>
   );
 }

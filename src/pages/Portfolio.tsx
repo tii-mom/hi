@@ -1,8 +1,8 @@
 import { Activity, Shield } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts';
-import { portfolioViewModel } from '@/features/portfolio';
-import type { PortfolioCopy, PortfolioPositionType } from '@/features/portfolio';
+import { createPortfolioViewModel } from '@/app/services/portfolio';
+import type { PortfolioPositionType } from '@/features/portfolio';
 import { cn } from '@/lib/utils';
 
 function formatUsd(value: number) {
@@ -56,30 +56,29 @@ function positionTone(type: PortfolioPositionType) {
 
 export default function Portfolio() {
   const { t } = useTranslation();
-  const copy = (item: PortfolioCopy) => t(item.key, item.fallback);
+  const portfolioViewModel = createPortfolioViewModel(t);
   const chartData = portfolioViewModel.allocations.map((item) => ({
     ...item,
-    name: copy(item.label),
     value: item.valuePercent,
   }));
 
   return (
-    <div className="h-full flex flex-col gap-6">
-      <div className="flex items-center justify-between border-b border-border pb-4 shrink-0">
-        <div>
-          <h2 className="text-xl font-semibold uppercase tracking-wider mb-1">{copy(portfolioViewModel.title)}</h2>
-          <p className="text-sm text-text-secondary">{copy(portfolioViewModel.subtitle)}</p>
+    <div className="h-full min-h-0 flex flex-col gap-4 md:gap-6">
+      <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 border-b border-border pb-4 shrink-0 min-w-0">
+        <div className="min-w-0">
+          <h2 className="text-lg md:text-xl font-semibold uppercase tracking-wider mb-1 break-words">{portfolioViewModel.title}</h2>
+          <p className="text-sm text-text-secondary">{portfolioViewModel.subtitle}</p>
         </div>
-        <div className="text-right">
-          <div className="text-[10px] text-text-secondary uppercase">{copy(portfolioViewModel.totalManagedLabel)}</div>
-          <div className="font-mono font-bold text-xl">{formatUsd(portfolioViewModel.totalManagedUsd)}</div>
+        <div className="text-left sm:text-right">
+          <div className="text-[10px] text-text-secondary uppercase">{portfolioViewModel.totalManagedLabel}</div>
+          <div className="font-mono font-bold text-lg md:text-xl break-words">{formatUsd(portfolioViewModel.totalManagedUsd)}</div>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 flex-1 min-h-0 overflow-y-auto pb-6">
-        <div className="lg:col-span-1 glass rounded-xl border border-border p-6 flex flex-col relative">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6 flex-1 min-h-0 overflow-y-auto pb-6">
+        <div className="lg:col-span-1 glass rounded-xl border border-border p-4 md:p-6 flex flex-col relative min-w-0">
           <h3 className="text-xs font-bold uppercase tracking-widest text-text-secondary mb-6">
-            {copy(portfolioViewModel.weightingTitle)}
+            {portfolioViewModel.weightingTitle}
           </h3>
           <div className="flex-1 w-full relative min-h-[200px]">
             <ResponsiveContainer width="100%" height="100%">
@@ -105,17 +104,17 @@ export default function Portfolio() {
               </PieChart>
             </ResponsiveContainer>
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none flex-col">
-              <span className="text-[10px] text-text-secondary uppercase">{copy(portfolioViewModel.resonanceLabel)}</span>
+              <span className="text-[10px] text-text-secondary uppercase">{portfolioViewModel.resonanceLabel}</span>
               <span className="font-mono font-bold">{portfolioViewModel.resonancePercent.toFixed(1)}%</span>
             </div>
           </div>
 
-          <div className="space-y-3 mt-6">
+          <div className="space-y-3 mt-6 min-w-0">
             {chartData.map((item) => (
-              <div key={item.id} className="flex items-center justify-between">
+              <div key={item.id} className="flex items-center justify-between gap-3 min-w-0">
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full" style={{ backgroundColor: item.color }} />
-                  <span className="text-sm">{item.name}</span>
+                  <span className="text-sm min-w-0 truncate">{item.name}</span>
                 </div>
                 <span className="text-sm font-mono">{item.valuePercent}%</span>
               </div>
@@ -123,14 +122,14 @@ export default function Portfolio() {
           </div>
         </div>
 
-        <div className="lg:col-span-2 flex flex-col gap-6">
-          <div className="flex gap-4">
+        <div className="lg:col-span-2 flex flex-col gap-4 md:gap-6 min-w-0">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {portfolioViewModel.metrics.map((metric) => {
               const isOrange = metric.tone === 'orange';
               const Icon = isOrange ? Activity : Shield;
 
               return (
-                <div key={metric.id} className="flex-1 glass rounded-xl border border-border p-4 flex items-center gap-4">
+                <div key={metric.id} className="glass rounded-xl border border-border p-4 flex items-center gap-4 min-w-0">
                   <div
                     className={cn(
                       'w-10 h-10 rounded-lg border flex items-center justify-center shrink-0',
@@ -140,56 +139,55 @@ export default function Portfolio() {
                     <Icon className={cn('w-5 h-5', isOrange ? 'text-orange-500' : 'text-accent-blue')} />
                   </div>
                   <div>
-                    <div className="text-[10px] uppercase text-text-secondary">{copy(metric.label)}</div>
-                    <div className={cn('font-mono font-bold', isOrange && 'text-orange-400')}>{copy(metric.value)}</div>
+                    <div className="text-[10px] uppercase text-text-secondary">{metric.label}</div>
+                    <div className={cn('font-mono font-bold', isOrange && 'text-orange-400')}>{metric.value}</div>
                   </div>
                 </div>
               );
             })}
           </div>
 
-          <div className="glass rounded-xl border border-border p-6 flex-1">
+          <div className="glass rounded-xl border border-border p-4 md:p-6 flex-1 min-w-0">
             <h3 className="text-xs font-bold uppercase tracking-widest text-text-secondary mb-6">
-              {copy(portfolioViewModel.positionsTitle)}
+              {portfolioViewModel.positionsTitle}
             </h3>
 
-            <div className="space-y-2">
+            <div className="space-y-2 min-w-0">
               {portfolioViewModel.positions.map((position) => (
                 <div
                   key={position.id}
-                  className="flex items-center justify-between p-4 bg-black/30 border border-white/5 rounded-xl hover:bg-white/5 transition-colors"
+                  className="grid grid-cols-1 sm:grid-cols-[minmax(0,2fr)_repeat(4,minmax(0,1fr))] gap-3 p-4 bg-black/30 border border-white/5 rounded-xl hover:bg-white/5 transition-colors min-w-0"
                 >
-                  <div className="flex-[2]">
-                    <div className="font-bold flex items-center gap-2">
+                  <div className="min-w-0">
+                    <div className="font-bold flex items-center gap-2 min-w-0">
                       {position.pair}
                       <span className={cn('text-[9px] px-1.5 py-0.5 rounded font-mono', positionTone(position.type))}>
-                        {copy(portfolioViewModel.positionTypes[position.type])}
+                        {portfolioViewModel.positionTypes[position.type]}
                       </span>
                     </div>
                     <div className="text-[10px] text-text-secondary mt-1">
-                      {copy(portfolioViewModel.positionLabels.managedBy)}:{' '}
-                      <span className="text-accent-blue">{copy(position.manager)}</span>
+                      {portfolioViewModel.positionLabels.managedBy}: <span className="text-accent-blue">{position.manager}</span>
                     </div>
                   </div>
-                  <div className="flex-1 text-right">
-                    <div className="text-[10px] uppercase text-text-secondary">{copy(portfolioViewModel.positionLabels.size)}</div>
-                    <div className="font-mono text-sm">{formatCompactUsd(position.sizeUsd)}</div>
+                  <div className="sm:text-right min-w-0">
+                    <div className="text-[10px] uppercase text-text-secondary">{portfolioViewModel.positionLabels.size}</div>
+                    <div className="font-mono text-sm break-words">{formatCompactUsd(position.sizeUsd)}</div>
                   </div>
-                  <div className="flex-[1.5] text-right">
-                    <div className="text-[10px] uppercase text-text-secondary">{copy(portfolioViewModel.positionLabels.entryMark)}</div>
+                  <div className="sm:text-right min-w-0">
+                    <div className="text-[10px] uppercase text-text-secondary">{portfolioViewModel.positionLabels.entryMark}</div>
                     <div className="font-mono text-xs text-text-secondary">
                       {formatPrice(position.entryPrice)} / <span className="text-white">{formatPrice(position.markPrice)}</span>
                     </div>
                   </div>
-                  <div className="flex-1 text-right">
-                    <div className="text-[10px] uppercase text-text-secondary">{copy(portfolioViewModel.positionLabels.pnl)}</div>
+                  <div className="sm:text-right min-w-0">
+                    <div className="text-[10px] uppercase text-text-secondary">{portfolioViewModel.positionLabels.pnl}</div>
                     <div className={cn('font-mono text-sm font-bold', position.pnlPercent < 0 ? 'text-red-400' : 'text-emerald-400')}>
                       {formatPercent(position.pnlPercent)}
                     </div>
                   </div>
-                  <div className="flex-[0.5] text-right">
-                    <div className="text-[10px] uppercase text-text-secondary">{copy(portfolioViewModel.positionLabels.bond)}</div>
-                    <div className="font-mono text-xs">{copy(position.bond)}</div>
+                  <div className="sm:text-right min-w-0">
+                    <div className="text-[10px] uppercase text-text-secondary">{portfolioViewModel.positionLabels.bond}</div>
+                    <div className="font-mono text-xs">{position.bond}</div>
                   </div>
                 </div>
               ))}

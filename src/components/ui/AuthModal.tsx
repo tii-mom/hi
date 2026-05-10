@@ -115,7 +115,7 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-[100] flex items-center justify-center px-4 py-4">
+      <div className="fixed inset-0 z-[100] flex items-start sm:items-center justify-center px-3 py-2 sm:px-4 sm:py-4 overflow-y-auto">
         <motion.div 
           initial={reducedMotion ? false : { opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -137,7 +137,7 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
           animate={reducedMotion ? { opacity: 1 } : { opacity: 1, scale: 1, y: 0 }}
           exit={reducedMotion ? { opacity: 1 } : { opacity: 0, scale: 0.95, y: 20 }}
           transition={reducedMotion ? { duration: 0 } : undefined}
-          className="w-full max-w-md max-h-[calc(100dvh-2rem)] bg-[#0a0a0c] border border-white/10 rounded-2xl shadow-2xl relative z-10 overflow-hidden outline-none"
+          className="w-full max-w-md max-h-[calc(100dvh-1rem)] sm:max-h-[calc(100dvh-2rem)] bg-[#0a0a0c] border border-white/10 rounded-2xl shadow-2xl relative z-10 overflow-hidden outline-none flex flex-col"
         >
           {/* Header */}
           <div className="px-6 py-4 border-b border-white/10 flex justify-between items-center bg-white/[0.02]">
@@ -152,7 +152,7 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
             </button>
           </div>
 
-          <div className="p-6 relative overflow-y-auto max-h-[calc(100dvh-6rem)]">
+          <div className="p-6 relative overflow-y-auto overscroll-contain min-h-0 flex-1">
             <AnimatePresence mode="wait">
               {step === 'select' && (
                 <motion.div

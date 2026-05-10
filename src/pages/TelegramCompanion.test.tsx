@@ -1,6 +1,7 @@
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { selectTelegramCompanionResponse } from '@/features/telegram/companion';
+import { TelegramProvider } from '@/features/telegram';
 import TelegramCompanion from './TelegramCompanion';
 
 afterEach(() => {
@@ -9,7 +10,11 @@ afterEach(() => {
 
 describe('TelegramCompanion', () => {
   it('renders localized shell copy and controls', () => {
-    render(<TelegramCompanion />);
+    render(
+      <TelegramProvider>
+        <TelegramCompanion />
+      </TelegramProvider>,
+    );
 
     expect(screen.getByRole('heading', { name: /neural link/i })).toBeInTheDocument();
     expect(screen.getByText(/tacit synchronization active/i)).toBeInTheDocument();
@@ -23,7 +28,11 @@ describe('TelegramCompanion', () => {
 
   it('preserves user input and resolves the report widget response', async () => {
     vi.useFakeTimers();
-    render(<TelegramCompanion />);
+    render(
+      <TelegramProvider>
+        <TelegramCompanion />
+      </TelegramProvider>,
+    );
 
     const input = screen.getByPlaceholderText(/share your constraints, ask for resonance/i);
     fireEvent.change(input, { target: { value: 'status report please' } });

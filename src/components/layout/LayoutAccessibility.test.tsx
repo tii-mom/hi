@@ -42,6 +42,7 @@ describe('layout accessibility hardening', () => {
     const dialog = await screen.findByRole('dialog', { name: /connect identity/i });
     expect(dialog).toHaveAttribute('aria-modal', 'true');
     expect(walletButton).toHaveAttribute('aria-expanded', 'true');
+    expect(document.body.style.overflow).toBe('hidden');
 
     await waitFor(() => expect(screen.getByRole('button', { name: /close identity modal/i })).toHaveFocus());
 
@@ -51,5 +52,6 @@ describe('layout accessibility hardening', () => {
     fireEvent.keyDown(dialog, { key: 'Escape' });
     await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeInTheDocument());
     expect(walletButton).toHaveFocus();
+    expect(document.body.style.overflow).toBe('');
   });
 });

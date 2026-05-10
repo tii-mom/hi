@@ -1,19 +1,26 @@
 import { motion } from 'motion/react';
 import { Briefcase, Brain } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { TerminalPanel } from '@/components/ui/surfaces/TerminalPanel';
+import { StatusBadge } from '@/components/ui/surfaces/StatusBadge';
 import { portfolioReasoningItems } from '../data';
 
 export default function PortfolioReasoning() {
   const { t } = useTranslation();
 
   return (
-    <div className="glass rounded-xl p-4 flex flex-col relative overflow-hidden h-full min-h-0">
-      <div className="flex items-center justify-between border-b border-white/5 pb-3 mb-4 shrink-0 relative z-10">
-        <div className="flex items-center gap-2">
-          <Briefcase className="w-3.5 h-3.5 text-accent-blue" />
-          <h3 className="text-[10px] font-bold uppercase tracking-widest text-text-secondary">{t('terminal.portfolio.title')}</h3>
-        </div>
-        <span className="text-[9px] font-mono text-accent-blue">{t('terminal.portfolio.aum')}: $2.65M</span>
+    <TerminalPanel
+      className="h-full min-h-0"
+      title={t('terminal.portfolio.title')}
+      actions={
+        <StatusBadge tone="blue" className="text-[9px] font-mono">
+          {t('terminal.portfolio.aum')}: $2.65M
+        </StatusBadge>
+      }
+    >
+      <div className="flex items-center gap-2 mb-4 shrink-0 relative z-10">
+        <Briefcase className="w-3.5 h-3.5 text-accent-blue" />
+        <h3 className="text-[10px] font-bold uppercase tracking-widest text-text-secondary">{t('terminal.portfolio.title')}</h3>
       </div>
       <div className="flex-1 overflow-y-auto space-y-3 relative z-10 min-h-0 pr-1">
         {portfolioReasoningItems.map((item, index) => (
@@ -52,6 +59,6 @@ export default function PortfolioReasoning() {
           </motion.div>
         ))}
       </div>
-    </div>
+    </TerminalPanel>
   );
 }

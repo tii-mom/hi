@@ -3,7 +3,8 @@ import { Activity, AlertTriangle, Power, ShieldAlert, Target, TrendingDown } fro
 import { motion } from 'motion/react';
 import { useTranslation } from 'react-i18next';
 import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
-import { createSystemStressData, riskLevels, riskViewModel, useSystemTime, type RiskCopy, type RiskLevel } from '@/features/risk';
+import { createRiskViewModel, createSystemStressData } from '@/app/services/risk';
+import { riskLevels, useSystemTime, type RiskLevel } from '@/features/risk';
 import { cn } from '@/lib/utils';
 import { useLiveData } from '../hooks/useLiveData';
 
@@ -47,7 +48,7 @@ export default function RiskCenter() {
   const { t } = useTranslation();
   const systemTime = useSystemTime();
   const systemStressData = useMemo(() => createSystemStressData(), []);
-  const copy = (item: RiskCopy) => t(item.key, item.fallback);
+  const riskViewModel = createRiskViewModel(t);
 
   const handleKillSwitch = () => {
     if (isArmed && !isTriggered) {
@@ -58,41 +59,40 @@ export default function RiskCenter() {
   };
 
   return (
-    <div className="h-full flex flex-col gap-6 p-2 bg-[#050505]">
-      <div className="flex items-center justify-between border-b border-red-900/30 pb-4">
-        <div>
-          <h2 className="text-xl font-bold uppercase tracking-widest text-red-500 flex items-center gap-2">
+    <div className="h-full min-h-0 flex flex-col gap-4 md:gap-6 p-2 bg-[#050505] overflow-hidden">
+      <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 border-b border-red-900/30 pb-4 min-w-0">
+        <div className="min-w-0">
+          <h2 className="text-lg md:text-xl font-bold uppercase tracking-widest text-red-500 flex items-center gap-2 break-words">
             <ShieldAlert className="w-5 h-5" />
-            {copy(riskViewModel.title)}
+            {riskViewModel.title}
           </h2>
           <p className="text-[10px] text-red-500/60 font-mono mt-1">
-            {copy(riskViewModel.statusLabel)}:{' '}
-            {isTriggered ? copy(riskViewModel.statusSevering) : copy(riskViewModel.statusResonant)} //{' '}
-            {copy(riskViewModel.defconLabel)}
+            {riskViewModel.statusLabel}:{' '}
+            {isTriggered ? riskViewModel.statusSevering : riskViewModel.statusResonant} // {riskViewModel.defconLabel}
           </p>
         </div>
-        <div className="flex items-center gap-4">
-          <div className="flex flex-col items-end">
+        <div className="flex items-center gap-4 sm:justify-end flex-wrap">
+          <div className="flex flex-col items-start sm:items-end">
             <span className="text-[10px] text-text-secondary font-mono tracking-widest">
-              {copy(riskViewModel.serverTimeLabel)}
+              {riskViewModel.serverTimeLabel}
             </span>
             <span className="text-sm font-mono text-white">{systemTime}Z</span>
           </div>
           <div className="w-[1px] h-8 bg-white/10" />
-          <div className="flex flex-col items-end">
+          <div className="flex flex-col items-start sm:items-end">
             <span className="text-[10px] text-text-secondary font-mono tracking-widest">
-              {copy(riskViewModel.totalExposureLabel)}
+              {riskViewModel.totalExposureLabel}
             </span>
             <span className="text-sm font-mono text-orange-500">{formatUsd(riskViewModel.totalExposureUsd)}</span>
           </div>
         </div>
       </div>
 
-      <div className="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-6 min-h-0">
-        <div className="col-span-1 lg:col-span-4 flex flex-col gap-6">
+      <div className="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-4 md:gap-6 min-h-0 overflow-hidden">
+        <div className="col-span-1 lg:col-span-4 flex flex-col gap-4 md:gap-6 min-h-0 min-w-0">
           <div
             className={cn(
-              'rounded-xl border p-6 flex flex-col items-center justify-center relative overflow-hidden transition-colors duration-500 setup-kill-switch',
+              'rounded-xl border p-4 md:p-6 flex flex-col items-center justify-center relative overflow-hidden transition-colors duration-500 setup-kill-switch min-w-0',
               isTriggered
                 ? 'bg-red-950/40 border-red-500'
                 : isArmed
@@ -102,28 +102,28 @@ export default function RiskCenter() {
           >
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-red-500/50 to-transparent opacity-50" />
 
-            <h3 className="text-xs font-bold uppercase tracking-widest text-text-secondary mb-8">
-              {copy(riskViewModel.protocolTitle)}
+            <h3 className="text-xs font-bold uppercase tracking-widest text-text-secondary mb-6 md:mb-8 text-center">
+              {riskViewModel.protocolTitle}
             </h3>
 
             <div className="relative">
               <button
                 onClick={() => !isTriggered && setIsArmed(!isArmed)}
                 className={cn(
-                  'absolute -top-6 left-1/2 -translate-x-1/2 px-4 py-1 text-[10px] font-bold uppercase tracking-widest rounded-t-lg transition-colors border border-b-0 cursor-pointer z-20',
+                  'absolute -top-5 md:-top-6 left-1/2 -translate-x-1/2 px-3 md:px-4 py-1 text-[10px] font-bold uppercase tracking-widest rounded-t-lg transition-colors border border-b-0 cursor-pointer z-20 whitespace-nowrap',
                   isArmed
                     ? 'bg-orange-500/20 text-orange-500 border-orange-500/50'
                     : 'bg-white/5 text-text-secondary border-white/10 hover:text-white hover:bg-white/10',
                 )}
               >
-                {isArmed ? copy(riskViewModel.protocolArmedText) : copy(riskViewModel.protocolDisarmedText)}
+                {isArmed ? riskViewModel.protocolArmedText : riskViewModel.protocolDisarmedText}
               </button>
 
               <button
                 onClick={handleKillSwitch}
                 disabled={!isArmed || isTriggered}
                 className={cn(
-                  'w-48 h-48 rounded-full border-4 flex items-center justify-center flex-col transition-all duration-300 relative z-10 shadow-2xl overflow-hidden group',
+                  'w-36 h-36 sm:w-44 sm:h-44 lg:w-48 lg:h-48 rounded-full border-4 flex items-center justify-center flex-col transition-all duration-300 relative z-10 shadow-2xl overflow-hidden group',
                   !isArmed && !isTriggered
                     ? 'bg-red-950/20 border-red-900/30 cursor-not-allowed opacity-50'
                     : isTriggered
@@ -132,14 +132,14 @@ export default function RiskCenter() {
                 )}
               >
                 {isTriggered && <div className="absolute inset-0 bg-red-500 animate-ping opacity-20" />}
-                <Power className={cn('w-16 h-16 mb-2', isArmed ? 'text-red-500 group-hover:text-red-400' : 'text-red-900')} />
+                <Power className={cn('w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 mb-2', isArmed ? 'text-red-500 group-hover:text-red-400' : 'text-red-900')} />
                 <span
                   className={cn(
-                    'font-black tracking-tighter text-2xl uppercase',
+                    'font-black tracking-tighter text-lg sm:text-xl lg:text-2xl uppercase text-center leading-none',
                     isArmed ? 'text-red-500 group-hover:text-red-400' : 'text-red-900',
                   )}
                 >
-                  {isTriggered ? copy(riskViewModel.statusSevering) : copy(riskViewModel.protocolActionText)}
+                  {isTriggered ? riskViewModel.statusSevering : riskViewModel.protocolActionText}
                 </span>
                 <span
                   className={cn(
@@ -147,7 +147,7 @@ export default function RiskCenter() {
                     isArmed ? 'text-red-400' : 'text-red-900',
                   )}
                 >
-                  {copy(riskViewModel.protocolSubtext)}
+                  {riskViewModel.protocolSubtext}
                 </span>
               </button>
             </div>
@@ -159,20 +159,20 @@ export default function RiskCenter() {
                 className="mt-8 text-center text-[10px] font-mono text-orange-400 animate-pulse flex items-center gap-2 bg-orange-500/10 px-4 py-2 rounded border border-orange-500/20"
               >
                 <AlertTriangle className="w-3 h-3" />
-                {copy(riskViewModel.protocolArmingNotice)}
+                {riskViewModel.protocolArmingNotice}
               </motion.div>
             )}
           </div>
 
-          <div className="glass rounded-xl border-border p-5 flex flex-col relative overflow-hidden flex-1">
+          <div className="glass rounded-xl border-border p-4 md:p-5 flex flex-col relative overflow-hidden flex-1 min-h-0 min-w-0">
             <h3 className="text-[10px] font-bold uppercase tracking-widest text-text-secondary mb-4 flex items-center gap-2">
-              <Activity className="w-3 h-3" /> {copy(riskViewModel.metricsTitle)}
+              <Activity className="w-3 h-3" /> {riskViewModel.metricsTitle}
             </h3>
 
             <div className="space-y-6">
               <div>
                 <div className="flex justify-between items-end mb-2">
-                  <span className="text-xs text-text-secondary uppercase font-mono">{copy(riskViewModel.leverageLabel)}</span>
+                  <span className="text-xs text-text-secondary uppercase font-mono">{riskViewModel.leverageLabel}</span>
                   <span
                     className={cn(
                       'text-2xl font-light font-mono',
@@ -192,14 +192,14 @@ export default function RiskCenter() {
                   />
                 </div>
                 <div className="flex justify-between text-[9px] font-mono mt-1 text-text-secondary">
-                  <span>{copy(riskViewModel.leverageScaleMin)}</span>
-                  <span>{copy(riskViewModel.leverageScaleMax)}</span>
+                  <span>{riskViewModel.leverageScaleMin}</span>
+                  <span>{riskViewModel.leverageScaleMax}</span>
                 </div>
               </div>
 
               <div>
                 <div className="flex justify-between items-end mb-2">
-                  <span className="text-xs text-text-secondary uppercase font-mono">{copy(riskViewModel.varLabel)}</span>
+                  <span className="text-xs text-text-secondary uppercase font-mono">{riskViewModel.varLabel}</span>
                   <span className="text-xl font-light font-mono text-orange-400">-{var95.toFixed(2)}%</span>
                 </div>
                 <div className="h-2 bg-white/5 rounded-full overflow-hidden">
@@ -210,27 +210,27 @@ export default function RiskCenter() {
           </div>
         </div>
 
-        <div className="col-span-1 lg:col-span-8 flex flex-col gap-6 min-h-0">
-          <div className="flex-[0.6] glass rounded-xl border border-border p-5 flex flex-col relative">
-            <div className="flex justify-between items-center mb-4">
+        <div className="col-span-1 lg:col-span-8 flex flex-col gap-4 md:gap-6 min-h-0 min-w-0">
+          <div className="flex-[0.6] glass rounded-xl border border-border p-4 md:p-5 flex flex-col relative min-h-0 min-w-0">
+            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 mb-4">
               <h3 className="text-[10px] font-bold uppercase tracking-widest text-text-secondary flex items-center gap-2">
-                <Target className="w-3 h-3" /> {copy(riskViewModel.heatmapTitle)}
+                <Target className="w-3 h-3" /> {riskViewModel.heatmapTitle}
               </h3>
-              <div className="flex gap-2">
+              <div className="flex gap-2 flex-wrap sm:justify-end">
                 {riskLevels.map((risk) => {
                   const tone = riskTone(risk);
 
                   return (
                     <span key={risk} className="text-[9px] uppercase font-mono text-text-secondary flex items-center gap-1">
                       <div className={cn('w-2 h-2 rounded-full blur-[2px]', tone.dot)} />
-                      {copy(riskViewModel.heatmapLegend[risk])}
+                      {riskViewModel.heatmapLegend[risk]}
                     </span>
                   );
                 })}
               </div>
             </div>
 
-            <div className="flex-1 grid grid-cols-4 gap-2 lg:gap-3">
+            <div className="flex-1 grid grid-cols-2 sm:grid-cols-4 gap-2 lg:gap-3 min-h-0">
               {riskViewModel.heatmapAgents.map((agent) => {
                 const tone = riskTone(agent.risk);
 
@@ -250,13 +250,13 @@ export default function RiskCenter() {
                       )}
                     />
                     <div className="relative z-10 flex justify-between items-start">
-                      <span className="text-xs font-bold">{copy(agent.name)}</span>
+                      <span className="text-xs font-bold">{agent.name}</span>
                       <span className="text-[10px] font-mono text-white/50">
-                        {agent.exposurePercent}% {copy(riskViewModel.heatmapAllocationLabel)}
+                        {agent.exposurePercent}% {riskViewModel.heatmapAllocationLabel}
                       </span>
                     </div>
                     <div className="relative z-10 text-[9px] uppercase tracking-widest text-text-secondary mt-4">
-                      {copy(agent.strategy)}
+                      {agent.strategy}
                     </div>
                   </div>
                 );
@@ -264,13 +264,13 @@ export default function RiskCenter() {
             </div>
           </div>
 
-          <div className="flex-[0.4] glass rounded-xl border border-border p-5 flex flex-col relative overflow-hidden">
+          <div className="flex-[0.4] glass rounded-xl border border-border p-4 md:p-5 flex flex-col relative overflow-hidden min-h-0 min-w-0">
             <div className="flex justify-between items-center mb-4 z-10 relative">
               <h3 className="text-[10px] font-bold uppercase tracking-widest text-text-secondary flex items-center gap-2">
-                <TrendingDown className="w-3 h-3" /> {copy(riskViewModel.stressTitle)}
+                <TrendingDown className="w-3 h-3" /> {riskViewModel.stressTitle}
               </h3>
               <span className="px-2 py-0.5 rounded bg-red-500/10 text-red-400 border border-red-500/20 text-[9px] font-mono uppercase animate-pulse">
-                {copy(riskViewModel.stressBadge)}
+                {riskViewModel.stressBadge}
               </span>
             </div>
 
@@ -298,7 +298,7 @@ export default function RiskCenter() {
                   <Area
                     type="monotone"
                     dataKey="liquidityRisk"
-                    name={copy(riskViewModel.stressAreas.liquidity)}
+                    name={riskViewModel.stressAreas.liquidity}
                     stroke="#f97316"
                     strokeWidth={1}
                     fillOpacity={1}
@@ -308,7 +308,7 @@ export default function RiskCenter() {
                   <Area
                     type="monotone"
                     dataKey="overall"
-                    name={copy(riskViewModel.stressAreas.overall)}
+                    name={riskViewModel.stressAreas.overall}
                     stroke="#ef4444"
                     strokeWidth={2}
                     fillOpacity={1}

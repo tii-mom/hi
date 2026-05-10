@@ -4,7 +4,9 @@ import { Activity, Mic, MoveUp, Sparkles } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import AgentAvatar from '../components/ui/AgentAvatar';
 import { cn } from '@/lib/utils';
-import { selectTelegramCompanionResponse, telegramCompanionViewModel, type TelegramCompanionCopy } from '@/features/telegram/companion';
+import { useTelegramShell } from '@/features/telegram';
+import { selectTelegramCompanionResponse, telegramCompanionViewModel } from '@/app/services/telegram';
+import type { TelegramCompanionCopy } from '@/features/telegram/companion';
 
 interface Message {
   id: string;
@@ -25,6 +27,7 @@ interface Message {
 
 export default function NeuralLinkInterface() {
   const { t } = useTranslation();
+  const telegram = useTelegramShell();
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
@@ -39,6 +42,12 @@ export default function NeuralLinkInterface() {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const copy = (item: TelegramCompanionCopy) => t(item.key, item.fallback);
+  const shellStyle = telegram.isTelegram && telegram.stableViewportHeight
+    ? {
+        minHeight: `${telegram.stableViewportHeight}px`,
+        paddingBottom: telegram.safeAreaInsetBottom > 0 ? `${telegram.safeAreaInsetBottom}px` : 'env(safe-area-inset-bottom, 0px)',
+      }
+    : undefined;
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -90,19 +99,22 @@ export default function NeuralLinkInterface() {
   };
 
   return (
-    <div className="h-full flex items-center justify-center p-0 md:p-6 bg-transparent overflow-hidden">
-      <div className="w-full h-full md:max-w-3xl md:max-h-[85vh] bg-black/40 backdrop-blur-3xl md:rounded-3xl md:border border-white/10 overflow-hidden flex flex-col relative shadow-[0_0_80px_rgba(0,0,0,0.8)]">
+    <div
+      className="h-full min-h-0 flex items-stretch justify-center p-0 md:p-6 bg-transparent overflow-hidden"
+      style={shellStyle}
+    >
+      <div className="w-full h-full min-h-0 md:max-w-3xl md:max-h-[85vh] bg-black/40 backdrop-blur-3xl md:rounded-3xl md:border border-white/10 overflow-hidden flex flex-col relative shadow-[0_0_80px_rgba(0,0,0,0.8)]">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[300px] bg-accent-blue/10 blur-[100px] pointer-events-none mix-blend-screen" />
         <div className="absolute bottom-0 right-0 w-[400px] h-[300px] bg-purple-500/10 blur-[100px] pointer-events-none mix-blend-screen" />
 
-        <div className="pt-8 pb-6 px-8 flex items-center justify-between border-b border-white/5 relative z-10">
-            <div className="flex items-center gap-4">
-              <div className="w-10 h-10 rounded-full flex items-center justify-center bg-white/5 border border-white/10 shadow-[0_0_15px_rgba(255,255,255,0.05)] relative">
+        <div className="pt-6 md:pt-8 pb-4 md:pb-6 px-4 md:px-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-white/5 relative z-10">
+            <div className="flex items-center gap-4 min-w-0">
+              <div className="w-10 h-10 rounded-full flex items-center justify-center bg-white/5 border border-white/10 shadow-[0_0_15px_rgba(255,255,255,0.05)] relative shrink-0">
               <div className="absolute inset-0 rounded-full animate-pulse-ring-blue opacity-50" />
               <Activity className="w-5 h-5 text-accent-blue" />
             </div>
-            <div>
-              <h2 className="text-lg font-light text-white tracking-wide">{copy(telegramCompanionViewModel.header.title)}</h2>
+            <div className="min-w-0">
+              <h2 className="text-lg font-light text-white tracking-wide truncate">{copy(telegramCompanionViewModel.header.title)}</h2>
               <p className="text-[10px] uppercase tracking-widest text-text-secondary font-mono">
                 {copy(telegramCompanionViewModel.header.status)}
               </p>
@@ -110,7 +122,7 @@ export default function NeuralLinkInterface() {
           </div>
         </div>
 
-        <div ref={scrollRef} className="flex-1 overflow-y-auto p-6 md:p-8 flex flex-col gap-8 scroll-smooth">
+        <div ref={scrollRef} className="flex-1 min-h-0 overflow-y-auto p-4 md:p-6 flex flex-col gap-6 md:gap-8 scroll-smooth">
           <AnimatePresence initial={false}>
             {messages.map((msg) => {
               const roleLabel = msg.agentRole ? copy(msg.agentRole) : 'Agent';
@@ -122,7 +134,7 @@ export default function NeuralLinkInterface() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   layout
-                  className={cn('flex flex-col max-w-[85%]', msg.sender === 'user' ? 'self-end items-end' : 'self-start items-start')}
+                  className={cn('flex flex-col max-w-[85%] min-w-0', msg.sender === 'user' ? 'self-end items-end' : 'self-start items-start')}
                 >
                   {msg.sender === 'agent' && (
                     <div className="flex items-center gap-2 mb-2">
@@ -134,7 +146,7 @@ export default function NeuralLinkInterface() {
                   <div className={cn('relative', msg.sender === 'user' ? 'text-right' : 'text-left')}>
                     <p
                       className={cn(
-                        'text-lg md:text-xl font-light leading-relaxed tracking-wide',
+                        'text-base md:text-xl font-light leading-relaxed tracking-wide break-words',
                         msg.sender === 'user' ? 'text-white' : 'text-white/80',
                       )}
                     >
@@ -142,16 +154,16 @@ export default function NeuralLinkInterface() {
                     </p>
 
                     {msg.type === 'widget' && msg.widgetData && (
-                        <div className="mt-6 p-5 bg-white/5 backdrop-blur-md rounded-2xl border border-white/10 w-full min-w-[280px] space-y-4">
-                          <div className="flex justify-between items-center text-sm font-mono tracking-wide">
+                        <div className="mt-6 p-4 md:p-5 bg-white/5 backdrop-blur-md rounded-2xl border border-white/10 w-full min-w-0 space-y-4">
+                          <div className="flex justify-between items-center gap-4 text-sm font-mono tracking-wide">
                           <span className="text-text-secondary">{copy(telegramCompanionViewModel.widgetLabels.btcAlignment)}</span>
                           <span className="text-accent-emerald">{msg.widgetData.values.btc}</span>
                         </div>
-                        <div className="flex justify-between items-center text-sm font-mono tracking-wide">
+                        <div className="flex justify-between items-center gap-4 text-sm font-mono tracking-wide">
                           <span className="text-text-secondary">{copy(telegramCompanionViewModel.widgetLabels.ethAlignment)}</span>
                           <span className="text-red-400">{msg.widgetData.values.eth}</span>
                         </div>
-                        <div className="pt-3 border-t border-white/5 flex justify-between items-center text-sm font-mono tracking-wide">
+                        <div className="pt-3 border-t border-white/5 flex justify-between items-center gap-4 text-sm font-mono tracking-wide">
                           <span className="text-text-secondary">{copy(telegramCompanionViewModel.widgetLabels.entropyRisk)}</span>
                           <span className="text-orange-400 font-bold">{msg.widgetData.values.risk}</span>
                         </div>
@@ -173,10 +185,10 @@ export default function NeuralLinkInterface() {
           )}
         </div>
 
-        <div className="px-6 pb-6 relative z-10 w-full max-w-2xl mx-auto">
+        <div className="px-4 md:px-6 pb-4 md:pb-6 relative z-10 w-full max-w-2xl mx-auto min-w-0">
           <div className="relative group">
             <div className="absolute inset-0 bg-accent-blue/10 rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity" />
-            <div className="relative bg-black/60 border border-white/10 rounded-3xl flex items-end p-2 pl-6 shadow-2xl backdrop-blur-xl">
+            <div className="relative bg-black/60 border border-white/10 rounded-3xl flex items-end p-2 pl-4 md:pl-6 shadow-2xl backdrop-blur-xl gap-2 min-w-0">
               <textarea
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
@@ -187,11 +199,11 @@ export default function NeuralLinkInterface() {
                   }
                 }}
                 placeholder={copy(telegramCompanionViewModel.input.placeholder)}
-                className="bg-transparent flex-1 outline-none text-base text-white placeholder-text-secondary w-full resize-none py-3 font-light"
+                className="bg-transparent flex-1 min-w-0 outline-none text-base text-white placeholder-text-secondary w-full resize-none py-3 font-light"
                 rows={1}
                 style={{ minHeight: '48px', maxHeight: '120px' }}
               />
-              <div className="flex items-center gap-2 mb-1 ml-2">
+              <div className="flex items-center gap-1 md:gap-2 mb-1 ml-1 md:ml-2 shrink-0">
                 <button
                   type="button"
                   aria-label={copy(telegramCompanionViewModel.input.micLabel)}
@@ -215,7 +227,7 @@ export default function NeuralLinkInterface() {
               </div>
             </div>
           </div>
-          <div className="text-center mt-3 text-[10px] text-text-secondary font-mono tracking-widest uppercase">{copy(telegramCompanionViewModel.footerContext)}</div>
+          <div className="text-center mt-3 text-[10px] text-text-secondary font-mono tracking-widest uppercase break-words">{copy(telegramCompanionViewModel.footerContext)}</div>
         </div>
       </div>
     </div>

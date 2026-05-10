@@ -87,15 +87,15 @@ export default function SkillMarketplace() {
   };
 
   return (
-    <div className="h-full flex flex-col gap-6 relative">
-      <div className="flex items-center justify-between border-b border-border pb-4">
-        <div>
-          <h2 className="text-xl font-semibold uppercase tracking-wider mb-1">
+    <div className="h-full min-h-0 flex flex-col gap-4 md:gap-6 relative overflow-hidden">
+      <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 border-b border-border pb-4 min-w-0">
+        <div className="min-w-0">
+          <h2 className="text-lg md:text-xl font-semibold uppercase tracking-wider mb-1 break-words">
             {copy(skillMarketplaceCopy.header.title)}
           </h2>
           <p className="text-sm text-text-secondary">{copy(skillMarketplaceCopy.header.subtitle)}</p>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 flex-wrap sm:justify-end">
           {isFusibleMode && selectedSkillIds.length > 0 && (
             <motion.button
               type="button"
@@ -103,7 +103,7 @@ export default function SkillMarketplace() {
               animate={{ opacity: 1, x: 0 }}
               onClick={initiateFusion}
               disabled={selectedSkillIds.length < 2}
-              className="px-4 py-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold rounded-lg text-sm flex items-center gap-2 hover:from-purple-500 hover:to-blue-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_0_15px_rgba(147,51,234,0.3)]"
+              className="px-4 py-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold rounded-lg text-sm flex items-center gap-2 hover:from-purple-500 hover:to-blue-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_0_15px_rgba(147,51,234,0.3)] whitespace-nowrap"
             >
               <Sparkles className="w-4 h-4" />
               {copyWithValues(skillMarketplaceCopy.actions.synthesizeSelected, {
@@ -116,7 +116,7 @@ export default function SkillMarketplace() {
             type="button"
             onClick={toggleFusibleMode}
             className={cn(
-              'px-4 py-2 font-semibold rounded-lg text-sm flex items-center gap-2 transition-colors',
+              'px-4 py-2 font-semibold rounded-lg text-sm flex items-center gap-2 transition-colors whitespace-nowrap',
               isFusibleMode ? 'bg-white/10 text-white border border-white/20' : 'bg-white text-black hover:bg-gray-200',
             )}
           >
@@ -126,8 +126,8 @@ export default function SkillMarketplace() {
         </div>
       </div>
 
-      <div className="flex-1 overflow-y-auto pb-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="flex-1 overflow-y-auto pb-6 min-h-0">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           <AnimatePresence>
             {skills.map((skill) => {
               const isSelected = selectedSkillIds.includes(skill.id);
@@ -148,7 +148,7 @@ export default function SkillMarketplace() {
                   aria-pressed={isSelected}
                   aria-disabled={!isFusibleMode}
                   className={cn(
-                    'glass rounded-xl p-6 border group relative overflow-hidden transition-all duration-300 text-left',
+                    'glass rounded-xl p-4 md:p-6 border group relative overflow-hidden transition-all duration-300 text-left min-w-0',
                     isFusibleMode ? 'cursor-pointer hover:border-white/40' : '',
                     isSelected ? 'border-purple-500 shadow-[0_0_20px_rgba(168,85,247,0.4)]' : 'border-border',
                   )}
@@ -191,9 +191,9 @@ export default function SkillMarketplace() {
                     </div>
                   </div>
 
-                  <h3 className="text-xl font-medium mb-2 group-hover:text-white transition-colors">{skillName}</h3>
+                  <h3 className="text-lg md:text-xl font-medium mb-2 group-hover:text-white transition-colors break-words">{skillName}</h3>
 
-                  <div className="flex items-center gap-4 mt-6 pt-4 border-t border-white/5">
+                  <div className="flex items-center gap-4 mt-6 pt-4 border-t border-white/5 min-w-0">
                     <div>
                       <div className="text-[10px] text-text-secondary mb-1">
                         {copy(skillMarketplaceCopy.metrics.tacitWeight)}
@@ -234,7 +234,7 @@ export default function SkillMarketplace() {
                 initial={{ opacity: 0, scale: 0.9, y: 20 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.9, y: 20 }}
-                className="relative bg-[#0f172a] border border-white/10 rounded-2xl p-8 max-w-sm w-full text-center overflow-hidden shadow-2xl"
+                className="relative bg-[#0f172a] border border-white/10 rounded-2xl p-6 sm:p-8 max-w-sm w-full text-center overflow-hidden shadow-2xl"
               >
                 <div className="absolute inset-0 bg-gradient-to-tr from-purple-500/10 via-transparent to-blue-500/10" />
 

@@ -4,7 +4,8 @@ import { motion, AnimatePresence } from 'motion/react';
 import { useTranslation } from 'react-i18next';
 import { Link, useParams } from 'react-router-dom';
 import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
-import { agentOverviewRanges, agentProfileTabs, getAgentById } from '@/features/agents';
+import { EmptyState } from '@/components/ui/surfaces/EmptyState';
+import { createAgentProfileViewModel } from '@/app/services/agents';
 import { cn } from '@/lib/utils';
 import AgentAvatar from '../components/ui/AgentAvatar';
 
@@ -25,42 +26,30 @@ function AgentProfileNotFound({ id }: { id?: string }) {
   const { t } = useTranslation();
 
   return (
-    <div className="h-full flex items-center justify-center p-6">
-      <div className="glass rounded-xl border border-border p-8 max-w-xl w-full relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-40 h-40 bg-accent-blue/10 rounded-full blur-[70px] -translate-y-1/2 translate-x-1/3 pointer-events-none" />
-        <div className="relative z-10">
-          <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-5">
-            <Activity className="w-5 h-5 text-accent-blue" />
-          </div>
-          <p className="text-[10px] font-mono uppercase tracking-[0.3em] text-text-secondary mb-2">
-            {t('agents.profile.notFound.eyebrow', 'Tacit entity missing')}
-          </p>
-          <h1 className="text-2xl font-light tracking-tight mb-3">
-            {t('agents.profile.notFound.title', 'Agent profile not found')}
-          </h1>
-          <p className="text-sm text-text-secondary leading-relaxed mb-6">
-            {t('agents.profile.notFound.description', {
-              defaultValue: 'No registered frontend agent profile matches {{id}}. Return to the registry to select an active entity.',
-              id: id ?? 'unknown-id',
-            })}
-          </p>
-          <Link
-            to="/terminal/agents"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white text-black text-sm font-bold hover:bg-white/90 transition-colors"
-          >
-            {t('agents.profile.notFound.cta', 'Return to Registry')}
-          </Link>
-        </div>
-      </div>
-    </div>
+    <EmptyState
+      title={t('agents.profile.notFound.title', 'Agent profile not found')}
+      description={t('agents.profile.notFound.description', {
+        defaultValue: 'No registered frontend agent profile matches {{id}}. Return to the registry to select an active entity.',
+        id: id ?? 'unknown-id',
+      })}
+      action={
+        <Link
+          to="/terminal/agents"
+          className="inline-flex items-center gap-2 rounded-lg bg-white px-4 py-2 text-sm font-bold text-black transition-colors hover:bg-white/90"
+        >
+          {t('agents.profile.notFound.cta', 'Return to Registry')}
+        </Link>
+      }
+    />
   );
 }
 
 export default function AgentProfile() {
   const { id } = useParams<{ id: string }>();
   const { t } = useTranslation();
-  const agent = getAgentById(id);
-  const [activeTab, setActiveTab] = useState<(typeof agentProfileTabs)[number]>('overview');
+  const viewModel = createAgentProfileViewModel(t, id);
+  const agent = viewModel.agent;
+  const [activeTab, setActiveTab] = useState(viewModel.tabs[0]?.id ?? 'overview');
   const [isCopyPanelOpen, setIsCopyPanelOpen] = useState(false);
   const [allocation, setAllocation] = useState(1000);
   const [maxDrawdown, setMaxDrawdown] = useState(15);
@@ -72,11 +61,6 @@ export default function AgentProfile() {
 
   const copy = (key: string, fallback: string) => t(key, fallback);
   const translateAgent = (suffix: string, fallback: string) => copy(`${agent.contentKeyPrefix}.${suffix}`, fallback);
-
-  const tabs = agentProfileTabs.map((tab) => ({
-    id: tab,
-    label: copy(`agents.profile.tabs.${tab}`, tab),
-  }));
 
   const translatedSkills = agent.skills.map((skill, index) => ({
     ...skill,
@@ -167,7 +151,7 @@ export default function AgentProfile() {
       </div>
 
       <div className="flex items-center gap-6 border-b border-border pb-2">
-        {tabs.map((tab) => (
+        {viewModel.tabs.map((tab) => (
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
@@ -212,7 +196,7 @@ export default function AgentProfile() {
                   {copy('agents.profile.overview.title', 'Historical Edge')}
                 </h3>
                 <div className="flex gap-2 text-[10px] font-mono">
-                  {agentOverviewRanges.map((range) => (
+                  {viewModel.ranges.map((range) => (
                     <span
                       key={range.key}
                       className={cn(

@@ -61,14 +61,14 @@ export default function Shell() {
     }
 
     return {
-      height: `${stableHeight}px`,
+      minHeight: `${stableHeight}px`,
       paddingBottom: safeAreaBottom,
     };
   }, [telegram.isTelegram, telegram.safeAreaInsetBottom, telegram.stableViewportHeight, telegram.viewportHeight]);
 
   return (
     <div
-      className="flex flex-col h-[100dvh] w-full bg-bg-base text-text-primary overflow-hidden relative"
+      className="flex flex-col min-h-[100dvh] w-full bg-bg-base text-text-primary overflow-hidden relative"
       data-telegram-shell={telegram.isTelegram ? 'true' : 'false'}
       data-telegram-theme={telegram.colorScheme}
       style={shellStyle}
@@ -97,13 +97,13 @@ export default function Shell() {
       )}
 
       <Header />
-      <main aria-labelledby="terminal-route-title" className="flex flex-1 overflow-hidden relative">
+      <main aria-labelledby="terminal-route-title" className="flex flex-1 min-h-0 min-w-0 overflow-hidden relative">
         <h1 id="terminal-route-title" className="sr-only">{routeTitle}</h1>
         <div aria-hidden="true" className="absolute inset-0 bg-noise opacity-50 pointer-events-none" />
         <div className="hidden md:flex relative z-10">
           <Sidebar />
         </div>
-        <div className="flex-1 overflow-hidden relative z-10">
+        <div className="flex-1 min-w-0 overflow-hidden relative z-10">
           <AnimatePresence mode="wait">
             <motion.div
               key={location.pathname}
@@ -111,8 +111,8 @@ export default function Shell() {
               animate={reducedMotion ? { opacity: 1 } : { opacity: 1, scale: 1, filter: 'blur(0px)' }}
               exit={reducedMotion ? { opacity: 1 } : { opacity: 0, scale: 1.02, filter: 'blur(10px)' }}
               transition={reducedMotion ? { duration: 0 } : { duration: 0.4, ease: [0.215, 0.61, 0.355, 1] }}
-              className="h-full overflow-auto scroll-smooth p-4 md:p-6 pb-24 md:pb-6"
-            >
+              className="h-full overflow-auto scroll-smooth p-4 md:p-6 pb-[calc(7rem+env(safe-area-inset-bottom,0px))] md:pb-6"
+              >
               <Outlet />
             </motion.div>
           </AnimatePresence>

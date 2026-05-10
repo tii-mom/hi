@@ -1,5 +1,7 @@
 import { cn } from '@/lib/utils';
 import AgentAvatar from '@/components/ui/AgentAvatar';
+import { TerminalPanel } from '@/components/ui/surfaces/TerminalPanel';
+import { StatusBadge } from '@/components/ui/surfaces/StatusBadge';
 import { useTranslation } from 'react-i18next';
 import type { TerminalAgentState } from '../types';
 
@@ -12,10 +14,7 @@ export default function TerminalAgentStates({ agents }: TerminalAgentStatesProps
   const idleStatus = t('terminal.agentStates.status.idle');
 
   return (
-    <div className="flex-1 glass rounded-xl flex flex-col overflow-hidden relative">
-      <div className="p-3 border-b border-white/5 bg-white/[0.02] shrink-0">
-        <h3 className="text-[10px] font-bold uppercase tracking-widest text-text-secondary">{t('terminal.agentsPanel.title')}</h3>
-      </div>
+    <TerminalPanel className="flex-1" title={t('terminal.agentsPanel.title')}>
       <div className="flex-1 overflow-y-auto p-3 space-y-2 relative z-10 pr-1">
         {agents.map((agent) => (
           <div
@@ -31,7 +30,9 @@ export default function TerminalAgentStates({ agents }: TerminalAgentStatesProps
                 </span>
               </div>
               <div className="flex items-center gap-1.5">
-                <span className="text-[8px] font-mono text-white/50">{agent.status}</span>
+                <StatusBadge tone="neutral" className="border-0 bg-transparent px-0 text-[8px] text-white/50">
+                  {agent.status}
+                </StatusBadge>
                 <div className={cn('w-1.5 h-1.5 rounded-full', agent.colorClass, agent.status !== idleStatus && 'animate-pulse')} />
               </div>
             </div>
@@ -50,6 +51,6 @@ export default function TerminalAgentStates({ agents }: TerminalAgentStatesProps
           </div>
         ))}
       </div>
-    </div>
+    </TerminalPanel>
   );
 }

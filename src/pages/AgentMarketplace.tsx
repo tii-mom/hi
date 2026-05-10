@@ -1,11 +1,12 @@
 import { motion } from 'motion/react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import { agentRegistry } from '@/features/agents';
+import { createAgentMarketplaceViewModel } from '@/app/services/agents';
 import AgentAvatar from '../components/ui/AgentAvatar';
 
 export default function AgentMarketplace() {
   const { t } = useTranslation();
+  const viewModel = createAgentMarketplaceViewModel(t);
 
   return (
     <div className="h-full flex flex-col gap-6">
@@ -25,7 +26,7 @@ export default function AgentMarketplace() {
 
       <div className="flex-1 overflow-y-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {agentRegistry.map((agent, i) => (
+          {viewModel.agents.map((agent, i) => (
             <Link to={`/terminal/agent/${agent.id}`} key={agent.id}>
               <motion.div 
                 initial={{ opacity: 0, y: 20 }}
@@ -44,12 +45,12 @@ export default function AgentMarketplace() {
                 </div>
                 
                 <h3 className="text-lg font-medium mb-1 group-hover:text-white transition-colors">
-                  {t(`${agent.contentKeyPrefix}.name`, agent.name)}
+                  {agent.name}
                 </h3>
                 <p className="text-xs text-text-secondary mb-4 uppercase tracking-wider">
                   {t('agents.marketplace.card.typeLabel', {
                     defaultValue: '{{type}} AI',
-                    type: t(`${agent.contentKeyPrefix}.type`, agent.type),
+                    type: agent.type,
                   })}
                 </p>
 

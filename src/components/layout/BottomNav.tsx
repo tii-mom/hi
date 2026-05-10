@@ -44,7 +44,7 @@ export default function BottomNav({ safeAreaInsetBottom = 0 }: BottomNavProps) {
   return (
     <nav
       aria-label={t('nav.mobile.label', 'Mobile terminal navigation')}
-      className="min-h-20 bg-black/80 backdrop-blur-md border-t border-border px-3 sm:px-6 flex items-center justify-between"
+      className="min-h-20 bg-black/80 backdrop-blur-md border-t border-border px-2 sm:px-6 flex items-center justify-between gap-1"
       style={navStyle}
     >
       {navItems.map((item) => {
@@ -56,7 +56,7 @@ export default function BottomNav({ safeAreaInsetBottom = 0 }: BottomNavProps) {
             to={item.path}
             aria-label={label}
             aria-current={isActive ? 'page' : undefined}
-            className="relative flex h-14 w-12 sm:w-14 flex-col items-center justify-center rounded-xl outline-none transition-colors focus-visible:ring-2 focus-visible:ring-accent-blue focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+            className="relative flex h-14 flex-1 basis-0 min-w-0 flex-col items-center justify-center rounded-xl outline-none transition-colors focus-visible:ring-2 focus-visible:ring-accent-blue focus-visible:ring-offset-2 focus-visible:ring-offset-black"
           >
             {isActive && (
               <motion.div 
@@ -69,7 +69,7 @@ export default function BottomNav({ safeAreaInsetBottom = 0 }: BottomNavProps) {
               aria-hidden="true"
               className={cn("w-5 h-5 relative z-10 mb-1", isActive ? "text-accent-blue" : "text-text-secondary")}
             />
-            <span className={cn("text-[9px] relative z-10 font-bold tracking-widest uppercase leading-none", isActive ? "text-accent-blue" : "text-text-secondary")}>
+            <span className={cn("text-[8px] sm:text-[9px] relative z-10 font-bold tracking-widest uppercase leading-none text-center w-full truncate", isActive ? "text-accent-blue" : "text-text-secondary")}>
               {label}
             </span>
           </Link>

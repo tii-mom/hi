@@ -4,32 +4,33 @@ import { BarChart2, PlayCircle, Settings, StopCircle } from 'lucide-react';
 import { ResponsiveContainer, AreaChart, Area, YAxis } from 'recharts';
 import AgentAvatar from '../components/ui/AgentAvatar';
 import { cn } from '@/lib/utils';
-import { copyTradingViewModel, type FeatureCopy } from '@/features/copy';
+import { copyTradingViewModel } from '@/app/services/copy';
+import type { FeatureCopy } from '@/features/copy';
 
 export default function CopyTrading() {
   const { t } = useTranslation();
   const copy = (item: FeatureCopy) => t(item.key, item.fallback);
 
   return (
-    <div className="h-full flex flex-col gap-6 overflow-hidden">
-      <div className="flex items-center justify-between border-b border-border pb-4 shrink-0">
-        <div>
-          <h2 className="text-xl font-semibold uppercase tracking-wider mb-1">{copy(copyTradingViewModel.header.title)}</h2>
+    <div className="h-full min-h-0 flex flex-col gap-4 md:gap-6 overflow-hidden">
+      <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 border-b border-border pb-4 shrink-0 min-w-0">
+        <div className="min-w-0">
+          <h2 className="text-lg md:text-xl font-semibold uppercase tracking-wider mb-1 break-words">{copy(copyTradingViewModel.header.title)}</h2>
           <p className="text-sm text-text-secondary">{copy(copyTradingViewModel.header.subtitle)}</p>
         </div>
-        <div className="flex gap-4 items-center">
-          <div className="text-right">
+        <div className="flex gap-4 items-start sm:items-center flex-wrap sm:justify-end">
+          <div className="text-left sm:text-right">
             <div className="text-[10px] text-text-secondary uppercase">{copy(copyTradingViewModel.summary.totalAllocated)}</div>
-            <div className="font-mono font-bold">$23,000.00</div>
+            <div className="font-mono font-bold break-words">$23,000.00</div>
           </div>
-          <div className="text-right">
+          <div className="text-left sm:text-right">
             <div className="text-[10px] text-text-secondary uppercase">{copy(copyTradingViewModel.summary.totalPnl)}</div>
-            <div className="font-mono font-bold text-accent-emerald">+$4,240.00</div>
+            <div className="font-mono font-bold text-accent-emerald break-words">+$4,240.00</div>
           </div>
         </div>
       </div>
 
-      <div className="flex-1 overflow-y-auto pr-2 pb-6 space-y-4">
+      <div className="flex-1 overflow-y-auto pr-0 sm:pr-2 pb-6 space-y-4 min-h-0">
         {copyTradingViewModel.rows.map((row, index) => {
           const isRunning = row.status === 'running';
           const statusCopy = isRunning ? copyTradingViewModel.status.running : copyTradingViewModel.status.paused;
@@ -41,7 +42,7 @@ export default function CopyTrading() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
-              className="glass rounded-xl border border-white/10 p-5 flex flex-col sm:flex-row items-center gap-6 relative overflow-hidden group"
+              className="glass rounded-xl border border-white/10 p-4 sm:p-5 flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-6 relative overflow-hidden group min-w-0"
             >
               <div
                 className={cn(
@@ -50,10 +51,10 @@ export default function CopyTrading() {
                 )}
               />
 
-              <div className="flex items-center gap-4 min-w-[240px] relative z-10 w-full sm:w-auto mt-2 sm:mt-0">
+              <div className="flex items-center gap-4 min-w-0 relative z-10 w-full sm:w-auto mt-2 sm:mt-0">
                 <AgentAvatar seed={copy(row.agent)} size={48} styleType={row.style} className="shrink-0" />
-                <div>
-                  <h3 className="font-bold">{copy(row.agent)}</h3>
+                <div className="min-w-0">
+                  <h3 className="font-bold break-words">{copy(row.agent)}</h3>
                   <div className="flex items-center gap-2 mt-1">
                     <span
                       className={cn(
@@ -69,7 +70,7 @@ export default function CopyTrading() {
                 </div>
               </div>
 
-              <div className="flex-1 w-full h-[60px] relative z-10 hidden sm:block">
+              <div className="flex-1 w-full h-[60px] relative z-10 hidden sm:block min-w-0">
                 <ResponsiveContainer width="100%" height="100%">
                   <AreaChart data={chartData}>
                     <defs>
@@ -90,7 +91,7 @@ export default function CopyTrading() {
                 </ResponsiveContainer>
               </div>
 
-              <div className="grid grid-cols-2 sm:flex sm:items-center gap-6 sm:gap-8 w-full sm:w-auto relative z-10 mt-4 sm:mt-0 border-t sm:border-t-0 border-white/10 pt-4 sm:pt-0">
+              <div className="grid grid-cols-2 sm:flex sm:items-center gap-4 sm:gap-8 w-full sm:w-auto relative z-10 mt-4 sm:mt-0 border-t sm:border-t-0 border-white/10 pt-4 sm:pt-0 min-w-0">
                 <div>
                   <div className="text-[10px] text-text-secondary mb-1">{copy(copyTradingViewModel.labels.allocated)}</div>
                   <div className="font-mono font-medium">{row.allocation}</div>

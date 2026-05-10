@@ -1,6 +1,8 @@
 import { motion } from 'motion/react';
 import { useTranslation } from 'react-i18next';
 import { ResponsiveContainer, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
+import { TerminalPanel } from '@/components/ui/surfaces/TerminalPanel';
+import { StatusBadge } from '@/components/ui/surfaces/StatusBadge';
 import type { TerminalMarketState } from '../types';
 
 const CustomTooltip = ({ active, payload, label }: any) => {
@@ -26,35 +28,32 @@ export default function TerminalMarketPanel({ market }: TerminalMarketPanelProps
   const { t } = useTranslation();
 
   return (
-    <div className="bg-gradient-to-b from-blue-900/10 to-transparent border border-white/5 rounded-xl h-[45%] flex flex-col relative overflow-hidden shrink-0">
+    <TerminalPanel
+      className="bg-gradient-to-b from-blue-900/10 to-transparent h-[45%] shrink-0"
+      title={t('terminal.market.executionTitle', { symbol: market.symbol })}
+      actions={
+        <div className="flex items-center gap-2">
+          {market.timeframes.map((timeframe) => {
+            const isActive = timeframe === market.activeTimeframe;
+
+            return (
+              <span
+                key={timeframe}
+                className={
+                  isActive
+                    ? 'text-[10px] font-mono text-text-primary px-2 py-0.5 bg-white/10 rounded border border-white/20 cursor-pointer'
+                    : 'text-[10px] font-mono text-text-secondary cursor-pointer hover:text-white transition-colors'
+                }
+              >
+                {timeframe}
+              </span>
+            );
+          })}
+        </div>
+      }
+    >
       <div className="absolute inset-0 bg-noise opacity-50" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-accent-blue/10 blur-[100px] pointer-events-none" />
-
-      <div className="p-4 border-b border-white/5 flex items-center justify-between relative z-10 bg-white/[0.02]">
-        <div className="flex items-center gap-4">
-          <h3 className="text-[10px] font-bold uppercase tracking-widest text-text-secondary">
-            {t('terminal.market.executionTitle', { symbol: market.symbol })}
-          </h3>
-          <div className="flex items-center gap-2">
-            {market.timeframes.map((timeframe) => {
-              const isActive = timeframe === market.activeTimeframe;
-
-              return (
-                <span
-                  key={timeframe}
-                  className={
-                    isActive
-                      ? 'text-[10px] font-mono text-text-primary px-2 py-0.5 bg-white/10 rounded border border-white/20 cursor-pointer'
-                      : 'text-[10px] font-mono text-text-secondary cursor-pointer hover:text-white transition-colors'
-                  }
-                >
-                  {timeframe}
-                </span>
-              );
-            })}
-          </div>
-        </div>
-      </div>
 
       <div className="flex-1 p-4 flex flex-col relative z-10 min-h-0">
         <div className="flex justify-between items-start mb-2">
@@ -68,9 +67,9 @@ export default function TerminalMarketPanel({ market }: TerminalMarketPanelProps
             </p>
           </div>
           <div className="text-right">
-            <span className="text-accent-emerald text-xl font-mono tracking-tighter bg-accent-emerald/10 px-2 py-1 rounded border border-accent-emerald/20">
+            <StatusBadge tone="emerald" className="text-xl tracking-tighter px-2 py-1">
               {market.changeLabel}
-            </span>
+            </StatusBadge>
           </div>
         </div>
         <div className="flex-1 relative mt-2 min-h-0">
@@ -99,6 +98,6 @@ export default function TerminalMarketPanel({ market }: TerminalMarketPanelProps
           </ResponsiveContainer>
         </div>
       </div>
-    </div>
+    </TerminalPanel>
   );
 }
