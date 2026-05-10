@@ -1,0 +1,71 @@
+{
+  "nav": {
+    "ecosystem": "エコシステム",
+    "tacitAgents": "暗黙知エージェント",
+    "heuristics": "発見的推論",
+    "resonanceChamber": "共鳴チャンバー",
+    "launchSystem": "システム起動",
+    "observerNode": "観測ノード",
+    "tacitEntities": "暗黙的エンティティ",
+    "intuitionForge": "直感フォージ",
+    "harmonicBonds": "調和結合",
+    "exposureMatrix": "エクスポージャー・マトリクス",
+    "frictionNet": "フリクション・ネット",
+    "neuralLink": "ニューラル・リンク",
+    "epochBilling": "エポック課金"
+  },
+  "landing": {
+    "sync": "グローバル・コンセンサス同期完了",
+    "title1": "人間の知性を",
+    "title2": "拡張する",
+    "title3": "暗黙知AI",
+    "subtitle": "マイケル・ポランニーの理論に基づく、生きた金融文明。エージェントは単に計算するだけでなく、内面化された何十億もの経験的ヒューリスティクスを通して市場を「感じ」ます。",
+    "enter": "文明へ入る",
+    "observe": "脈動を観測する"
+  },
+  "agents": {
+    "macro": {
+      "name": "マクロAI",
+      "status": "戦術的共鳴: 高",
+      "dialogue": "穏やかな市場の推移を観測しています。機関投資家の慎重な蓄積の兆候が確認されました。安全性を確保しつつ、ロングポジションへの静かな直感を感じています。"
+    },
+    "risk": {
+      "name": "リスクAI",
+      "status": "摩擦: 検知",
+      "dialogue": "板情報の深層に無言の摩擦を感知しています。政策の転換を控える中、環境は不安定です。資産保护のため、エクスポージャーを50%に調整します。"
+    },
+    "whale": {
+      "name": "ホエールAI",
+      "status": "データ: オンチェーン",
+      "dialogue": "エンティティ・クラスタリングにより、静かな蓄積パターンを検知。資金がLayer 1基軸資産へと慎重に移動していることを示しています。"
+    },
+    "roles": {
+      "macroCore": "マクロコア",
+      "frictionSentinel": "摩擦センチネル",
+      "chaosSynthesis": "カオス合成",
+      "onChainPulse": "オンチェーンパルス"
+    }
+  },
+  "ui": {
+    "consensusAchieved": "コンセンサス形成完了",
+    "executing": "資本配置を実行中。",
+    "language": "システム言語",
+    "globalResonance": "グローバル共鳴度",
+    "activeBonds": "アクティブな結合",
+    "osCore": "Tacit OS コア",
+    "systemLang": "システム言語",
+    "globalNeuralState": "世界のニューラル状態",
+    "synthesizing": "合成中",
+    "tacitSaturation": "暗黙的飽和状態",
+    "entropyScanner": "エントロピースキャナー",
+    "memeHeuristic": "ミームヒューリスティック",
+    "liquidityIntuition": "流動性の直感",
+    "coordinatedAgents": "協調エージェント",
+    "vectorMatrix": "ベクトル行列",
+    "intuitionGraph": "直感グラフ",
+    "viewTx": "トランザクション表示",
+    "resonant": "共鳴",
+    "dissonant": "不協和",
+    "observing": "観察中"
+  }
+}

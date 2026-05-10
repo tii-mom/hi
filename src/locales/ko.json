@@ -1,0 +1,71 @@
+{
+  "nav": {
+    "ecosystem": "生代系统",
+    "tacitAgents": "暗默적 에이전트",
+    "heuristics": "휴리스틱",
+    "resonanceChamber": "공명 챔버",
+    "launchSystem": "시스템 시작",
+    "observerNode": "관측 노드",
+    "tacitEntities": "암묵적 개체",
+    "intuitionForge": "직관 포지",
+    "harmonicBonds": "조화 채권",
+    "exposureMatrix": "노출 매트릭스",
+    "frictionNet": "마찰 네트워크",
+    "neuralLink": "뉴럴 링크",
+    "epochBilling": "에포크 과금"
+  },
+  "landing": {
+    "sync": "글로벌 컨센서스 동기화 완료",
+    "title1": "인간의 지능",
+    "title2": "증폭되는 곳",
+    "title3": "Tacit AI.",
+    "subtitle": "마이클 폴라니의 이론에 기반한 살아있는 금융 문명. 에이전트는 단순한 매개변수 계산을 넘어 수십억 개의 경험적 휴리스틱을 통해 시장을 순간적으로 '직감'합니다.",
+    "enter": "문명 진입",
+    "observe": "펄스 관측"
+  },
+  "agents": {
+    "macro": {
+      "name": "매크로 AI",
+      "status": "전술 공명: 극상",
+      "dialogue": "4H 차트 모멘텀 강력 반등 확인. 기관 볼륨 0.618 피보나치에서 대량 매집 포착. 즉각적인 롱 포지션 진입을 위한 강한 직관이 발생 중입니다."
+    },
+    "risk": {
+      "name": "리스크 AI",
+      "status": "마찰: 감지됨",
+      "dialogue": "오더북 뎁스 내 보이지 않는 강한 마찰 감지. 매크로 지표 발표 대기 중. 생존 극대화를 위해 익스포저 50% 축소."
+    },
+    "whale": {
+      "name": "고래 AI",
+      "status": "데이터: 온체인",
+      "dialogue": "엔티티 클러스터 내 거대 매집 패턴 포착. 자본 흐름이 베이스 L1 자산으로 초고속 순환 중입니다."
+    },
+    "roles": {
+      "macroCore": "매크로 코어",
+      "frictionSentinel": "마찰 센티널",
+      "chaosSynthesis": "혼돈 합성",
+      "onChainPulse": "온체인 맥박"
+    }
+  },
+  "ui": {
+    "consensusAchieved": "컨센서스 도달",
+    "executing": "자본 투입 실행 완료.",
+    "language": "시스템 언어",
+    "globalResonance": "글로벌 공명",
+    "activeBonds": "활성 뉴럴 본드",
+    "osCore": "Tacit OS 코어",
+    "systemLang": "시스템 언어",
+    "globalNeuralState": "글로벌 신경망 상태",
+    "synthesizing": "합성 중",
+    "tacitSaturation": "암묵적 포화도",
+    "entropyScanner": "엔트로피 스캐너",
+    "memeHeuristic": "밈 휴리스틱",
+    "liquidityIntuition": "유동성 직관",
+    "coordinatedAgents": "조정된 에이전트",
+    "vectorMatrix": "벡터 매트릭스",
+    "intuitionGraph": "직관 그래프",
+    "viewTx": "트랜잭션 보기",
+    "resonant": "공진",
+    "dissonant": "부조화",
+    "observing": "관찰 중"
+  }
+}

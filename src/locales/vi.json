@@ -1,0 +1,71 @@
+{
+  "nav": {
+    "ecosystem": "Hệ sinh thái",
+    "tacitAgents": "Đặc vụ ngầm",
+    "heuristics": "Suy luận logic",
+    "resonanceChamber": "Buồng cộng hưởng",
+    "launchSystem": "Khởi động hệ thống",
+    "observerNode": "Nút quan sát",
+    "tacitEntities": "Thực thể ngầm",
+    "intuitionForge": "Lò rèn trực giác",
+    "harmonicBonds": "Trái phiếu hài hòa",
+    "exposureMatrix": "Ma trận rủi ro",
+    "frictionNet": "Lưới ma sát",
+    "neuralLink": "Liên kết Neural",
+    "epochBilling": "Thanh toán Kỷ nguyên"
+  },
+  "landing": {
+    "sync": "Đồng bộ hóa Đồng thuận Toàn cầu",
+    "title1": "Trí tuệ nhân loại",
+    "title2": "được khuếch đại bởi",
+    "title3": "Tacit AI.",
+    "subtitle": "Một nền văn minh tài chính sống động dựa trên các lý thuyết của Michael Polanyi. Các đặc vụ không chỉ tính toán—chúng \"cảm nhận\" thị trường qua hàng tỷ phép suy luận kinh nghiệm.",
+    "enter": "Tiến vào Văn minh",
+    "observe": "Quan sát Nhịp đập"
+  },
+  "agents": {
+    "macro": {
+      "name": "AI Vĩ mô",
+      "status": "CỘNG HƯỞNG CHIẾN THUẬT: CAO",
+      "dialogue": "Động lượng BTC đang cải thiện trên biểu đồ 4H. Hồ sơ khối lượng tổ chức cho thấy sự tích lũy quanh mức thoái lui Fib 0.618. Trực giác mách bảo vị thế MUA (LONG)."
+    },
+    "risk": {
+      "name": "AI Rủi ro",
+      "status": "MA SÁT: ĐÃ PHÁT HIỆN",
+      "dialogue": "Cảm nhận được ma sát ngầm trong độ sâu sổ lệnh. Môi trường vĩ mô không ổn định trước thềm thay đổi chính sách. Đang điều chỉnh mức rủi ro xuống 50%."
+    },
+    "whale": {
+      "name": "AI Cá voi",
+      "status": "DỮ LIỆU: TRÊN CHUỖI",
+      "dialogue": "Phát hiện mẫu tích lũy lớn thông qua phân cụm thực thể. Dòng vốn cho thấy sự luân chuyển tĩnh lặng sang các tài sản cơ sở Layer 1."
+    },
+    "roles": {
+      "macroCore": "Lõi Vĩ mô",
+      "frictionSentinel": "Lính canh Ma sát",
+      "chaosSynthesis": "Tổng hợp Hỗn loạn",
+      "onChainPulse": "Nhịp đập On-chain"
+    }
+  },
+  "ui": {
+    "consensusAchieved": "Đã đạt Đồng thuận",
+    "executing": "Đang thực hiện triển khai vốn.",
+    "language": "Ngôn ngữ Hệ thống",
+    "globalResonance": "Cộng hưởng Toàn cầu",
+    "activeBonds": "Liên kết Thần kinh Hoạt động",
+    "osCore": "Lõi Tacit OS",
+    "systemLang": "Ngôn ngữ Hệ thống",
+    "globalNeuralState": "Trạng thái Thần kinh Toàn cầu",
+    "synthesizing": "Đang tổng hợp",
+    "tacitSaturation": "Độ bão hòa Ngầm",
+    "entropyScanner": "Máy quét Entropy",
+    "memeHeuristic": "Meme Heuristic",
+    "liquidityIntuition": "Trực giác Thanh khoản",
+    "coordinatedAgents": "Tác nhân Phối hợp",
+    "vectorMatrix": "Ma trận Vector",
+    "intuitionGraph": "Đồ thị Trực giác",
+    "viewTx": "Xem giao dịch",
+    "resonant": "CỘNG HƯỞNG",
+    "dissonant": "BẤT ĐỒNG",
+    "observing": "ĐANG QUAN SÁT"
+  }
+}

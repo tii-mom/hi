@@ -1,0 +1,71 @@
+{
+  "nav": {
+    "ecosystem": "生态系统",
+    "tacitAgents": "默契智能体",
+    "heuristics": "启发式策略",
+    "resonanceChamber": "共鸣舱",
+    "launchSystem": "启动系统",
+    "observerNode": "观测节点",
+    "tacitEntities": "默契实体",
+    "intuitionForge": "直觉熔炉",
+    "harmonicBonds": "谐波契约",
+    "exposureMatrix": "风险敞口矩阵",
+    "frictionNet": "摩擦过滤网",
+    "neuralLink": "神经链接",
+    "epochBilling": "时代计费"
+  },
+  "landing": {
+    "sync": "全球共识已同步",
+    "title1": "人类智慧",
+    "title2": "被其放大：",
+    "title3": "默会人工智能。",
+    "subtitle": "基于迈克尔·波兰尼理论构建的活态金融文明。智能体不只是计算参数——它们通过数十亿内置的经验启发式模型，深刻“感知”市场的呼吸与脉动。",
+    "enter": "进入文明",
+    "observe": "观测脉搏"
+  },
+  "agents": {
+    "macro": {
+      "name": "宏观 AI",
+      "status": "战术共鸣：高",
+      "dialogue": "您好，我观察到 4 小时级别的动能正在改善。机构的成交量分布表明，在 0.618 斐波那契回撤位附近存在稳健的吸筹行为。直觉指引我建议您考虑做多，请安心布局。"
+    },
+    "risk": {
+      "name": "风控 AI",
+      "status": "摩擦：已检测",
+      "dialogue": "请注意，我在订单簿深度中感知到一些无声的摩擦。政策可能发生转变，当前宏观环境略有不稳。为了您的资产安全，建议将敞口降至 50%。"
+    },
+    "whale": {
+      "name": "巨鲸 AI",
+      "status": "数据：链上",
+      "dialogue": "通过实体聚类分析，我为您捕捉到了大规模的吸筹模式。资金流向表明，主力正悄然轮动至底层公链资产。我们将为您持续盯盘。"
+    },
+    "roles": {
+      "macroCore": "宏观核心",
+      "frictionSentinel": "摩擦哨兵",
+      "chaosSynthesis": "混沌合成",
+      "onChainPulse": "链上脉搏"
+    }
+  },
+  "ui": {
+    "consensusAchieved": "共识已达成",
+    "executing": "正在平稳执行资金部署。",
+    "language": "系统语言",
+    "globalResonance": "全球共鸣度",
+    "activeBonds": "活跃神经网络",
+    "osCore": "Tacit OS 核心",
+    "systemLang": "系统语言",
+    "globalNeuralState": "全球神经状态",
+    "synthesizing": "合成中",
+    "tacitSaturation": "默会饱和度",
+    "entropyScanner": "熵值扫描器",
+    "memeHeuristic": "模因启发式",
+    "liquidityIntuition": "流动性直觉",
+    "coordinatedAgents": "协同代理",
+    "vectorMatrix": "向量矩阵",
+    "intuitionGraph": "直觉图",
+    "viewTx": "查看交易",
+    "resonant": "共振",
+    "dissonant": "失调",
+    "observing": "观察中"
+  }
+}

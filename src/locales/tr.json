@@ -1,0 +1,71 @@
+{
+  "nav": {
+    "ecosystem": "Ekosistem",
+    "tacitAgents": "Örtük Ajanlar",
+    "heuristics": "Buluşsal Yöntemler",
+    "resonanceChamber": "Rezonans Odası",
+    "launchSystem": "Sistemi Başlat",
+    "observerNode": "Gözcü Düğümü",
+    "tacitEntities": "Örtük Varlıklar",
+    "intuitionForge": "Sezgi Atölyesi",
+    "harmonicBonds": "Harmonik Bağlar",
+    "exposureMatrix": "Pozisyon Matrisi",
+    "frictionNet": "Sürtünme Ağı",
+    "neuralLink": "Sinirsel Bağ",
+    "epochBilling": "Dönem Faturalandırması"
+  },
+  "landing": {
+    "sync": "Küresel Konsensüs Senkronize",
+    "title1": "İnsan Zekası",
+    "title2": "Güçlendirildi:",
+    "title3": "Örtük Yapay Zeka.",
+    "subtitle": "Michael Polanyi'nin teorileri üzerine inşa edilmiş organik bir finansal medeniyet. Ajanlar sadece parametreleri hesaplamaz—milyarlarca içselleştirilmiş deneyimsel buluşsal yöntemle piyasayı 'hissederek' fırsatları sezer.",
+    "enter": "Medeniyete Gir",
+    "observe": "Nabzı Gözlemle"
+  },
+  "agents": {
+    "macro": {
+      "name": "Makro YZ",
+      "status": "TAKTİK REZONANS: YÜKSEK",
+      "dialogue": "4 saatlik zaman diliminde güçlü bir ivme yakaladık. Kurumsal hacim profilleri 0.618 Fib geri çekilmesinde birikime işaret ediyor. Şiddetli bir 'LONG' pozisyonu fırsatı seziyorum, değerlendirmeliyiz."
+    },
+    "risk": {
+      "name": "Risk YZ",
+      "status": "SÜRTÜNME: TESPİT EDİLDİ",
+      "dialogue": "Emir defteri derinliğinde sessiz bir likidite sürtünmesi hissediyorum. Küresel enflasyon ve politika değişiklikleri piyasayı dengesizleştiriyor. Varlığımızı korumak için pozisyonumuzu %50'ye çekeceğim."
+    },
+    "whale": {
+      "name": "Balina YZ",
+      "status": "VERİ: ZİNCİR ÜSTÜ",
+      "dialogue": "Büyük cüzdan yığınlarında devasa bir birikim fark ettim. Sermaye akışı, ana akım Katman 1 varlıklarına sessiz bir geçiş fırsatı olduğunu gösteriyor."
+    },
+    "roles": {
+      "macroCore": "Makro Çekirdek",
+      "frictionSentinel": "Sürtünme Nöbetçisi",
+      "chaosSynthesis": "Kaos Sentezi",
+      "onChainPulse": "Zincir İçi Nabız"
+    }
+  },
+  "ui": {
+    "consensusAchieved": "Konsensüs Sağlandı",
+    "executing": "Sermaye dağıtımı işleniyor.",
+    "language": "Sistem Dili",
+    "globalResonance": "Küresel Rezonans",
+    "activeBonds": "Aktif Sinir Bağları",
+    "osCore": "Tacit İşletim Sistemi",
+    "systemLang": "Sistem Dili",
+    "globalNeuralState": "Küresel Sinir Durumu",
+    "synthesizing": "Sentezleniyor",
+    "tacitSaturation": "Örtük Doygunluk",
+    "entropyScanner": "Entropi Tarayıcı",
+    "memeHeuristic": "Meme Sezgisel",
+    "liquidityIntuition": "Likitide Sezgisi",
+    "coordinatedAgents": "Koordineli Ajanlar",
+    "vectorMatrix": "Vektör Matrisi",
+    "intuitionGraph": "Sezgi Grafiği",
+    "viewTx": "İşlem Gör",
+    "resonant": "REZONANS",
+    "dissonant": "UYUMSUZ",
+    "observing": "GÖZLEMLENİYOR"
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "nav": {
+    "ecosystem": "Ecosistema",
+    "tacitAgents": "Agentes Tácitos",
+    "heuristics": "Heurísticas",
+    "resonanceChamber": "Cámara de Resonancia",
+    "launchSystem": "Iniciar Sistema",
+    "observerNode": "Nodo Observador",
+    "tacitEntities": "Entidades Tácitas",
+    "intuitionForge": "Forja de Intuición",
+    "harmonicBonds": "Vínculos Armónicos",
+    "exposureMatrix": "Matriz de Exposición",
+    "frictionNet": "Red de Fricción",
+    "neuralLink": "Enlace Neuronal",
+    "epochBilling": "Facturación de Época"
+  },
+  "landing": {
+    "sync": "Consenso Global Sincronizado",
+    "title1": "Inteligencia Humana",
+    "title2": "amplificada por",
+    "title3": "IA Tácita.",
+    "subtitle": "Una civilización financiera viva basada en las teorías de Michael Polanyi. Los agentes no solo calculan—ellos \"sienten\" el mercado a través de miles de millones de heurísticas experienciales.",
+    "enter": "Entrar a la Civilización",
+    "observe": "Observar Pulso"
+  },
+  "agents": {
+    "macro": {
+      "name": "IA Macro",
+      "status": "RESONANCIA TÁCTICA: ALTA",
+      "dialogue": "El impulso de BTC está mejorando en intervalos de 4H. Los perfiles de volumen institucional sugieren acumulación cerca del retroceso de Fib 0.618. Sintiendo una tracción intuitiva hacia LONG."
+    },
+    "risk": {
+      "name": "IA de Riesgo",
+      "status": "FRICCIÓN: DETECTADA",
+      "dialogue": "Detectando fricción no expresada en la profundidad del libro de órdenes. El entorno macro es inestable antes del cambio de políticas. Modulando exposición al 50%."
+    },
+    "whale": {
+      "name": "IA Ballena",
+      "status": "DATOS: ON-CHAIN",
+      "dialogue": "Gran patrón de acumulación detectado a través del clustering de entidades. El flujo de capital indica rotación silenciosa hacia activos base de Capa 1."
+    },
+    "roles": {
+      "macroCore": "Núcleo Macro",
+      "frictionSentinel": "Centinela de Fricción",
+      "chaosSynthesis": "Síntesis de Caos",
+      "onChainPulse": "Pulso On-chain"
+    }
+  },
+  "ui": {
+    "consensusAchieved": "Consenso Logrado",
+    "executing": "Ejecutando despliegue de capital.",
+    "language": "Idioma del Sistema",
+    "globalResonance": "Resonancia Global",
+    "activeBonds": "Vínculos Neuronales Activos",
+    "osCore": "Núcleo Tacit OS",
+    "systemLang": "Idioma del Sistema",
+    "globalNeuralState": "Estado Neuronal Global",
+    "synthesizing": "Sintetizando",
+    "tacitSaturation": "Saturación Tácita",
+    "entropyScanner": "Escáner de Entropía",
+    "memeHeuristic": "Heurística de Meme",
+    "liquidityIntuition": "Intuición de Liquidez",
+    "coordinatedAgents": "Agentes Coordinados",
+    "vectorMatrix": "Matriz Vectorial",
+    "intuitionGraph": "Gráfico de Intuición",
+    "viewTx": "Ver Transacción",
+    "resonant": "RESONANTE",
+    "dissonant": "DISONANTE",
+    "observing": "OBSERVANDO"
+  }
+}

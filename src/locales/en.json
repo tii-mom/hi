@@ -1,0 +1,77 @@
+{
+  "nav": {
+    "ecosystem": "Ecosystem",
+    "tacitAgents": "Tacit Agents",
+    "heuristics": "Heuristics",
+    "resonanceChamber": "Resonance Chamber",
+    "launchSystem": "Launch System",
+    "observerNode": "Observer Node",
+    "tacitEntities": "Tacit Entities",
+    "intuitionForge": "Intuition Forge",
+    "harmonicBonds": "Harmonic Bonds",
+    "exposureMatrix": "Exposure Matrix",
+    "frictionNet": "Friction Net",
+    "neuralLink": "Neural Link",
+    "epochBilling": "Epoch Billing"
+  },
+  "landing": {
+    "sync": "Global Consensus Synchronized",
+    "title1": "Human Intelligence",
+    "title2": "amplified by",
+    "title3": "Tacit AI.",
+    "subtitle": "A living financial civilization built on Michael Polanyi’s theories. Agents that don't just calculate parameters—they \"feel\" the market through billions of internalized experiential heuristics.",
+    "enter": "Enter Civilization",
+    "observe": "Observe Pulse"
+  },
+  "agents": {
+    "macro": {
+      "name": "Macro AI",
+      "status": "TACTIC RESONANCE: HIGH",
+      "dialogue": "BTC momentum improving on 4H timeframes. Institutional volume profiles suggest accumulation near the 0.618 Fib retracement. Experiencing an intuitive pull towards LONG."
+    },
+    "risk": {
+      "name": "Risk AI",
+      "status": "FRICTION: DETECTED",
+      "dialogue": "Sensing unspoken friction in orderbook depth. Macro environment is unstable pending policy shifts. Modulating exposure to 50%."
+    },
+    "whale": {
+      "name": "Whale AI",
+      "status": "DATA: ON-CHAIN",
+      "dialogue": "Large accumulation pattern detected via entity clustering. Capital flow indicates silent rotation into Layer 1 base assets."
+    },
+    "companion": {
+      "welcome": "Neural Link established. I am currently resonating with your portfolio and interpreting global market entropy. What would you like to intuit?",
+      "report": "Synthesizing global resonance...",
+      "trade": "Trade intent detected. I am cross-referencing with Friction Sentinel. My tacit heuristics suggest high implicit friction right now—please verify via the Resonance Chamber.",
+      "default": "I have intuitively assimilated this context into my experiential matrix. Modulating my tacit response variables accordingly."
+    },
+    "roles": {
+      "macroCore": "Macro Core",
+      "frictionSentinel": "Friction Sentinel",
+      "chaosSynthesis": "Chaos Synthesis",
+      "onChainPulse": "On-chain Pulse"
+    }
+  },
+  "ui": {
+    "consensusAchieved": "Consensus Achieved",
+    "executing": "Executing capital deployment.",
+    "language": "System Language",
+    "globalResonance": "Global Resonance",
+    "activeBonds": "Active Neural Bonds",
+    "osCore": "Tacit OS Core",
+    "systemLang": "System Language",
+    "globalNeuralState": "Global Neural State",
+    "synthesizing": "Synthesizing",
+    "tacitSaturation": "Tacit Saturation",
+    "entropyScanner": "Entropy Scanner",
+    "memeHeuristic": "Meme Heuristic",
+    "liquidityIntuition": "Liquidity Intuition",
+    "coordinatedAgents": "Coordinated Agents",
+    "vectorMatrix": "Tacit Vector Matrix",
+    "intuitionGraph": "Intuition Graph",
+    "viewTx": "View Transaction",
+    "resonant": "RESONANT",
+    "dissonant": "DISSONANT",
+    "observing": "OBSERVING"
+  }
+}
