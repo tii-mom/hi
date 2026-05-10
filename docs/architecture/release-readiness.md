@@ -28,6 +28,7 @@ This document defines the minimum frontend checks that should stay green before 
 - `npm run test`
 - `npm run build`
 - `npm run smoke:release`
+- `npm run smoke:routes`
 
 For CI jobs that want a single release gate, use `npm run verify:ci`.
 
@@ -38,6 +39,12 @@ For CI jobs that want a single release gate, use `npm run verify:ci`.
 - Read-only live wiring must go through `src/app/services/readModels.ts`; pages should not call `fetch` directly.
 - Preview-only financial actions must remain separated from live execution behavior.
 - Mobile and Telegram WebView smoke checks must pass before a public release.
+
+## Hosting Defaults
+
+- Vercel is the default static host target for the current frontend release gate.
+- SPA deep links must rewrite to `index.html`; assets must keep immutable cache headers.
+- Security headers must ship with CSP, referrer policy, content-type protection, and a restrictive permissions policy.
 
 ## Notes
 

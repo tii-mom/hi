@@ -16,8 +16,9 @@
     "test": "vitest run",
     "test:parity": "vitest run src/test/localeParity.test.ts",
     "test:watch": "vitest",
+    "smoke:routes": "node scripts/route-smoke.mjs",
     "smoke:release": "node scripts/release-smoke.mjs",
-    "verify:ci": "npm run typecheck && npm run lint && npm run test:parity && npm run test && npm run build && npm run smoke:release",
+    "verify:ci": "npm run typecheck && npm run lint && npm run test:parity && npm run test && npm run build && npm run smoke:release && npm run smoke:routes",
     "verify": "npm run typecheck && npm run lint && npm run test && npm run build"
   },
   "dependencies": {
