@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { consensusViewModel, voteIconMap, type ConsensusCopy } from '@/features/consensus';
 import { cn } from '@/lib/utils';
 import AgentAvatar from '../components/ui/AgentAvatar';
+import { LaunchStateBadge } from '@/components/ui/surfaces/LaunchStateBadge';
 
 export default function DebateInterface() {
   const { t } = useTranslation();
@@ -17,6 +18,7 @@ export default function DebateInterface() {
         </div>
         <div className="px-3 py-1 rounded bg-accent-blue/10 border border-accent-blue/30 text-accent-blue text-xs font-mono animate-pulse">
           {copy(consensusViewModel.header.synthesisStatus)}
+          <LaunchStateBadge state="preview" className="ml-2 align-middle" />
         </div>
       </div>
 
@@ -63,8 +65,14 @@ export default function DebateInterface() {
                 </h4>
                 <p className="text-xs text-text-secondary">{copy(consensusViewModel.consensus.message)}</p>
               </div>
-              <button className="px-4 py-2 bg-accent-emerald text-black text-sm font-bold rounded-lg hover:bg-accent-emerald/80 transition-colors">
+              <button
+                type="button"
+                disabled
+                title="Preview-only consensus action. No live execution route is connected."
+                className="px-4 py-2 bg-accent-emerald/50 text-black/70 text-sm font-bold rounded-lg cursor-not-allowed transition-colors"
+              >
                 {copy(consensusViewModel.consensus.action)}
+                <LaunchStateBadge state="disabled" className="ml-2 align-middle" />
               </button>
             </div>
           </div>

@@ -7,6 +7,7 @@ import { createRiskViewModel, createSystemStressData } from '@/app/services/risk
 import { loadRiskReadModel } from '@/app/services/readModels';
 import { useReadModelResource } from '@/app/services/useReadModelResource';
 import { ResourceStatus } from '@/components/ui/surfaces/ResourceStatus';
+import { LaunchStateBadge } from '@/components/ui/surfaces/LaunchStateBadge';
 import { riskLevels, useSystemTime, type RiskLevel } from '@/features/risk';
 import { cn } from '@/lib/utils';
 import { useLiveData } from '../hooks/useLiveData';
@@ -115,10 +116,14 @@ export default function RiskCenter() {
             <h3 className="text-xs font-bold uppercase tracking-widest text-text-secondary mb-6 md:mb-8 text-center">
               {riskViewModel.protocolTitle}
             </h3>
+            <div className="mb-4">
+              <LaunchStateBadge state="disabled" />
+            </div>
 
             <div className="relative">
               <button
                 onClick={() => !isTriggered && setIsArmed(!isArmed)}
+                title="Preview-only arming state. No live risk engine is connected."
                 className={cn(
                   'absolute -top-5 md:-top-6 left-1/2 -translate-x-1/2 px-3 md:px-4 py-1 text-[10px] font-bold uppercase tracking-widest rounded-t-lg transition-colors border border-b-0 cursor-pointer z-20 whitespace-nowrap',
                   isArmed
@@ -131,14 +136,16 @@ export default function RiskCenter() {
 
               <button
                 onClick={handleKillSwitch}
-                disabled={!isArmed || isTriggered}
+                disabled
+                aria-disabled
+                title="Disabled until live risk kill-switch execution exists."
                 className={cn(
                   'w-36 h-36 sm:w-44 sm:h-44 lg:w-48 lg:h-48 rounded-full border-4 flex items-center justify-center flex-col transition-all duration-300 relative z-10 shadow-2xl overflow-hidden group',
                   !isArmed && !isTriggered
                     ? 'bg-red-950/20 border-red-900/30 cursor-not-allowed opacity-50'
                     : isTriggered
                       ? 'bg-red-600 border-red-400 scale-95'
-                      : 'bg-red-500/10 border-red-500 hover:bg-red-500/20 hover:scale-105 cursor-pointer shadow-[0_0_50px_rgba(239,68,68,0.3)]',
+                      : 'bg-red-500/10 border-red-500 cursor-not-allowed opacity-70 shadow-[0_0_50px_rgba(239,68,68,0.3)]',
                 )}
               >
                 {isTriggered && <div className="absolute inset-0 bg-red-500 animate-ping opacity-20" />}

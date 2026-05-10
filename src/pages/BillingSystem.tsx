@@ -9,6 +9,7 @@ import {
   yieldSegmentToneClasses,
 } from '@/features/billing';
 import { cn } from '@/lib/utils';
+import { LaunchStateBadge } from '@/components/ui/surfaces/LaunchStateBadge';
 
 function walletStatusDotClass(walletStatus: WalletStatus) {
   if (walletStatus === 'connected') {
@@ -78,9 +79,11 @@ export default function BillingSystem() {
             <button
               type="button"
               onClick={openAuthModal}
+              title="Preview-only wallet management. No live wallet operations are connected."
               className="w-full py-2 bg-white/5 border border-white/10 hover:bg-white/10 rounded-lg text-xs font-bold uppercase tracking-wider transition-colors mt-4"
             >
               {copy(billingViewModel.walletDisplay.manageAction)}
+              <LaunchStateBadge state="preview" className="ml-2 align-middle" />
             </button>
           </div>
         </div>
@@ -115,6 +118,8 @@ export default function BillingSystem() {
                     <span className={cn('text-lg font-mono', summaryMetricToneClasses[metric.tone])}>{copy(metric.value)}</span>
                     <button
                       type="button"
+                      disabled
+                      title="Disabled until production billing settlement exists."
                       className="text-[9px] bg-white text-black px-2 py-1 rounded font-bold uppercase hover:bg-white/90"
                     >
                       {copy(metric.action)}
@@ -160,6 +165,8 @@ export default function BillingSystem() {
                 </span>
                 <button
                   type="button"
+                  disabled={bond.status !== 'active'}
+                  title="Disabled until live logic-bond revocation is implemented."
                   className="text-[10px] font-bold text-white/50 hover:text-white uppercase tracking-wider underline underline-offset-2"
                 >
                   {copy(billingViewModel.logicBonds.revokeAction)}

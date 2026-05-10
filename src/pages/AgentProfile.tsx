@@ -9,6 +9,7 @@ import { createAgentProfileViewModel } from '@/app/services/agents';
 import { loadAgentProfileReadModel } from '@/app/services/readModels';
 import { useReadModelResource } from '@/app/services/useReadModelResource';
 import { ResourceStatus } from '@/components/ui/surfaces/ResourceStatus';
+import { LaunchStateBadge } from '@/components/ui/surfaces/LaunchStateBadge';
 import { cn } from '@/lib/utils';
 import AgentAvatar from '../components/ui/AgentAvatar';
 
@@ -151,10 +152,12 @@ export default function AgentProfile() {
           <div className="flex flex-col items-end gap-4">
             <button
               onClick={() => setIsCopyPanelOpen(true)}
+              title="Preview-only copy configuration. No live copy-trading contract deployment is connected."
               className="px-6 py-2.5 bg-white text-black text-sm font-bold rounded-lg hover:bg-white/90 transition-colors flex items-center gap-2"
             >
               <Activity className="w-4 h-4" />
               {copy('agents.profile.actions.copyStrategy', 'Copy Strategy')}
+              <LaunchStateBadge state="preview" />
             </button>
             <div className="text-right">
               <div className="text-sm text-text-secondary mb-1">{copy('agents.profile.labels.totalAum', 'Total AUM Configured')}</div>
@@ -524,12 +527,12 @@ export default function AgentProfile() {
                   <span className="text-accent-emerald font-mono">~${(allocation * agent.copyYieldRate).toFixed(2)}</span>
                 </div>
                 <button
-                  onClick={() => {
-                    setIsCopyPanelOpen(false);
-                  }}
-                  className="w-full py-3 bg-white text-black font-bold text-sm uppercase tracking-wider rounded-lg hover:bg-white/90 transition-colors"
+                  disabled
+                  title="Disabled until live copy-trading contract deployment exists."
+                  className="w-full py-3 bg-white/40 text-black/70 font-bold text-sm uppercase tracking-wider rounded-lg cursor-not-allowed transition-colors"
                 >
                   {copy('agents.profile.copy.confirm', 'Confirm & Deploy Contract')}
+                  <LaunchStateBadge state="disabled" className="ml-2 align-middle" />
                 </button>
               </div>
             </motion.div>

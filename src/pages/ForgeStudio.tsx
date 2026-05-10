@@ -12,6 +12,7 @@ import {
   type ForgePreviewMetric,
 } from '@/features/forge';
 import { cn } from '@/lib/utils';
+import { LaunchStateBadge } from '@/components/ui/surfaces/LaunchStateBadge';
 
 function getMetricValue(metric: ForgePreviewMetric, personality: ForgePersonalityId) {
   return metric.valuePercentByPersonality?.[personality] ?? metric.valuePercent;
@@ -36,9 +37,11 @@ export default function ForgeStudio() {
         <button
           type="button"
           className="px-6 py-2 bg-gradient-to-r from-accent-violet to-accent-blue text-white font-bold rounded-lg hover:opacity-90 transition-opacity flex items-center gap-2 text-sm uppercase tracking-wider"
+          title="Preview-only action. No live entity deployment is connected."
         >
           <Zap className="w-4 h-4 fill-current" />
           {copy(forgeViewModel.incubateAction)}
+          <LaunchStateBadge state="preview" />
         </button>
       </div>
 
@@ -52,11 +55,12 @@ export default function ForgeStudio() {
               </h3>
               <div className="grid grid-cols-2 gap-4">
                 {forgeViewModel.modelOptions.map((option) => (
-                  <button
-                    key={option.id}
-                    type="button"
-                    onClick={() => setModel(option.id)}
-                    className={cn(
+                    <button
+                      key={option.id}
+                      type="button"
+                      onClick={() => setModel(option.id)}
+                      title="Preview-only model selection. No live model deployment is connected."
+                      className={cn(
                       'p-4 border rounded-xl cursor-pointer transition-all text-left',
                       model === option.id ? modelToneClasses[option.tone].selected : modelToneClasses[option.tone].unselected,
                     )}
@@ -88,6 +92,7 @@ export default function ForgeStudio() {
                       key={threshold.id}
                       type="button"
                       onClick={() => setPersonality(threshold.id)}
+                      title="Preview-only personality tuning. No live entity deployment is connected."
                       className={cn(
                         'flex-1 py-2 px-4 rounded-lg text-xs font-bold uppercase tracking-wider transition-colors border',
                         isActive
@@ -141,10 +146,10 @@ export default function ForgeStudio() {
                   }
 
                   return (
-                    <div
-                      key={slot.id}
-                      className="border border-dashed border-white/10 rounded-xl p-4 h-32 flex items-center justify-center bg-black/40"
-                    >
+                      <div
+                        key={slot.id}
+                        className="border border-dashed border-white/10 rounded-xl p-4 h-32 flex items-center justify-center bg-black/40"
+                      >
                       <span className="text-[10px] text-white/20 uppercase tracking-widest">{copy(slot.label)}</span>
                     </div>
                   );

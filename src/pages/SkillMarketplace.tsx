@@ -13,6 +13,7 @@ import {
   type SkillMarketplaceCard,
 } from '@/features/skills';
 import { cn } from '@/lib/utils';
+import { LaunchStateBadge } from '@/components/ui/surfaces/LaunchStateBadge';
 
 export default function SkillMarketplace() {
   const [skills, setSkills] = useState<SkillMarketplaceCard[]>(initialSkillCatalog);
@@ -103,6 +104,7 @@ export default function SkillMarketplace() {
               animate={{ opacity: 1, x: 0 }}
               onClick={initiateFusion}
               disabled={selectedSkillIds.length < 2}
+              title="Preview-only synthesis flow. No live skill economy is connected."
               className="px-4 py-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold rounded-lg text-sm flex items-center gap-2 hover:from-purple-500 hover:to-blue-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_0_15px_rgba(147,51,234,0.3)] whitespace-nowrap"
             >
               <Sparkles className="w-4 h-4" />
@@ -110,11 +112,13 @@ export default function SkillMarketplace() {
                 selected: selectedSkillIds.length,
                 limit: 3,
               })}
+              <LaunchStateBadge state="preview" />
             </motion.button>
           )}
           <button
             type="button"
             onClick={toggleFusibleMode}
+            title="Preview-only synthesis flow. No live skill economy is connected."
             className={cn(
               'px-4 py-2 font-semibold rounded-lg text-sm flex items-center gap-2 transition-colors whitespace-nowrap',
               isFusibleMode ? 'bg-white/10 text-white border border-white/20' : 'bg-white text-black hover:bg-gray-200',
@@ -122,6 +126,7 @@ export default function SkillMarketplace() {
           >
             {isFusibleMode ? <X className="w-4 h-4" /> : <Layers className="w-4 h-4" />}
             {copy(isFusibleMode ? skillMarketplaceCopy.actions.cancel : skillMarketplaceCopy.actions.synthesize)}
+            <LaunchStateBadge state="preview" />
           </button>
         </div>
       </div>
@@ -135,19 +140,20 @@ export default function SkillMarketplace() {
               const SkillIcon = skill.icon;
 
               return (
-                <motion.button
-                  key={skill.id}
-                  type="button"
-                  layout
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: isSelected ? 0.95 : 1 }}
-                  exit={{ opacity: 0, scale: 0.5, filter: 'blur(10px)' }}
-                  transition={{ duration: 0.3 }}
-                  onClick={() => handleSelectSkill(skill.id)}
-                  aria-label={skillName}
-                  aria-pressed={isSelected}
-                  aria-disabled={!isFusibleMode}
-                  className={cn(
+              <motion.button
+                key={skill.id}
+                type="button"
+                layout
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: isSelected ? 0.95 : 1 }}
+                exit={{ opacity: 0, scale: 0.5, filter: 'blur(10px)' }}
+                transition={{ duration: 0.3 }}
+                onClick={() => handleSelectSkill(skill.id)}
+                aria-label={skillName}
+                aria-pressed={isSelected}
+                aria-disabled={!isFusibleMode}
+                title={isFusibleMode ? 'Preview-only skill synthesis card.' : 'Select enabled only in preview synthesis mode.'}
+                className={cn(
                     'glass rounded-xl p-4 md:p-6 border group relative overflow-hidden transition-all duration-300 text-left min-w-0',
                     isFusibleMode ? 'cursor-pointer hover:border-white/40' : '',
                     isSelected ? 'border-purple-500 shadow-[0_0_20px_rgba(168,85,247,0.4)]' : 'border-border',
@@ -312,6 +318,7 @@ export default function SkillMarketplace() {
                             setFusedSkill(null);
                             setIsFusibleMode(false);
                           }}
+                          title="Preview-only confirmation. No live skill deployment exists."
                           className="w-full py-3 bg-white text-black font-bold uppercase tracking-wider text-sm rounded-lg hover:bg-gray-200 transition-colors"
                         >
                           {copy(skillMarketplaceCopy.modal.successAction)}

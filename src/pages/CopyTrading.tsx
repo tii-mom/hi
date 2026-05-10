@@ -9,6 +9,7 @@ import { createCopyTradingViewModel } from '@/app/services/copy';
 import { loadCopyTradingReadModel } from '@/app/services/readModels';
 import { useReadModelResource } from '@/app/services/useReadModelResource';
 import { ResourceStatus } from '@/components/ui/surfaces/ResourceStatus';
+import { LaunchStateBadge } from '@/components/ui/surfaces/LaunchStateBadge';
 
 export default function CopyTrading() {
   const { t, i18n } = useTranslation();
@@ -27,6 +28,9 @@ export default function CopyTrading() {
         <div className="min-w-0">
           <h2 className="text-lg md:text-xl font-semibold uppercase tracking-wider mb-1 break-words">{copyTradingViewModel.header.title}</h2>
           <p className="text-sm text-text-secondary">{copyTradingViewModel.header.subtitle}</p>
+          <div className="mt-2">
+            <LaunchStateBadge state="preview" />
+          </div>
         </div>
         <div className="flex gap-4 items-start sm:items-center flex-wrap sm:justify-end">
           <div className="text-left sm:text-right">
@@ -114,6 +118,7 @@ export default function CopyTrading() {
                 <div className="col-span-2 flex items-center justify-end gap-2 sm:ml-4 sm:border-l border-white/10 sm:pl-6">
                   <button
                     type="button"
+                    disabled
                     className="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-text-secondary hover:text-white transition-colors"
                     title={copyTradingViewModel.actions.manageSettings}
                     aria-label={copyTradingViewModel.actions.manageSettings}
@@ -123,8 +128,9 @@ export default function CopyTrading() {
                   {isRunning ? (
                     <button
                       type="button"
+                      disabled
                       className="p-2 rounded-lg bg-orange-500/10 hover:bg-orange-500/20 text-orange-500 border border-orange-500/20 transition-colors"
-                      title={copyTradingViewModel.actions.severBond}
+                      title={`${copyTradingViewModel.actions.severBond} is disabled until live copy-trading execution is connected.`}
                       aria-label={copyTradingViewModel.actions.severBond}
                     >
                       <StopCircle className="w-4 h-4" />
@@ -132,8 +138,9 @@ export default function CopyTrading() {
                   ) : (
                     <button
                       type="button"
+                      disabled
                       className="p-2 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-500 border border-emerald-500/20 transition-colors"
-                      title={copyTradingViewModel.actions.restoreResonance}
+                      title={`${copyTradingViewModel.actions.restoreResonance} is disabled until live copy-trading execution is connected.`}
                       aria-label={copyTradingViewModel.actions.restoreResonance}
                     >
                       <PlayCircle className="w-4 h-4" />
