@@ -27,8 +27,16 @@ This document defines the minimum frontend checks that should stay green before 
 - `npm run test:parity`
 - `npm run test`
 - `npm run build`
+- `npm run smoke:release`
 
 For CI jobs that want a single release gate, use `npm run verify:ci`.
+
+## Production Gates
+
+- Live API wiring must use the service adapter contract in `src/app/services`.
+- Unconfigured production API environments must stay in explicit mock mode.
+- Preview-only financial actions must remain separated from live execution behavior.
+- Mobile and Telegram WebView smoke checks must pass before a public release.
 
 ## Notes
 
