@@ -2,6 +2,7 @@ export * from './config';
 export * from './httpClient';
 export * from './readModels';
 export * from './types';
+export * from './useReadModelResource';
 
 export { terminalService } from './terminal';
 export { portfolioService } from './portfolio';

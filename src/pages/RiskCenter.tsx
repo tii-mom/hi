@@ -1,9 +1,12 @@
-import { useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { Activity, AlertTriangle, Power, ShieldAlert, Target, TrendingDown } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useTranslation } from 'react-i18next';
 import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { createRiskViewModel, createSystemStressData } from '@/app/services/risk';
+import { loadRiskReadModel } from '@/app/services/readModels';
+import { useReadModelResource } from '@/app/services/useReadModelResource';
+import { ResourceStatus } from '@/components/ui/surfaces/ResourceStatus';
 import { riskLevels, useSystemTime, type RiskLevel } from '@/features/risk';
 import { cn } from '@/lib/utils';
 import { useLiveData } from '../hooks/useLiveData';
@@ -45,10 +48,16 @@ export default function RiskCenter() {
   const [isTriggered, setIsTriggered] = useState(false);
   const { value: leverage } = useLiveData(2.4, 0.05, 2000);
   const { value: var95 } = useLiveData(1.24, 0.02, 3000);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const systemTime = useSystemTime();
   const systemStressData = useMemo(() => createSystemStressData(), []);
-  const riskViewModel = createRiskViewModel(t);
+  const fallback = createRiskViewModel(t);
+  const load = useCallback((context: Parameters<typeof loadRiskReadModel>[1]['context']) => loadRiskReadModel(t, { context }), [t]);
+  const { data: riskViewModel, resource } = useReadModelResource({
+    fallback,
+    load,
+    dependencyKey: i18n.language,
+  });
 
   const handleKillSwitch = () => {
     if (isArmed && !isTriggered) {
@@ -60,6 +69,7 @@ export default function RiskCenter() {
 
   return (
     <div className="h-full min-h-0 flex flex-col gap-4 md:gap-6 p-2 bg-[#050505] overflow-hidden">
+      <ResourceStatus resource={resource} label="Risk data" />
       <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 border-b border-red-900/30 pb-4 min-w-0">
         <div className="min-w-0">
           <h2 className="text-lg md:text-xl font-bold uppercase tracking-widest text-red-500 flex items-center gap-2 break-words">

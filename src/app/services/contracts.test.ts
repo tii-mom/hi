@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { createFrontendServiceContext, getServiceReadiness } from './config';
 import { createHttpClient } from './httpClient';
 import { createIntegrationBoundaryContract, wrapMockReadModel } from './contracts';
@@ -9,6 +9,10 @@ import { createTelegramCompanionViewModel, selectTelegramCompanionResponse } fro
 const t = (key: string, fallback?: string) => fallback ?? key;
 
 describe('app service contracts', () => {
+  afterEach(() => {
+    vi.unstubAllGlobals();
+  });
+
   it('reports mock mode when the production API boundary is not configured', () => {
     const context = createFrontendServiceContext();
     const readiness = getServiceReadiness({ ...context, apiBaseUrl: undefined });
@@ -36,6 +40,28 @@ describe('app service contracts', () => {
     expect(result.status).toBe('error');
     expect(result.error?.code).toBe('unconfigured');
     expect(result.meta.source).toBe('mock');
+  });
+
+  it('loads live JSON through the configured API boundary', async () => {
+    const fetchSpy = vi.fn(async () =>
+      new Response(JSON.stringify({ title: 'Live terminal' }), {
+        status: 200,
+        headers: { 'Content-Type': 'application/json' },
+      }),
+    );
+    vi.stubGlobal('fetch', fetchSpy);
+
+    const client = createHttpClient({
+      apiBaseUrl: 'https://core.example.test/api/',
+      now: () => new Date('2026-05-10T00:00:00.000Z'),
+      online: true,
+    });
+    const result = await client.getJson<{ title: string }>('/frontend/terminal');
+
+    expect(fetchSpy).toHaveBeenCalledWith('https://core.example.test/api/frontend/terminal', expect.any(Object));
+    expect(result.status).toBe('success');
+    expect(result.meta.source).toBe('live');
+    expect(result.data?.title).toBe('Live terminal');
   });
 
   it('loads mock-backed read models through the adapter boundary when the api base is absent', async () => {

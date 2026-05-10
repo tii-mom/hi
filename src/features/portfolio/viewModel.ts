@@ -8,8 +8,10 @@ export interface PortfolioPageViewModel {
   title: string;
   subtitle: string;
   totalManagedLabel: string;
+  totalManagedUsd: number;
   weightingTitle: string;
   resonanceLabel: string;
+  resonancePercent: number;
   positionsTitle: string;
   positionLabels: {
     managedBy: string;

@@ -8,12 +8,15 @@ import {
   TerminalStatsRow,
   useTerminalViewModel,
 } from '../features/terminal';
+import { ResourceStatus } from '@/components/ui/surfaces/ResourceStatus';
 
 export default function TerminalDashboard() {
-  const { stats, market, agentStates } = useTerminalViewModel();
+  const { data: viewModel, resource } = useTerminalViewModel();
+  const { stats, market, agentStates } = viewModel;
 
   return (
     <div className="h-full min-h-0 min-w-0 flex flex-col gap-4 overflow-hidden">
+      <ResourceStatus resource={resource} label="Terminal data" />
       <TerminalStatsRow stats={stats} />
 
       <div className="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-4 min-h-0">

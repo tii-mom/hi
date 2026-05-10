@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'motion/react';
 import { BarChart2, PlayCircle, Settings, StopCircle } from 'lucide-react';
@@ -5,13 +6,23 @@ import { ResponsiveContainer, AreaChart, Area, YAxis } from 'recharts';
 import AgentAvatar from '../components/ui/AgentAvatar';
 import { cn } from '@/lib/utils';
 import { createCopyTradingViewModel } from '@/app/services/copy';
+import { loadCopyTradingReadModel } from '@/app/services/readModels';
+import { useReadModelResource } from '@/app/services/useReadModelResource';
+import { ResourceStatus } from '@/components/ui/surfaces/ResourceStatus';
 
 export default function CopyTrading() {
-  const { t } = useTranslation();
-  const copyTradingViewModel = createCopyTradingViewModel(t);
+  const { t, i18n } = useTranslation();
+  const fallback = createCopyTradingViewModel(t);
+  const load = useCallback((context: Parameters<typeof loadCopyTradingReadModel>[1]['context']) => loadCopyTradingReadModel(t, { context }), [t]);
+  const { data: copyTradingViewModel, resource } = useReadModelResource({
+    fallback,
+    load,
+    dependencyKey: i18n.language,
+  });
 
   return (
     <div className="h-full min-h-0 flex flex-col gap-4 md:gap-6 overflow-hidden">
+      <ResourceStatus resource={resource} label="Copy data" />
       <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 border-b border-border pb-4 shrink-0 min-w-0">
         <div className="min-w-0">
           <h2 className="text-lg md:text-xl font-semibold uppercase tracking-wider mb-1 break-words">{copyTradingViewModel.header.title}</h2>

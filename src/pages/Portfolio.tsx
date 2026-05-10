@@ -1,7 +1,11 @@
+import { useCallback } from 'react';
 import { Activity, Shield } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts';
 import { createPortfolioViewModel } from '@/app/services/portfolio';
+import { loadPortfolioReadModel } from '@/app/services/readModels';
+import { useReadModelResource } from '@/app/services/useReadModelResource';
+import { ResourceStatus } from '@/components/ui/surfaces/ResourceStatus';
 import type { PortfolioPositionType } from '@/features/portfolio';
 import { cn } from '@/lib/utils';
 
@@ -55,8 +59,14 @@ function positionTone(type: PortfolioPositionType) {
 }
 
 export default function Portfolio() {
-  const { t } = useTranslation();
-  const portfolioViewModel = createPortfolioViewModel(t);
+  const { t, i18n } = useTranslation();
+  const fallback = createPortfolioViewModel(t);
+  const load = useCallback((context: Parameters<typeof loadPortfolioReadModel>[1]['context']) => loadPortfolioReadModel(t, { context }), [t]);
+  const { data: portfolioViewModel, resource } = useReadModelResource({
+    fallback,
+    load,
+    dependencyKey: i18n.language,
+  });
   const chartData = portfolioViewModel.allocations.map((item) => ({
     ...item,
     value: item.valuePercent,
@@ -64,6 +74,7 @@ export default function Portfolio() {
 
   return (
     <div className="h-full min-h-0 flex flex-col gap-4 md:gap-6">
+      <ResourceStatus resource={resource} label="Portfolio data" />
       <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 border-b border-border pb-4 shrink-0 min-w-0">
         <div className="min-w-0">
           <h2 className="text-lg md:text-xl font-semibold uppercase tracking-wider mb-1 break-words">{portfolioViewModel.title}</h2>

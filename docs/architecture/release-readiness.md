@@ -35,6 +35,7 @@ For CI jobs that want a single release gate, use `npm run verify:ci`.
 
 - Live API wiring must use the service adapter contract in `src/app/services`.
 - Unconfigured production API environments must stay in explicit mock mode.
+- Read-only live wiring must go through `src/app/services/readModels.ts`; pages should not call `fetch` directly.
 - Preview-only financial actions must remain separated from live execution behavior.
 - Mobile and Telegram WebView smoke checks must pass before a public release.
 

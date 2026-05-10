@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { Activity, History, Network, ShieldCheck, Sliders, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useTranslation } from 'react-i18next';
@@ -6,6 +6,9 @@ import { Link, useParams } from 'react-router-dom';
 import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { EmptyState } from '@/components/ui/surfaces/EmptyState';
 import { createAgentProfileViewModel } from '@/app/services/agents';
+import { loadAgentProfileReadModel } from '@/app/services/readModels';
+import { useReadModelResource } from '@/app/services/useReadModelResource';
+import { ResourceStatus } from '@/components/ui/surfaces/ResourceStatus';
 import { cn } from '@/lib/utils';
 import AgentAvatar from '../components/ui/AgentAvatar';
 
@@ -46,8 +49,18 @@ function AgentProfileNotFound({ id }: { id?: string }) {
 
 export default function AgentProfile() {
   const { id } = useParams<{ id: string }>();
-  const { t } = useTranslation();
-  const viewModel = createAgentProfileViewModel(t, id);
+  const { t, i18n } = useTranslation();
+  const fallback = createAgentProfileViewModel(t, id);
+  const load = useCallback(
+    (context: Parameters<typeof loadAgentProfileReadModel>[2]['context']) =>
+      loadAgentProfileReadModel(id ?? 'unknown-id', t, { context }),
+    [id, t],
+  );
+  const { data: viewModel, resource } = useReadModelResource({
+    fallback,
+    load,
+    dependencyKey: `${id ?? 'unknown-id'}:${i18n.language}`,
+  });
   const agent = viewModel.agent;
   const [activeTab, setActiveTab] = useState(viewModel.tabs[0]?.id ?? 'overview');
   const [isCopyPanelOpen, setIsCopyPanelOpen] = useState(false);
@@ -98,6 +111,7 @@ export default function AgentProfile() {
 
   return (
     <div className="h-full flex flex-col gap-6 relative">
+      <ResourceStatus resource={resource} label="Agent profile" />
       <div className="glass rounded-xl p-6 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-64 h-64 bg-accent-blue/10 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/4 pointer-events-none" />
 

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import { Activity, Mic, MoveUp, Sparkles } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
@@ -6,6 +6,9 @@ import AgentAvatar from '../components/ui/AgentAvatar';
 import { cn } from '@/lib/utils';
 import { useTelegramShell } from '@/features/telegram';
 import { createTelegramCompanionViewModel, selectTelegramCompanionResponse } from '@/app/services/telegram';
+import { loadTelegramCompanionReadModel } from '@/app/services/readModels';
+import { useReadModelResource } from '@/app/services/useReadModelResource';
+import { ResourceStatus } from '@/components/ui/surfaces/ResourceStatus';
 
 interface Message {
   id: string;
@@ -24,9 +27,15 @@ interface Message {
 }
 
 export default function NeuralLinkInterface() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const telegram = useTelegramShell();
-  const telegramCompanionViewModel = createTelegramCompanionViewModel(t);
+  const fallback = createTelegramCompanionViewModel(t);
+  const load = useCallback((context: Parameters<typeof loadTelegramCompanionReadModel>[1]['context']) => loadTelegramCompanionReadModel(t, { context }), [t]);
+  const { data: telegramCompanionViewModel, resource } = useReadModelResource({
+    fallback,
+    load,
+    dependencyKey: i18n.language,
+  });
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
@@ -104,6 +113,7 @@ export default function NeuralLinkInterface() {
       <div className="w-full h-full min-h-0 md:max-w-3xl md:max-h-[85vh] bg-black/40 backdrop-blur-3xl md:rounded-3xl md:border border-white/10 overflow-hidden flex flex-col relative shadow-[0_0_80px_rgba(0,0,0,0.8)]">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[300px] bg-accent-blue/10 blur-[100px] pointer-events-none mix-blend-screen" />
         <div className="absolute bottom-0 right-0 w-[400px] h-[300px] bg-purple-500/10 blur-[100px] pointer-events-none mix-blend-screen" />
+        <ResourceStatus resource={resource} label="Telegram companion" className="m-3 relative z-10" />
 
         <div className="pt-6 md:pt-8 pb-4 md:pb-6 px-4 md:px-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-white/5 relative z-10">
             <div className="flex items-center gap-4 min-w-0">

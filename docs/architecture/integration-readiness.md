@@ -32,6 +32,20 @@ This document defines the frontend-facing contract surface before `hi` consumes 
   - risk kill switch
   - billing
 
+## Read-Only Endpoints
+
+When `VITE_HI_PROTOCOL_API_URL` is configured, the frontend read model adapters request these JSON resources:
+
+- `GET /frontend/terminal`
+- `GET /frontend/portfolio`
+- `GET /frontend/risk`
+- `GET /frontend/agents`
+- `GET /frontend/agents/:id`
+- `GET /frontend/copy-trading`
+- `GET /frontend/telegram-companion`
+
+Each endpoint should return the page-ready view model shape exported by `src/app/services/readModels.ts`. Until those endpoints exist, adapters stay in explicit mock mode.
+
 ## State Model
 
 Frontend adapters must expose explicit states instead of collapsing network failure into empty UI:

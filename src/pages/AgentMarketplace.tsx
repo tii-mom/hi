@@ -1,15 +1,26 @@
+import { useCallback } from 'react';
 import { motion } from 'motion/react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { createAgentMarketplaceViewModel } from '@/app/services/agents';
+import { loadAgentsReadModel } from '@/app/services/readModels';
+import { useReadModelResource } from '@/app/services/useReadModelResource';
+import { ResourceStatus } from '@/components/ui/surfaces/ResourceStatus';
 import AgentAvatar from '../components/ui/AgentAvatar';
 
 export default function AgentMarketplace() {
-  const { t } = useTranslation();
-  const viewModel = createAgentMarketplaceViewModel(t);
+  const { t, i18n } = useTranslation();
+  const fallback = createAgentMarketplaceViewModel(t);
+  const load = useCallback((context: Parameters<typeof loadAgentsReadModel>[1]['context']) => loadAgentsReadModel(t, { context }), [t]);
+  const { data: viewModel, resource } = useReadModelResource({
+    fallback,
+    load,
+    dependencyKey: i18n.language,
+  });
 
   return (
     <div className="h-full flex flex-col gap-6">
+      <ResourceStatus resource={resource} label="Agent registry" />
       <div className="flex items-center justify-between border-b border-border pb-4">
         <div>
           <h2 className="text-xl font-semibold uppercase tracking-wider mb-1">

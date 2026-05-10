@@ -32,7 +32,7 @@ describe('App routing', () => {
       </AppProvider>,
     );
 
-    expect(await screen.findByText(/network/i)).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /observer node/i })).toHaveAttribute('href', '/terminal');
+    expect(await screen.findByRole('link', { name: /observer node/i }, { timeout: 5000 })).toHaveAttribute('href', '/terminal');
+    expect(screen.getByText(/network/i)).toBeInTheDocument();
   });
 });

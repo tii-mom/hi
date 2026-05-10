@@ -12,6 +12,7 @@ export interface RiskPageViewModel {
   defconLabel: string;
   serverTimeLabel: string;
   totalExposureLabel: string;
+  totalExposureUsd: number;
   protocolTitle: string;
   protocolArmedText: string;
   protocolDisarmedText: string;
