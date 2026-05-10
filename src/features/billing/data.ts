@@ -1,4 +1,22 @@
-import type { BillingViewModel } from './types';
+import type { BillingBondStatus, BillingMetricTone, BillingViewModel, BillingYieldSegmentTone } from './types';
+
+export const yieldSegmentToneClasses: Record<BillingYieldSegmentTone, string> = {
+  emerald: 'bg-accent-emerald/20 text-accent-emerald hover:bg-accent-emerald/30',
+  blue: 'bg-accent-blue/20 text-accent-blue hover:bg-accent-blue/30',
+  white: 'bg-white/10 text-white hover:bg-white/20',
+};
+
+export const summaryMetricToneClasses: Record<BillingMetricTone, string> = {
+  emerald: 'text-accent-emerald',
+  blue: 'text-accent-blue',
+  white: 'text-white',
+};
+
+export const bondStatusToneClasses: Record<BillingBondStatus, string> = {
+  active: 'text-accent-emerald border-accent-emerald/20 bg-accent-emerald/10',
+  trial: 'text-orange-400 border-orange-400/20 bg-orange-400/10',
+  paused: 'text-text-secondary border-white/10 bg-white/5',
+};
 
 export const billingViewModel: BillingViewModel = {
   title: {

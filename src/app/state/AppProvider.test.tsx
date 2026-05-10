@@ -1,5 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 import { describe, expect, it } from 'vitest';
+import Header from '@/components/layout/Header';
 import { AppProvider, useAppState } from './AppProvider';
 
 function AppStateProbe() {
@@ -60,5 +62,25 @@ describe('AppProvider', () => {
     fireEvent.click(screen.getByRole('button', { name: /disconnect/i }));
     expect(screen.getByTestId('wallet-status')).toHaveTextContent('disconnected');
     expect(screen.getByTestId('identity-label')).toHaveTextContent('No identity connected');
+  });
+
+  it('opens the global wallet identity modal from the shell header', () => {
+    render(
+      <AppProvider>
+        <MemoryRouter>
+          <Header />
+        </MemoryRouter>
+      </AppProvider>,
+    );
+
+    expect(screen.getByText('Connect')).toBeInTheDocument();
+
+    const walletButton = screen.getByRole('button', { name: /wallet identity/i });
+    expect(walletButton).toHaveAttribute('aria-expanded', 'false');
+
+    fireEvent.click(walletButton);
+
+    expect(walletButton).toHaveAttribute('aria-expanded', 'true');
+    expect(screen.getByRole('heading', { name: /connect identity/i })).toBeInTheDocument();
   });
 });

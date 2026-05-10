@@ -2,6 +2,8 @@ import { SearchCode, Shield, Target, TrendingDown, Zap } from 'lucide-react';
 import type { FeatureCopy, SkillMarketplaceCard, SkillMarketplaceCopy } from './types';
 import type { SkillRarity } from './types';
 
+export const rarityLevels: SkillRarity[] = ['Common', 'Rare', 'Epic', 'Legendary', 'Mythic'];
+
 export const skillMarketplaceCopy: SkillMarketplaceCopy = {
   header: {
     title: {

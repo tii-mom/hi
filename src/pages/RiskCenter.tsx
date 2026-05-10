@@ -3,7 +3,7 @@ import { Activity, AlertTriangle, Power, ShieldAlert, Target, TrendingDown } fro
 import { motion } from 'motion/react';
 import { useTranslation } from 'react-i18next';
 import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
-import { createSystemStressData, riskViewModel, useSystemTime, type RiskCopy, type RiskLevel } from '@/features/risk';
+import { createSystemStressData, riskLevels, riskViewModel, useSystemTime, type RiskCopy, type RiskLevel } from '@/features/risk';
 import { cn } from '@/lib/utils';
 import { useLiveData } from '../hooks/useLiveData';
 
@@ -217,7 +217,7 @@ export default function RiskCenter() {
                 <Target className="w-3 h-3" /> {copy(riskViewModel.heatmapTitle)}
               </h3>
               <div className="flex gap-2">
-                {(['high', 'medium', 'low'] as const).map((risk) => {
+                {riskLevels.map((risk) => {
                   const tone = riskTone(risk);
 
                   return (

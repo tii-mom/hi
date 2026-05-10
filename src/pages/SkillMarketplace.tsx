@@ -7,14 +7,12 @@ import {
   generatedSkillNames,
   initialSkillCatalog,
   rarityClassNames,
+  rarityLevels,
   skillMarketplaceCopy,
   type FeatureCopy,
   type SkillMarketplaceCard,
-  type SkillRarity,
 } from '@/features/skills';
 import { cn } from '@/lib/utils';
-
-const rarityLevels: SkillRarity[] = ['Common', 'Rare', 'Epic', 'Legendary', 'Mythic'];
 
 export default function SkillMarketplace() {
   const [skills, setSkills] = useState<SkillMarketplaceCard[]>(initialSkillCatalog);

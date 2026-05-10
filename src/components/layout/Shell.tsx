@@ -3,15 +3,41 @@ import { useEffect, useMemo, useState, type CSSProperties } from 'react';
 import { useTranslation } from 'react-i18next';
 import { AnimatePresence, motion } from 'motion/react';
 import { useTelegramShell } from '@/features/telegram';
+import { useAppState } from '@/app/state';
+import { cn } from '@/lib/utils';
 import Sidebar from './Sidebar';
 import Header from './Header';
 import BottomNav from './BottomNav';
+
+const routeTitleKeys: Record<string, string> = {
+  '/terminal': 'nav.observerNode',
+  '/terminal/agents': 'agents.marketplace.title',
+  '/terminal/forge': 'forge.header.title',
+  '/terminal/skills': 'skills.header.title',
+  '/terminal/debate': 'nav.resonanceChamber',
+  '/terminal/copy': 'copy.trading.header.title',
+  '/terminal/portfolio': 'portfolio.header.title',
+  '/terminal/risk': 'risk.header.title',
+  '/terminal/companion': 'nav.neuralLink',
+  '/terminal/billing': 'billing.header.title',
+};
+
+function getRouteTitleKey(pathname: string) {
+  if (pathname.startsWith('/terminal/agent/')) {
+    return 'nav.tacitEntities';
+  }
+
+  return routeTitleKeys[pathname] ?? 'nav.observerNode';
+}
 
 export default function Shell() {
   const location = useLocation();
   const telegram = useTelegramShell();
   const { t } = useTranslation();
+  const { motionPreference } = useAppState();
   const [systemTime, setSystemTime] = useState(() => new Date().toISOString().substring(11, 19));
+  const reducedMotion = motionPreference === 'reduced';
+  const routeTitle = t(getRouteTitleKey(location.pathname));
 
   useEffect(() => {
     const interval = window.setInterval(() => {
@@ -20,6 +46,10 @@ export default function Shell() {
 
     return () => window.clearInterval(interval);
   }, []);
+
+  useEffect(() => {
+    document.title = `${routeTitle} | HI Protocol`;
+  }, [routeTitle]);
 
   const shellStyle = useMemo<CSSProperties>(() => {
     const stableHeight = telegram.stableViewportHeight ?? telegram.viewportHeight;
@@ -44,13 +74,32 @@ export default function Shell() {
       style={shellStyle}
     >
       {/* Living Ambient Lighting */}
-      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-accent-blue/5 rounded-full blur-[120px] pointer-events-none mix-blend-screen animate-breathe" />
-      <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-accent-violet/5 rounded-full blur-[150px] pointer-events-none mix-blend-screen animate-breathe" style={{ animationDelay: '2s' }} />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[5px] bg-accent-emerald/10 blur-[10px] pointer-events-none animate-scanline" />
+      <div
+        aria-hidden="true"
+        className={cn(
+          "absolute top-0 left-1/4 w-[500px] h-[500px] bg-accent-blue/5 rounded-full blur-[120px] pointer-events-none mix-blend-screen",
+          !reducedMotion && "animate-breathe",
+        )}
+      />
+      <div
+        aria-hidden="true"
+        className={cn(
+          "absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-accent-violet/5 rounded-full blur-[150px] pointer-events-none mix-blend-screen",
+          !reducedMotion && "animate-breathe",
+        )}
+        style={reducedMotion ? undefined : { animationDelay: '2s' }}
+      />
+      {!reducedMotion && (
+        <div
+          aria-hidden="true"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[5px] bg-accent-emerald/10 blur-[10px] pointer-events-none animate-scanline"
+        />
+      )}
 
       <Header />
-      <main className="flex flex-1 overflow-hidden relative">
-        <div className="absolute inset-0 bg-noise opacity-50 pointer-events-none" />
+      <main aria-labelledby="terminal-route-title" className="flex flex-1 overflow-hidden relative">
+        <h1 id="terminal-route-title" className="sr-only">{routeTitle}</h1>
+        <div aria-hidden="true" className="absolute inset-0 bg-noise opacity-50 pointer-events-none" />
         <div className="hidden md:flex relative z-10">
           <Sidebar />
         </div>
@@ -58,10 +107,10 @@ export default function Shell() {
           <AnimatePresence mode="wait">
             <motion.div
               key={location.pathname}
-              initial={{ opacity: 0, scale: 0.98, filter: 'blur(10px)' }}
-              animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
-              exit={{ opacity: 0, scale: 1.02, filter: 'blur(10px)' }}
-              transition={{ duration: 0.4, ease: [0.215, 0.61, 0.355, 1] }}
+              initial={reducedMotion ? false : { opacity: 0, scale: 0.98, filter: 'blur(10px)' }}
+              animate={reducedMotion ? { opacity: 1 } : { opacity: 1, scale: 1, filter: 'blur(0px)' }}
+              exit={reducedMotion ? { opacity: 1 } : { opacity: 0, scale: 1.02, filter: 'blur(10px)' }}
+              transition={reducedMotion ? { duration: 0 } : { duration: 0.4, ease: [0.215, 0.61, 0.355, 1] }}
               className="h-full overflow-auto scroll-smooth p-4 md:p-6 pb-24 md:pb-6"
             >
               <Outlet />
@@ -70,7 +119,7 @@ export default function Shell() {
         </div>
       </main>
       <div className="md:hidden absolute bottom-0 inset-x-0 w-full z-50">
-        <BottomNav />
+        <BottomNav safeAreaInsetBottom={telegram.safeAreaInsetBottom} />
       </div>
       
       {/* Bottom Global Status */}

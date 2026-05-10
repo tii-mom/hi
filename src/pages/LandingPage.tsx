@@ -1,46 +1,15 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
-import { ArrowRight, Activity, Brain, Shield, Zap, Users, type LucideIcon } from 'lucide-react';
+import { ArrowRight, Activity, Brain } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import LanguageSwitcher from '../components/ui/LanguageSwitcher';
 import {
+  heroNodeIcons,
   landingViewModel,
+  valuePropIcons,
+  valuePropToneClasses,
   type LandingCopy,
-  type LandingHeroIcon,
-  type LandingValuePropIcon,
-  type LandingValuePropTone,
 } from '@/features/landing';
-
-const heroNodeIcons: Record<LandingHeroIcon, LucideIcon> = {
-  shield: Shield,
-  activity: Activity,
-  users: Users,
-  zap: Zap,
-};
-
-const valuePropIcons: Record<LandingValuePropIcon, LucideIcon> = {
-  brain: Brain,
-  zap: Zap,
-  shield: Shield,
-};
-
-const valuePropToneClasses: Record<LandingValuePropTone, { wrapper: string; icon: string; border: string }> = {
-  blue: {
-    wrapper: 'bg-accent-blue/10',
-    icon: 'text-accent-blue',
-    border: 'border-accent-blue/20',
-  },
-  violet: {
-    wrapper: 'bg-accent-violet/10',
-    icon: 'text-accent-violet',
-    border: 'border-accent-violet/20',
-  },
-  emerald: {
-    wrapper: 'bg-accent-emerald/10',
-    icon: 'text-accent-emerald',
-    border: 'border-accent-emerald/20',
-  },
-};
 
 export default function LandingPage() {
   const { t } = useTranslation();

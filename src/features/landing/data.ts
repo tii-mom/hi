@@ -1,4 +1,42 @@
-import type { LandingViewModel } from './types';
+import { Activity, Brain, Shield, Users, Zap, type LucideIcon } from 'lucide-react';
+import type {
+  LandingHeroIcon,
+  LandingValuePropIcon,
+  LandingValuePropTone,
+  LandingValuePropToneClasses,
+  LandingViewModel,
+} from './types';
+
+export const heroNodeIcons: Record<LandingHeroIcon, LucideIcon> = {
+  shield: Shield,
+  activity: Activity,
+  users: Users,
+  zap: Zap,
+};
+
+export const valuePropIcons: Record<LandingValuePropIcon, LucideIcon> = {
+  brain: Brain,
+  zap: Zap,
+  shield: Shield,
+};
+
+export const valuePropToneClasses: Record<LandingValuePropTone, LandingValuePropToneClasses> = {
+  blue: {
+    wrapper: 'bg-accent-blue/10',
+    icon: 'text-accent-blue',
+    border: 'border-accent-blue/20',
+  },
+  violet: {
+    wrapper: 'bg-accent-violet/10',
+    icon: 'text-accent-violet',
+    border: 'border-accent-violet/20',
+  },
+  emerald: {
+    wrapper: 'bg-accent-emerald/10',
+    icon: 'text-accent-emerald',
+    border: 'border-accent-emerald/20',
+  },
+};
 
 export const landingViewModel: LandingViewModel = {
   heroSecondaryNodes: [

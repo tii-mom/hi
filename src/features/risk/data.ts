@@ -1,4 +1,6 @@
-import type { RiskStressPoint, RiskViewModel } from './types';
+import type { RiskLevel, RiskStressPoint, RiskViewModel } from './types';
+
+export const riskLevels: RiskLevel[] = ['high', 'medium', 'low'];
 
 export const riskViewModel: RiskViewModel = {
   title: {

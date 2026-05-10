@@ -4,17 +4,9 @@ import { motion, AnimatePresence } from 'motion/react';
 import { useTranslation } from 'react-i18next';
 import { Link, useParams } from 'react-router-dom';
 import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
-import { getAgentById } from '@/features/agents';
+import { agentOverviewRanges, agentProfileTabs, getAgentById } from '@/features/agents';
 import { cn } from '@/lib/utils';
 import AgentAvatar from '../components/ui/AgentAvatar';
-
-const profileTabs = ['overview', 'skills', 'memory', 'industry'] as const;
-const overviewRanges = [
-  { key: 'agents.profile.overview.range.1m', fallback: '1M' },
-  { key: 'agents.profile.overview.range.3m', fallback: '3M' },
-  { key: 'agents.profile.overview.range.6m', fallback: '6M' },
-  { key: 'agents.profile.overview.range.1y', fallback: '1Y' },
-] as const;
 
 function CustomTooltip({ active, payload, label }: any) {
   if (!active || !payload || !payload.length) {
@@ -68,7 +60,7 @@ export default function AgentProfile() {
   const { id } = useParams<{ id: string }>();
   const { t } = useTranslation();
   const agent = getAgentById(id);
-  const [activeTab, setActiveTab] = useState<(typeof profileTabs)[number]>('overview');
+  const [activeTab, setActiveTab] = useState<(typeof agentProfileTabs)[number]>('overview');
   const [isCopyPanelOpen, setIsCopyPanelOpen] = useState(false);
   const [allocation, setAllocation] = useState(1000);
   const [maxDrawdown, setMaxDrawdown] = useState(15);
@@ -81,7 +73,7 @@ export default function AgentProfile() {
   const copy = (key: string, fallback: string) => t(key, fallback);
   const translateAgent = (suffix: string, fallback: string) => copy(`${agent.contentKeyPrefix}.${suffix}`, fallback);
 
-  const tabs = profileTabs.map((tab) => ({
+  const tabs = agentProfileTabs.map((tab) => ({
     id: tab,
     label: copy(`agents.profile.tabs.${tab}`, tab),
   }));
@@ -220,7 +212,7 @@ export default function AgentProfile() {
                   {copy('agents.profile.overview.title', 'Historical Edge')}
                 </h3>
                 <div className="flex gap-2 text-[10px] font-mono">
-                  {overviewRanges.map((range) => (
+                  {agentOverviewRanges.map((range) => (
                     <span
                       key={range.key}
                       className={cn(

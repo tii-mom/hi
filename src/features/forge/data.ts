@@ -1,4 +1,21 @@
-import type { ForgeViewModel } from './types';
+import type { ForgeMetricTone, ForgeModelTone, ForgeViewModel } from './types';
+
+export const modelToneClasses: Record<ForgeModelTone, { selected: string; unselected: string }> = {
+  blue: {
+    selected: 'border-accent-blue bg-accent-blue/5',
+    unselected: 'border-white/10 hover:border-white/30 bg-white/[0.02]',
+  },
+  emerald: {
+    selected: 'border-accent-emerald bg-accent-emerald/5',
+    unselected: 'border-white/10 hover:border-white/30 bg-white/[0.02]',
+  },
+};
+
+export const metricToneClasses: Record<ForgeMetricTone, string> = {
+  blue: 'bg-accent-blue',
+  violet: 'bg-purple-500',
+  emerald: 'bg-accent-emerald',
+};
 
 export const forgeViewModel: ForgeViewModel = {
   title: {

@@ -12,6 +12,8 @@ describe('NotFound', () => {
     );
 
     expect(screen.getByText(/route unknown/i)).toBeInTheDocument();
+    expect(screen.getByRole('main')).toHaveAccessibleName(/no active interface node/i);
     expect(screen.getByRole('link', { name: /open terminal/i })).toHaveAttribute('href', '/terminal');
+    expect(document.title).toBe('Route Unknown | HI Protocol');
   });
 });

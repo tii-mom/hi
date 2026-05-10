@@ -4,29 +4,14 @@ import { Beaker, Brain, Cpu, Hammer, SlidersHorizontal, Zap } from 'lucide-react
 import { useTranslation } from 'react-i18next';
 import {
   forgeViewModel,
+  metricToneClasses,
+  modelToneClasses,
   type ForgeCopy,
   type ForgeModelId,
   type ForgePersonalityId,
   type ForgePreviewMetric,
 } from '@/features/forge';
 import { cn } from '@/lib/utils';
-
-const modelToneClasses = {
-  blue: {
-    selected: 'border-accent-blue bg-accent-blue/5',
-    unselected: 'border-white/10 hover:border-white/30 bg-white/[0.02]',
-  },
-  emerald: {
-    selected: 'border-accent-emerald bg-accent-emerald/5',
-    unselected: 'border-white/10 hover:border-white/30 bg-white/[0.02]',
-  },
-} as const;
-
-const metricToneClasses = {
-  blue: 'bg-accent-blue',
-  violet: 'bg-purple-500',
-  emerald: 'bg-accent-emerald',
-} as const;
 
 function getMetricValue(metric: ForgePreviewMetric, personality: ForgePersonalityId) {
   return metric.valuePercentByPersonality?.[personality] ?? metric.valuePercent;

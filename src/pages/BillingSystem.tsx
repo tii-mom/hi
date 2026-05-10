@@ -2,31 +2,13 @@ import { CreditCard, Copy, Cpu } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { useAppState, type WalletStatus } from '@/app/state';
 import {
+  bondStatusToneClasses,
   billingViewModel,
-  type BillingBondStatus,
+  summaryMetricToneClasses,
   type BillingCopy,
-  type BillingMetricTone,
-  type BillingYieldSegmentTone,
+  yieldSegmentToneClasses,
 } from '@/features/billing';
 import { cn } from '@/lib/utils';
-
-const yieldSegmentToneClasses: Record<BillingYieldSegmentTone, string> = {
-  emerald: 'bg-accent-emerald/20 text-accent-emerald hover:bg-accent-emerald/30',
-  blue: 'bg-accent-blue/20 text-accent-blue hover:bg-accent-blue/30',
-  white: 'bg-white/10 text-white hover:bg-white/20',
-};
-
-const summaryMetricToneClasses: Record<BillingMetricTone, string> = {
-  emerald: 'text-accent-emerald',
-  blue: 'text-accent-blue',
-  white: 'text-white',
-};
-
-const bondStatusToneClasses: Record<BillingBondStatus, string> = {
-  active: 'text-accent-emerald border-accent-emerald/20 bg-accent-emerald/10',
-  trial: 'text-orange-400 border-orange-400/20 bg-orange-400/10',
-  paused: 'text-text-secondary border-white/10 bg-white/5',
-};
 
 function walletStatusDotClass(walletStatus: WalletStatus) {
   if (walletStatus === 'connected') {

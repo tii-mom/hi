@@ -1,4 +1,13 @@
-import type { AgentEntity, AgentPerformancePoint } from './types';
+import type { AgentCopy, AgentEntity, AgentPerformancePoint, AgentProfileTab } from './types';
+
+export const agentProfileTabs: AgentProfileTab[] = ['overview', 'skills', 'memory', 'industry'];
+
+export const agentOverviewRanges: AgentCopy[] = [
+  { key: 'agents.profile.overview.range.1m', fallback: '1M' },
+  { key: 'agents.profile.overview.range.3m', fallback: '3M' },
+  { key: 'agents.profile.overview.range.6m', fallback: '6M' },
+  { key: 'agents.profile.overview.range.1y', fallback: '1Y' },
+];
 
 function buildPerformanceData(base: number, slope: number, wave: number): AgentPerformancePoint[] {
   return Array.from({ length: 30 }, (_, index) => ({

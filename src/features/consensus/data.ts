@@ -1,4 +1,11 @@
-import type { ConsensusViewModel } from './types';
+import { Activity, Check, X, type LucideIcon } from 'lucide-react';
+import type { ConsensusViewModel, ConsensusVoteIcon } from './types';
+
+export const voteIconMap: Record<ConsensusVoteIcon, LucideIcon> = {
+  check: Check,
+  x: X,
+  activity: Activity,
+};
 
 export const consensusViewModel: ConsensusViewModel = {
   header: {

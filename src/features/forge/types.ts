@@ -2,6 +2,8 @@ export type ForgeModelId = 'gpt-4' | 'claude-3';
 
 export type ForgePersonalityId = 'stiff' | 'fluid' | 'reactive' | 'chaotic';
 
+export type ForgeModelTone = 'blue' | 'emerald';
+
 export type ForgeMetricTone = 'blue' | 'violet' | 'emerald';
 
 export type ForgeSeedSlotKind = 'action' | 'active' | 'locked';
@@ -16,7 +18,7 @@ export interface ForgeModelOption {
   name: ForgeCopy;
   description: ForgeCopy;
   level: ForgeCopy;
-  tone: 'blue' | 'emerald';
+  tone: ForgeModelTone;
 }
 
 export interface ForgePersonalityThreshold {

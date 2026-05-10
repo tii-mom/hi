@@ -1,15 +1,8 @@
 import { motion } from 'motion/react';
-import { Activity, Check, X, type LucideIcon } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import { consensusViewModel, type ConsensusCopy, type ConsensusVoteIcon } from '@/features/consensus';
+import { consensusViewModel, voteIconMap, type ConsensusCopy } from '@/features/consensus';
 import { cn } from '@/lib/utils';
 import AgentAvatar from '../components/ui/AgentAvatar';
-
-const voteIconMap: Record<ConsensusVoteIcon, LucideIcon> = {
-  check: Check,
-  x: X,
-  activity: Activity,
-};
 
 export default function DebateInterface() {
   const { t } = useTranslation();

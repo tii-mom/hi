@@ -2,6 +2,13 @@ export type AgentOperatingStatus = 'active' | 'scanning' | 'tracking' | 'idle' |
 
 export type AgentRiskLevel = 'Low' | 'Medium' | 'High';
 
+export type AgentProfileTab = 'overview' | 'skills' | 'memory' | 'industry';
+
+export interface AgentCopy {
+  key: string;
+  fallback: string;
+}
+
 export interface AgentSummary {
   id: string;
   name: string;
