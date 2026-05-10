@@ -1,6 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Wallet, X, Smartphone, ArrowRight } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
+import { useAppState } from '@/app/state';
 
 interface AuthModalProps {
   isOpen: boolean;
@@ -9,14 +11,42 @@ interface AuthModalProps {
 
 export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
   const [step, setStep] = useState<'select' | 'connecting' | 'success'>('select');
+  const connectTimerRef = useRef<number | null>(null);
+  const closeTimerRef = useRef<number | null>(null);
+  const { t } = useTranslation();
+  const { confirmWalletConnection, disconnectWallet, setWalletConnecting, walletStatus } = useAppState();
+
+  const clearTimers = () => {
+    if (connectTimerRef.current) {
+      window.clearTimeout(connectTimerRef.current);
+    }
+    if (closeTimerRef.current) {
+      window.clearTimeout(closeTimerRef.current);
+    }
+    connectTimerRef.current = null;
+    closeTimerRef.current = null;
+  };
+
+  useEffect(() => clearTimers, []);
 
   if (!isOpen) return null;
 
-  const handleConnect = () => {
+  const handleClose = () => {
+    clearTimers();
+    if (walletStatus === 'connecting') {
+      disconnectWallet();
+    }
+    setStep('select');
+    onClose();
+  };
+
+  const handleConnect = (identityLabel: string) => {
     setStep('connecting');
-    setTimeout(() => {
+    setWalletConnecting();
+    connectTimerRef.current = window.setTimeout(() => {
+      confirmWalletConnection(identityLabel);
       setStep('success');
-      setTimeout(() => {
+      closeTimerRef.current = window.setTimeout(() => {
         onClose();
         setStep('select');
       }, 1500);
@@ -31,7 +61,7 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           className="absolute inset-0 bg-black/60 backdrop-blur-sm"
-          onClick={onClose}
+          onClick={handleClose}
         />
         
         <motion.div 
@@ -42,8 +72,12 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
         >
           {/* Header */}
           <div className="px-6 py-4 border-b border-white/10 flex justify-between items-center bg-white/[0.02]">
-            <h3 className="font-bold text-sm uppercase tracking-widest text-white">Connect Identity</h3>
-            <button onClick={onClose} className="p-1 hover:bg-white/10 rounded-lg transition-colors text-white/50 hover:text-white">
+            <h3 className="font-bold text-sm uppercase tracking-widest text-white">{t('auth.title')}</h3>
+            <button
+              onClick={handleClose}
+              aria-label={t('auth.close')}
+              className="p-1 hover:bg-white/10 rounded-lg transition-colors text-white/50 hover:text-white"
+            >
               <X className="w-4 h-4" />
             </button>
           </div>
@@ -59,11 +93,11 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
                   className="space-y-4"
                 >
                   <p className="text-xs text-white/50 mb-6 text-center leading-relaxed">
-                    Authenticate to deploy agents, synchronize reputation across the network, and manage x402 billing parameters.
+                    {t('auth.description')}
                   </p>
                   
                   <button 
-                    onClick={handleConnect}
+                    onClick={() => handleConnect(t('auth.identities.telegram'))}
                     className="w-full p-4 rounded-xl border border-blue-500/30 bg-blue-500/5 hover:bg-blue-500/10 transition-all flex items-center justify-between group"
                   >
                     <div className="flex items-center gap-4">
@@ -71,8 +105,8 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
                         <Smartphone className="w-5 h-5 text-white" />
                       </div>
                       <div className="text-left">
-                        <div className="font-bold text-sm text-white">Telegram Account</div>
-                        <div className="text-[10px] uppercase font-mono text-white/40">Powered by TON</div>
+                        <div className="font-bold text-sm text-white">{t('auth.telegram.title')}</div>
+                        <div className="text-[10px] uppercase font-mono text-white/40">{t('auth.telegram.subtitle')}</div>
                       </div>
                     </div>
                     <ArrowRight className="w-4 h-4 text-white/30 group-hover:text-blue-500 transition-colors" />
@@ -80,11 +114,11 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
 
                   <div className="relative py-2">
                     <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-white/10" /></div>
-                    <div className="relative flex justify-center"><span className="bg-[#0a0a0c] px-2 text-[10px] uppercase tracking-widest text-white/30">OR WEB3</span></div>
+                    <div className="relative flex justify-center"><span className="bg-[#0a0a0c] px-2 text-[10px] uppercase tracking-widest text-white/30">{t('auth.divider')}</span></div>
                   </div>
 
                   <button 
-                    onClick={handleConnect}
+                    onClick={() => handleConnect(t('auth.identities.baseWallet'))}
                     className="w-full p-4 rounded-xl border border-white/10 bg-white/[0.02] hover:bg-white/5 transition-all flex items-center justify-between group"
                   >
                      <div className="flex items-center gap-4">
@@ -92,8 +126,8 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
                         <Wallet className="w-5 h-5 text-white" />
                       </div>
                       <div className="text-left">
-                        <div className="font-bold text-sm text-white">Base Wallet</div>
-                        <div className="text-[10px] uppercase font-mono text-white/40">Coinbase / Metamask</div>
+                        <div className="font-bold text-sm text-white">{t('auth.baseWallet.title')}</div>
+                        <div className="text-[10px] uppercase font-mono text-white/40">{t('auth.baseWallet.subtitle')}</div>
                       </div>
                     </div>
                     <ArrowRight className="w-4 h-4 text-white/30 group-hover:text-white transition-colors" />
@@ -110,8 +144,8 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
                   className="flex flex-col items-center justify-center py-12"
                 >
                   <div className="w-16 h-16 rounded-full border-2 border-white/10 border-t-accent-blue animate-spin mb-6" />
-                  <h4 className="text-sm font-bold uppercase tracking-widest mb-2 text-white">Establishing Secure Link</h4>
-                  <p className="text-[10px] font-mono text-white/50 animate-pulse">Requesting cryptographic signature...</p>
+                  <h4 className="text-sm font-bold uppercase tracking-widest mb-2 text-white">{t('auth.connecting.title')}</h4>
+                  <p className="text-[10px] font-mono text-white/50 animate-pulse">{t('auth.connecting.description')}</p>
                 </motion.div>
               )}
 
@@ -128,8 +162,8 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
-                  <h4 className="text-sm font-bold uppercase tracking-widest mb-2 text-white">Identity Confirmed</h4>
-                  <p className="text-[10px] font-mono text-accent-emerald">System Access Granted</p>
+                  <h4 className="text-sm font-bold uppercase tracking-widest mb-2 text-white">{t('auth.success.title')}</h4>
+                  <p className="text-[10px] font-mono text-accent-emerald">{t('auth.success.description')}</p>
                 </motion.div>
               )}
             </AnimatePresence>

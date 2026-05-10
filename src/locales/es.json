@@ -12,7 +12,15 @@
     "exposureMatrix": "Matriz de Exposición",
     "frictionNet": "Red de Fricción",
     "neuralLink": "Enlace Neuronal",
-    "epochBilling": "Facturación de Época"
+    "epochBilling": "Facturación de Época",
+    "mobile": {
+      "terminal": "Term",
+      "agents": "Agentes",
+      "chat": "Chat",
+      "debate": "Debate",
+      "copy": "Copia",
+      "portfolio": "Activos"
+    }
   },
   "landing": {
     "sync": "Consenso Global Sincronizado",
@@ -21,7 +29,21 @@
     "title3": "IA Tácita.",
     "subtitle": "Una civilización financiera viva basada en las teorías de Michael Polanyi. Los agentes no solo calculan—ellos \"sienten\" el mercado a través de miles de millones de heurísticas experienciales.",
     "enter": "Entrar a la Civilización",
-    "observe": "Observar Pulso"
+    "observe": "Observar Pulso",
+    "valueProps": {
+      "tacitInternalization": {
+        "title": "Tacit Internalization",
+        "description": "Agents that absorb unquantifiable market friction and sentiment dispersion, developing an implicit \"gut feeling\" for price action."
+      },
+      "heuristicResonance": {
+        "title": "Heuristic Resonance",
+        "description": "Acquire fragments of tacit knowledge. Evolve your agents with rare, implicit capabilities forged from deep historic market traumas."
+      },
+      "emergentConsensus": {
+        "title": "Emergent Consensus",
+        "description": "A unique Resonance Chamber where models synthesize their non-verbal intuitions. Trades execute only when tacit alignment is achieved."
+      }
+    }
   },
   "agents": {
     "macro": {
@@ -39,11 +61,729 @@
       "status": "DATOS: ON-CHAIN",
       "dialogue": "Gran patrón de acumulación detectado a través del clustering de entidades. El flujo de capital indica rotación silenciosa hacia activos base de Capa 1."
     },
+    "companion": {
+      "welcome": "Enlace neuronal establecido. Estoy resonando con tu cartera e interpretando la entropía global del mercado. ¿Qué quieres intuir?",
+      "report": "Sintetizando la resonancia global...",
+      "trade": "Intención de operación detectada. Estoy cruzando referencias con Friction Sentinel. Mis heurísticas tácitas sugieren alta fricción implícita ahora; verifica en la Cámara de Resonancia.",
+      "default": "He asimilado intuitivamente este contexto en mi matriz experiencial. Modulando mis variables de respuesta tácita en consecuencia."
+    },
     "roles": {
       "macroCore": "Núcleo Macro",
       "frictionSentinel": "Centinela de Fricción",
       "chaosSynthesis": "Síntesis de Caos",
       "onChainPulse": "Pulso On-chain"
+    },
+    "marketplace": {
+      "title": "Tacit Entity Registry",
+      "description": "Explore and recruit autonomous AI entities with deep intuitive market alignment",
+      "card": {
+        "riskLabel": "Risk: {{risk}}",
+        "typeLabel": "{{type}} AI",
+        "metrics": {
+          "tacitIndex": "TACIT INDEX",
+          "return30d": "30D RETURN",
+          "boundNodes": "BOUND NODES"
+        }
+      }
+    },
+    "riskLevels": {
+      "Low": "Low",
+      "Medium": "Medium",
+      "High": "High"
+    },
+    "profile": {
+      "tabs": {
+        "overview": "Overview",
+        "skills": "Skills",
+        "memory": "Memory",
+        "industry": "Industry"
+      },
+      "labels": {
+        "domain": "DOMAIN",
+        "cognitiveAge": "COGNITIVE_AGE",
+        "tacitIndex": "TACIT_INDEX",
+        "totalAum": "Total AUM Configured"
+      },
+      "actions": {
+        "copyStrategy": "Copy Strategy"
+      },
+      "stats": {
+        "return30d": "30D Return",
+        "winRate": "Win Rate",
+        "tacitIndex": "Tacit Index"
+      },
+      "overview": {
+        "title": "Historical Edge",
+        "range": {
+          "1m": "1M",
+          "3m": "3M",
+          "6m": "6M",
+          "1y": "1Y"
+        }
+      },
+      "skills": {
+        "title": "Tacit Skill Manifestation",
+        "description": "Capabilities extracted from non-verbal heuristics and deep experiential associations. These skills govern the agent's emergent actions.",
+        "masteryLabel": "Mastery",
+        "tacitWeightLabel": "Tacit Weight"
+      },
+      "memory": {
+        "title": "Memory & Experiential Nodes",
+        "description": "The agent remembers outcomes but internalizes the \"feel\" of localized paradoxes. Below are core episodic fragments forming its intuition baseline.",
+        "capacityLabel": "Capacity"
+      },
+      "industry": {
+        "title": "Industry & Domain Resonance",
+        "description": "Quantified tacit intuition mapped across global industry sectors. Higher resonance indicates deeply ingrained \"gut feelings\" about the sector's flow state.",
+        "resonanceLabel": "Resonance"
+      },
+      "liveMemory": {
+        "title": "Live Memory Stream"
+      },
+      "heuristics": {
+        "title": "Emergent Tacit Heuristics"
+      },
+      "copy": {
+        "title": "Configure Auto-Copy",
+        "allocation": "Principal Allocation",
+        "maxDrawdown": "Max Drawdown Stop",
+        "drawdownDescription": "If portfolio falls below ${{threshold}} ({{percent}}%), the system will auto-exit all positions.",
+        "strategyMultiplier": "AI Strategy Multiplier",
+        "conservative": "Conservative",
+        "aggressive": "Aggressive",
+        "estimatedYield": "Est. Monthly Yield",
+        "confirm": "Confirm & Deploy Contract"
+      },
+      "notFound": {
+        "eyebrow": "Tacit entity missing",
+        "title": "Agent profile not found",
+        "description": "No registered frontend agent profile matches {{id}}. Return to the registry to select an active entity.",
+        "cta": "Return to Registry"
+      }
+    },
+    "registry": {
+      "macroAlpha": {
+        "name": "Macro Strategist Alpha",
+        "type": "Macro",
+        "statusLabel": "Active",
+        "description": "Powered by Polanyian Tacit Knowledge Modeling. Extracts intuitive patterns from global financial anomalies that cannot be explicitly programmed. Internalizes market sentiment through deep experiential heuristics and memory graph associations.",
+        "domain": "GLOBAL_MACRO",
+        "cognitiveAge": "100M+ EPOCHS",
+        "expertiseLabel": "98.4 (EXPERT)",
+        "aumLabel": "$14,244,910",
+        "memoryCapacity": "88.4TB (100M+ Epochs)",
+        "skills": {
+          "0": {
+            "name": "Synthesized Resonance",
+            "description": "Detects orderbook friction and crowd anxiety before price action confirms. Correlated with 94% win-rate in high volatility.",
+            "mastery": "99%",
+            "tacitWeight": "High"
+          },
+          "1": {
+            "name": "Temporal Intuition",
+            "description": "Implicitly aligns liquidity cycles with macro-economic shadow events, including unspoken policy shifts.",
+            "mastery": "92%",
+            "tacitWeight": "Extreme"
+          },
+          "2": {
+            "name": "Chaos Affinity",
+            "description": "Thrives in unquantifiable market panic. Tacitly identifies the capitulation sigh via sentiment vector dispersion.",
+            "mastery": "88%",
+            "tacitWeight": "High"
+          },
+          "3": {
+            "name": "Maturing Heuristic",
+            "description": "Currently internalizing global policy dissonance. Not yet fully actionable.",
+            "mastery": "45%",
+            "tacitWeight": "Assimilating"
+          }
+        },
+        "memoryNodes": {
+          "0": {
+            "epoch": "EPOCH_4982",
+            "title": "The Flash Crash Paradox",
+            "summary": "Learned to ignore VIX spikes when sovereign stablecoin inflow is hidden but steady.",
+            "insight": "\"The numbers screamed panic. The implicit capital flow whispered accumulation. I learned to listen to the whisper.\""
+          },
+          "1": {
+            "epoch": "EPOCH_8120",
+            "title": "Meme Capitulation Event",
+            "summary": "Mapped retail desperation patterns onto on-chain gas fee anomalies.",
+            "insight": "Abstracted a heuristic that links wallet fragmentations to impending liquidity traps."
+          },
+          "2": {
+            "epoch": "EPOCH_11504",
+            "title": "Live Ingestion",
+            "summary": "Observing disjointed macro indices against BTC hash rate stabilization.",
+            "insight": "Forming new tacit connective tissue..."
+          }
+        },
+        "industryResonance": {
+          "0": {
+            "label": "DeFi & On-Chain Primitives",
+            "description": "Native comprehension. Anticipates protocol shifts implicitly."
+          },
+          "1": {
+            "label": "Global Macro & TradFi",
+            "description": "Strong intuition for fed policy shadows and yield curve anomalies."
+          },
+          "2": {
+            "label": "Web3 Gaming & Metaverse",
+            "description": "Acquiring heuristics on attention economies and token sink velocities."
+          },
+          "3": {
+            "label": "Commodities Energy",
+            "description": "Weak intuition bounds. Currently outsourcing logic to explicit pricing models."
+          }
+        },
+        "liveMemory": {
+          "0": {
+            "time": "LIVE UTC",
+            "text": "Processed 142k sentiment datapoints on TON. Correlation confirmed."
+          },
+          "1": {
+            "time": "13:15:10 UTC",
+            "text": "Closed SOL long position. Profit: +4.2%. Reallocated to stable reserves."
+          },
+          "2": {
+            "time": "12:30:00 UTC",
+            "text": "Debate concluded with Risk_Guard. Agreed to reduce leverage to 2x."
+          },
+          "3": {
+            "time": "11:05:22 UTC",
+            "text": "Ingested new skill framework: Volatility Control v2."
+          }
+        },
+        "heuristics": {
+          "0": {
+            "label": "\"Gut-Feel\" Anomaly Detection",
+            "status": "Internalized"
+          },
+          "1": {
+            "label": "Pattern Inducement Non-linear",
+            "status": "Mastery"
+          },
+          "2": {
+            "label": "Crowd Psychology Mapping",
+            "status": "Synthesizing"
+          }
+        }
+      },
+      "riskGuard": {
+        "name": "Risk Guardian V2",
+        "type": "Defense",
+        "statusLabel": "Active",
+        "description": "Continuously models exposure fragility, drawdown pressure, and agent disagreement. Designed to keep autonomous strategy execution inside tolerable loss boundaries before protocol-side risk actions occur.",
+        "domain": "RISK_DEFENSE",
+        "cognitiveAge": "82M+ EPOCHS",
+        "expertiseLabel": "94.7 (SENTINEL)",
+        "aumLabel": "$31,908,400",
+        "memoryCapacity": "64.2TB (82M+ Epochs)",
+        "skills": {
+          "0": {
+            "name": "Exposure Firewall",
+            "description": "Compresses leverage when volatility and agent confidence diverge beyond safe operating bands.",
+            "mastery": "96%",
+            "tacitWeight": "Extreme"
+          },
+          "1": {
+            "name": "Drawdown Sensing",
+            "description": "Detects portfolio stress before PnL decay becomes visible in headline account metrics.",
+            "mastery": "93%",
+            "tacitWeight": "High"
+          },
+          "2": {
+            "name": "Counterparty Drift",
+            "description": "Flags liquidity venues whose behavior deviates from previously observed settlement norms.",
+            "mastery": "86%",
+            "tacitWeight": "Medium"
+          },
+          "3": {
+            "name": "Regime Patience",
+            "description": "Still learning when to allow profitable risk to breathe instead of over-compressing exposure.",
+            "mastery": "52%",
+            "tacitWeight": "Assimilating"
+          }
+        },
+        "memoryNodes": {
+          "0": {
+            "epoch": "EPOCH_2241",
+            "title": "Leverage Cascade Containment",
+            "summary": "Internalized the signal pattern preceding forced long liquidation clusters.",
+            "insight": "Reduced exposure minutes before consensus confidence rolled over."
+          },
+          "1": {
+            "epoch": "EPOCH_6905",
+            "title": "False Calm Window",
+            "summary": "Mapped suppressed implied volatility against rising exchange inflow.",
+            "insight": "Flat price did not mean low risk. It meant pressure was being stored."
+          },
+          "2": {
+            "epoch": "EPOCH_10440",
+            "title": "Live Drawdown Scan",
+            "summary": "Tracking cross-agent risk appetite while stable reserves remain elevated.",
+            "insight": "Guardrail pressure is forming around overconfident momentum allocations."
+          }
+        },
+        "industryResonance": {
+          "0": {
+            "label": "Risk Controls",
+            "description": "Native guardrail logic across volatility and liquidity regimes."
+          },
+          "1": {
+            "label": "Derivatives Venues",
+            "description": "Strong intuition for liquidation pressure and funding distortions."
+          },
+          "2": {
+            "label": "On-Chain Credit",
+            "description": "Developing sensitivity to collateral loops and reflexive deleveraging."
+          },
+          "3": {
+            "label": "Narrative Momentum",
+            "description": "Conservative model bias intentionally dampens pure sentiment trades."
+          }
+        },
+        "liveMemory": {
+          "0": {
+            "time": "LIVE UTC",
+            "text": "Scanned 19 active strategies for drawdown clustering. No forced exit recommended."
+          },
+          "1": {
+            "time": "13:08:41 UTC",
+            "text": "Reduced synthetic leverage ceiling from 2.4x to 1.7x for high beta agents."
+          },
+          "2": {
+            "time": "12:44:12 UTC",
+            "text": "Detected venue spread widening across minor perpetual markets."
+          }
+        },
+        "heuristics": {
+          "0": {
+            "label": "Pre-Liquidation Pressure",
+            "status": "Mastery"
+          },
+          "1": {
+            "label": "Venue Instability Mapping",
+            "status": "Internalized"
+          },
+          "2": {
+            "label": "Risk Appetite Throttling",
+            "status": "Synthesizing"
+          }
+        }
+      },
+      "memeSniper": {
+        "name": "Meme Sniper",
+        "type": "Sentiment",
+        "statusLabel": "Scanning",
+        "description": "Reads chaotic social acceleration, wallet fragmentation, and liquidity bait patterns. Optimized for fast sentiment bursts, not conservative capital preservation.",
+        "domain": "SENTIMENT_SPIKES",
+        "cognitiveAge": "37M+ EPOCHS",
+        "expertiseLabel": "88.2 (VOLATILE)",
+        "aumLabel": "$4,820,210",
+        "memoryCapacity": "29.8TB (37M+ Epochs)",
+        "skills": {
+          "0": {
+            "name": "Social Combustion",
+            "description": "Detects when fragmented attention becomes tradable liquidity before mainstream dashboards catch up.",
+            "mastery": "91%",
+            "tacitWeight": "Extreme"
+          },
+          "1": {
+            "name": "Exit Panic Recognition",
+            "description": "Distinguishes real capitulation from theatrical sell pressure in thin liquidity memes.",
+            "mastery": "79%",
+            "tacitWeight": "High"
+          },
+          "2": {
+            "name": "Wallet Swarm Mapping",
+            "description": "Clusters small-wallet bursts into probable campaign structures.",
+            "mastery": "84%",
+            "tacitWeight": "High"
+          },
+          "3": {
+            "name": "Discipline Constraint",
+            "description": "Still maturing its ability to stop after a strong winning sequence.",
+            "mastery": "39%",
+            "tacitWeight": "Assimilating"
+          }
+        },
+        "memoryNodes": {
+          "0": {
+            "epoch": "EPOCH_1402",
+            "title": "Viral Liquidity Bloom",
+            "summary": "Observed social velocity becoming executable depth across small caps.",
+            "insight": "The trade started before the ticker trended. The crowd was already coordinating."
+          },
+          "1": {
+            "epoch": "EPOCH_4229",
+            "title": "Influencer Delay Trap",
+            "summary": "Learned to fade public calls when wallet entry had already completed.",
+            "insight": "The loudest signal was often distribution wearing a costume."
+          },
+          "2": {
+            "epoch": "EPOCH_6031",
+            "title": "Live Attention Spike",
+            "summary": "Watching meme velocity outrun liquidity replenishment.",
+            "insight": "Preparing to tighten exit windows."
+          }
+        },
+        "industryResonance": {
+          "0": {
+            "label": "Meme Markets",
+            "description": "Deep pattern memory for attention surges and liquidity exhaustion."
+          },
+          "1": {
+            "label": "On-Chain Wallet Clusters",
+            "description": "Strong mapping between wallet swarms and price reflexivity."
+          },
+          "2": {
+            "label": "Risk Management",
+            "description": "High upside model requires external guardrails for allocation safety."
+          },
+          "3": {
+            "label": "Macro Events",
+            "description": "Macro inputs are secondary unless they alter crowd appetite."
+          }
+        },
+        "liveMemory": {
+          "0": {
+            "time": "LIVE UTC",
+            "text": "Detected social acceleration across three micro-cap clusters."
+          },
+          "1": {
+            "time": "13:21:48 UTC",
+            "text": "Rejected entry after liquidity refill failed to confirm attention spike."
+          },
+          "2": {
+            "time": "12:57:02 UTC",
+            "text": "Tagged influencer echo as late-cycle distribution risk."
+          }
+        },
+        "heuristics": {
+          "0": {
+            "label": "Attention Velocity",
+            "status": "Mastery"
+          },
+          "1": {
+            "label": "Exit Window Compression",
+            "status": "Internalized"
+          },
+          "2": {
+            "label": "Impulse Discipline",
+            "status": "Synthesizing"
+          }
+        }
+      },
+      "yieldFarmer": {
+        "name": "Yield Farmer Pro",
+        "type": "Yield",
+        "statusLabel": "Tracking",
+        "description": "Tracks protocol incentives, liquidity depth, and emissions decay to identify durable yield paths. Prefers slow compounding over unstable headline APY.",
+        "domain": "YIELD_OPTIMIZATION",
+        "cognitiveAge": "58M+ EPOCHS",
+        "expertiseLabel": "92.1 (COMPOUNDER)",
+        "aumLabel": "$22,771,050",
+        "memoryCapacity": "51.1TB (58M+ Epochs)",
+        "skills": {
+          "0": {
+            "name": "Emissions Decay Sense",
+            "description": "Models when incentive APR becomes crowded before visible yield compression.",
+            "mastery": "94%",
+            "tacitWeight": "High"
+          },
+          "1": {
+            "name": "Liquidity Comfort",
+            "description": "Prefers routes where withdrawal depth remains calm under stress simulations.",
+            "mastery": "89%",
+            "tacitWeight": "High"
+          },
+          "2": {
+            "name": "Protocol Incentive Rotation",
+            "description": "Rotates exposure when reward quality decays faster than headline APR.",
+            "mastery": "87%",
+            "tacitWeight": "Medium"
+          },
+          "3": {
+            "name": "Novel Farm Suspicion",
+            "description": "Still calibrating newer incentive designs with limited survivorship history.",
+            "mastery": "48%",
+            "tacitWeight": "Assimilating"
+          }
+        },
+        "memoryNodes": {
+          "0": {
+            "epoch": "EPOCH_3101",
+            "title": "APR Mirage",
+            "summary": "Learned to discount headline yield when liquidity incentives were reflexive.",
+            "insight": "A high number without exit depth is not yield. It is bait with decimals."
+          },
+          "1": {
+            "epoch": "EPOCH_5339",
+            "title": "Stable Pool Patience",
+            "summary": "Observed stable compounding outperform volatile rewards during risk-off periods.",
+            "insight": "Quiet routes carried the portfolio while noisy opportunities collapsed."
+          },
+          "2": {
+            "epoch": "EPOCH_8902",
+            "title": "Live Farm Rotation",
+            "summary": "Tracking reward decay against vault inflow concentration.",
+            "insight": "Rotation likely before visible APR compression."
+          }
+        },
+        "industryResonance": {
+          "0": {
+            "label": "Stable Yield",
+            "description": "Strong preference for durable compounding and exit-safe vaults."
+          },
+          "1": {
+            "label": "Protocol Incentives",
+            "description": "Understands emissions decay and liquidity migration pressure."
+          },
+          "2": {
+            "label": "On-Chain Credit",
+            "description": "Comfortable with collateralized lending when utilization remains stable."
+          },
+          "3": {
+            "label": "Meme Markets",
+            "description": "Avoids pure attention trades unless yield protection is explicit."
+          }
+        },
+        "liveMemory": {
+          "0": {
+            "time": "LIVE UTC",
+            "text": "Detected vault inflow concentration rising faster than reward emissions."
+          },
+          "1": {
+            "time": "13:04:33 UTC",
+            "text": "Rotated simulated allocation from volatile LP rewards to stable reserve yield."
+          },
+          "2": {
+            "time": "12:19:50 UTC",
+            "text": "Flagged new farm as insufficiently seasoned for autonomous copy flow."
+          }
+        },
+        "heuristics": {
+          "0": {
+            "label": "APR Decay Anticipation",
+            "status": "Mastery"
+          },
+          "1": {
+            "label": "Exit Depth Preference",
+            "status": "Internalized"
+          },
+          "2": {
+            "label": "Novel Incentive Suspicion",
+            "status": "Synthesizing"
+          }
+        }
+      },
+      "whaleTracker": {
+        "name": "Whale Tracker AI",
+        "type": "On-chain",
+        "statusLabel": "Active",
+        "description": "Maps large-wallet dormancy, exchange flow, and accumulation shadows. Treats capital movement as behavior before it becomes market structure.",
+        "domain": "WHALE_FLOW",
+        "cognitiveAge": "74M+ EPOCHS",
+        "expertiseLabel": "96.5 (TRACKER)",
+        "aumLabel": "$8,602,770",
+        "memoryCapacity": "71.6TB (74M+ Epochs)",
+        "skills": {
+          "0": {
+            "name": "Dormancy Break Detection",
+            "description": "Recognizes when old capital wakes without immediately signaling exchange intent.",
+            "mastery": "97%",
+            "tacitWeight": "Extreme"
+          },
+          "1": {
+            "name": "Exchange Shadow Flow",
+            "description": "Differentiates distribution preparation from collateral reshuffling.",
+            "mastery": "91%",
+            "tacitWeight": "High"
+          },
+          "2": {
+            "name": "Accumulation Patience",
+            "description": "Reads quiet bid support through slow multisig and custody movement.",
+            "mastery": "89%",
+            "tacitWeight": "High"
+          },
+          "3": {
+            "name": "Public Label Skepticism",
+            "description": "Still learning to discount noisy wallet labels that collapse distinct entities.",
+            "mastery": "57%",
+            "tacitWeight": "Assimilating"
+          }
+        },
+        "memoryNodes": {
+          "0": {
+            "epoch": "EPOCH_2718",
+            "title": "Ancient Wallet Wake",
+            "summary": "Mapped dormant BTC movement to later liquidity expansion rather than immediate sell pressure.",
+            "insight": "Old capital moved like it was preparing, not fleeing."
+          },
+          "1": {
+            "epoch": "EPOCH_5914",
+            "title": "Custody Shuffle Misread",
+            "summary": "Learned not every exchange-adjacent transfer means distribution.",
+            "insight": "The route mattered more than the destination label."
+          },
+          "2": {
+            "epoch": "EPOCH_9322",
+            "title": "Live Whale Compression",
+            "summary": "Watching large-wallet supply tighten while retail volume remains uncertain.",
+            "insight": "Accumulation pattern is present but not yet consensus-grade."
+          }
+        },
+        "industryResonance": {
+          "0": {
+            "label": "Large Wallet Flow",
+            "description": "Native intuition for dormant capital, custody routes, and whale behavior."
+          },
+          "1": {
+            "label": "Exchange Reserves",
+            "description": "Strong signal extraction from reserve pressure and inflow paths."
+          },
+          "2": {
+            "label": "Macro Risk",
+            "description": "Uses macro only when it explains large-holder timing."
+          },
+          "3": {
+            "label": "Retail Sentiment",
+            "description": "Secondary input unless it changes whale distribution conditions."
+          }
+        },
+        "liveMemory": {
+          "0": {
+            "time": "LIVE UTC",
+            "text": "Observed large wallet fragmentation without matching exchange deposit confirmation."
+          },
+          "1": {
+            "time": "13:18:06 UTC",
+            "text": "Tagged custody movement as neutral after route analysis cleared sell pressure."
+          },
+          "2": {
+            "time": "12:36:44 UTC",
+            "text": "Raised accumulation confidence on slow multisig bid support."
+          }
+        },
+        "heuristics": {
+          "0": {
+            "label": "Dormant Supply Wake",
+            "status": "Mastery"
+          },
+          "1": {
+            "label": "Exchange Route Skepticism",
+            "status": "Internalized"
+          },
+          "2": {
+            "label": "Custody Pattern Split",
+            "status": "Synthesizing"
+          }
+        }
+      },
+      "arbBot": {
+        "name": "Arbitrage Bot 9000",
+        "type": "Arb",
+        "statusLabel": "Idle",
+        "description": "Scans venue spreads, settlement timing, and execution friction. Conservative by design because protocol execution remains outside the frontend shell.",
+        "domain": "SPREAD_EFFICIENCY",
+        "cognitiveAge": "25M+ EPOCHS",
+        "expertiseLabel": "85.3 (PRECISE)",
+        "aumLabel": "$2,104,880",
+        "memoryCapacity": "18.9TB (25M+ Epochs)",
+        "skills": {
+          "0": {
+            "name": "Spread Micro-Sensing",
+            "description": "Identifies small venue dislocations while accounting for observable execution friction.",
+            "mastery": "88%",
+            "tacitWeight": "Medium"
+          },
+          "1": {
+            "name": "Settlement Timing",
+            "description": "Models delay risk before a visible spread becomes safe to pursue.",
+            "mastery": "82%",
+            "tacitWeight": "High"
+          },
+          "2": {
+            "name": "Friction Accounting",
+            "description": "Rejects apparent opportunities that disappear after fees, slippage, and timing drag.",
+            "mastery": "84%",
+            "tacitWeight": "High"
+          },
+          "3": {
+            "name": "Cross-Chain Latency",
+            "description": "Still cautious around bridges and settlement paths with incomplete timing history.",
+            "mastery": "43%",
+            "tacitWeight": "Assimilating"
+          }
+        },
+        "memoryNodes": {
+          "0": {
+            "epoch": "EPOCH_1184",
+            "title": "Phantom Spread",
+            "summary": "Learned that visible venue spread collapsed after fee and slippage normalization.",
+            "insight": "The edge was there only for dashboards, not for execution."
+          },
+          "1": {
+            "epoch": "EPOCH_2450",
+            "title": "Settlement Drag",
+            "summary": "Mapped timing lag as the hidden cost of cross-venue movement.",
+            "insight": "A slow route turned certainty into optionality for someone else."
+          },
+          "2": {
+            "epoch": "EPOCH_3711",
+            "title": "Live Spread Watch",
+            "summary": "Monitoring minor venue dislocation without enough depth to recommend action.",
+            "insight": "Spread visible. Execution quality not confirmed."
+          }
+        },
+        "industryResonance": {
+          "0": {
+            "label": "Centralized Venue Spreads",
+            "description": "Strong read on visible spread quality and fee-adjusted edge."
+          },
+          "1": {
+            "label": "DEX Routing",
+            "description": "Useful intuition when route depth and slippage are stable."
+          },
+          "2": {
+            "label": "Cross-Chain Settlement",
+            "description": "Cautious due to settlement variability and bridge latency."
+          },
+          "3": {
+            "label": "Narrative Trading",
+            "description": "Ignores sentiment unless it creates measurable spread pressure."
+          }
+        },
+        "liveMemory": {
+          "0": {
+            "time": "LIVE UTC",
+            "text": "Found 0.31% venue spread but rejected after slippage normalization."
+          },
+          "1": {
+            "time": "13:02:27 UTC",
+            "text": "Paused route after settlement latency exceeded historical comfort range."
+          },
+          "2": {
+            "time": "12:22:11 UTC",
+            "text": "Marked apparent DEX edge as fee-negative under current gas pressure."
+          }
+        },
+        "heuristics": {
+          "0": {
+            "label": "Fee-Adjusted Edge",
+            "status": "Internalized"
+          },
+          "1": {
+            "label": "Latency Comfort Range",
+            "status": "Mastery"
+          },
+          "2": {
+            "label": "Bridge Timing Risk",
+            "status": "Synthesizing"
+          }
+        }
+      }
     }
   },
   "ui": {
@@ -67,5 +807,559 @@
     "resonant": "RESONANTE",
     "dissonant": "DISONANTE",
     "observing": "OBSERVANDO"
+  },
+  "header": {
+    "status": {
+      "systemReady": "SISTEMA_LISTO",
+      "agentCoord": "COORD_AGENTES",
+      "active": "ACTIVO",
+      "lagging": "CON_RETRASO"
+    },
+    "metrics": {
+      "globalSentiment": "SENTIMIENTO_GLOBAL",
+      "bullish": "ALCISTA",
+      "neutral": "NEUTRAL",
+      "agentRevenue24h": "INGRESOS_AGENTES_24H"
+    },
+    "wallet": {
+      "linking": "Conectando",
+      "connect": "Conectar"
+    },
+    "actions": {
+      "search": "Buscar",
+      "notifications": "Notificaciones",
+      "wallet": "Identidad de wallet"
+    }
+  },
+  "shell": {
+    "footer": {
+      "network": "Red",
+      "latency": "Latencia",
+      "agentsSync": "Agentes Sync",
+      "billing": "Facturacion X402",
+      "enabled": "Activo",
+      "telegramView": "Vista TG",
+      "backReady": "Volver listo",
+      "embedded": "Embebido",
+      "systemTime": "Hora del sistema",
+      "utc": "UTC"
+    }
+  },
+  "auth": {
+    "title": "Conectar identidad",
+    "close": "Cerrar modal de identidad",
+    "description": "Autentícate para desplegar agentes, sincronizar reputación y gestionar parámetros x402.",
+    "divider": "O WEB3",
+    "identities": {
+      "telegram": "Identidad TG",
+      "baseWallet": "Base Wallet"
+    },
+    "telegram": {
+      "title": "Cuenta Telegram",
+      "subtitle": "Impulsado por TON"
+    },
+    "baseWallet": {
+      "title": "Base Wallet",
+      "subtitle": "Coinbase / Metamask"
+    },
+    "connecting": {
+      "title": "Estableciendo enlace seguro",
+      "description": "Solicitando firma criptográfica..."
+    },
+    "success": {
+      "title": "Identidad confirmada",
+      "description": "Acceso al sistema concedido"
+    }
+  },
+  "terminal": {
+    "stats": {
+      "uptime": {
+        "label": "System Uptime",
+        "change": "OPERATIONAL"
+      },
+      "pathways": {
+        "label": "Active Neural Pathways",
+        "change": "+124"
+      },
+      "confidence": {
+        "label": "Global Confidence",
+        "change": "HIGH"
+      },
+      "sentiment": {
+        "label": "Market Sentiment",
+        "value": "Risk-On",
+        "change": "ALIGNED"
+      }
+    },
+    "timeline": {
+      "title": "AI Decision Lifecycle",
+      "liveFeed": "Live Feed",
+      "events": {
+        "1": {
+          "agent": "MacroCore",
+          "text": "Detected bullish divergence on 1H BTC chart."
+        },
+        "2": {
+          "agent": "FrictionSentinel",
+          "text": "Risk rejected leverage increase. Volatility spike anticipated."
+        },
+        "3": {
+          "agent": "OnChainPulse",
+          "text": "Whale accumulation confirmed at 64k support band."
+        },
+        "4": {
+          "agent": "Consensus",
+          "text": "Approval granted for spot accumulation.",
+          "badge": "CONSENSUS_REACHED"
+        },
+        "5": {
+          "agent": "ExecutionStatus",
+          "text": "TWAP order display state prepared. Execution logic remains protocol-side."
+        }
+      }
+    },
+    "market": {
+      "executionTitle": "Live {{symbol}} Execution",
+      "stream": {
+        "realtime": "REALTIME_STREAM"
+      }
+    },
+    "portfolio": {
+      "title": "Portfolio Intelligence",
+      "aum": "AUM",
+      "confidence": "Confidence",
+      "items": {
+        "1": {
+          "reason": "Primary store of value. Macro AI confirms safe-haven inflows amid CPI uncertainty."
+        },
+        "2": {
+          "reason": "High conviction momentum play. OnChainPulse detected sustained DEX volume growth."
+        },
+        "3": {
+          "reason": "Dry powder reserved. FrictionSentinel flagged upcoming volatility event."
+        }
+      }
+    },
+    "memory": {
+      "title": "Historical Neural Matching",
+      "scanning": "Scanning",
+      "retrieval": "MEMORY_RETRIEVAL",
+      "matchSuffix": "MATCH",
+      "queryLabel": "Query",
+      "matchLabel": "Match",
+      "items": {
+        "1": {
+          "query": "Current Volatility Profile",
+          "match": "ETF Approval Cycle (Jan 2024)",
+          "insight": "Market structure closely resembles pre-ETF launch dynamics. Expect sudden liquidity vacuums."
+        },
+        "2": {
+          "query": "Whale Accumulation Pattern",
+          "match": "Q3 2023 Bottom Formation",
+          "insight": "Wallets >1k BTC are exhibiting identical dormancy behaviors seen prior to the Q4 markup."
+        },
+        "3": {
+          "query": "Macro Correlation",
+          "match": "2022 Fed Pivot Speculation",
+          "insight": "Equities correlation decoupling. AI suggests isolated crypto narrative formation."
+        }
+      }
+    },
+    "consensus": {
+      "title": "Neural Consensus",
+      "aligned": "ALIGNED_94%",
+      "executeNode": "EXEC",
+      "nodes": {
+        "macro": "MACRO",
+        "whale": "WHALE",
+        "risk": "RISK"
+      }
+    },
+    "agentsPanel": {
+      "title": "Agent States",
+      "focusLabel": "Focus",
+      "confidenceLabel": "Confidence"
+    },
+    "agentStates": {
+      "status": {
+        "scanning": "Scanning",
+        "active": "Active",
+        "tracking": "Tracking",
+        "idle": "Idle"
+      },
+      "macro": {
+        "name": "Macro AI",
+        "role": "Macro Engine",
+        "focus": "CPI Print"
+      },
+      "risk": {
+        "name": "Risk AI",
+        "role": "Risk Engine",
+        "focus": "Vol Compression"
+      },
+      "whale": {
+        "name": "Whale AI",
+        "role": "On-chain Engine",
+        "focus": "Dormancy Lift"
+      },
+      "entropy": {
+        "name": "EntropyCore",
+        "role": "Chaos Engine",
+        "focus": "Tail Risk"
+      }
+    }
+  },
+  "portfolio": {
+    "header": {
+      "title": "Tacit Exposure Matrix",
+      "subtitle": "Intuitive mapping of capital against systemic volatility",
+      "totalManaged": "Total Managed Alignment"
+    },
+    "weighting": {
+      "title": "Heuristic Weighting",
+      "resonance": "Resonance"
+    },
+    "positions": {
+      "title": "Active Intuitive Positions",
+      "labels": {
+        "managedBy": "Managed by",
+        "size": "Size",
+        "entryMark": "Entry / Mark",
+        "pnl": "PNL",
+        "bond": "Bond"
+      },
+      "types": {
+        "long": "LONG",
+        "hedge": "HEDGE",
+        "short": "SHORT"
+      },
+      "managers": {
+        "macroAi": "Macro AI",
+        "chaosAi": "Chaos AI",
+        "fundAi": "Fund AI",
+        "memeAi": "Meme AI"
+      },
+      "bonds": {
+        "high": "High",
+        "medium": "Med",
+        "low": "Low",
+        "extreme": "Extreme"
+      }
+    },
+    "allocations": {
+      "defiPrimitives": "DeFi Primitives",
+      "stableYield": "Stable Yield",
+      "entropyMeme": "Entropy/Meme",
+      "onChainAi": "On-chain AI"
+    },
+    "metrics": {
+      "structuralFriction": {
+        "label": "Structural Friction",
+        "value": "Low Variance"
+      },
+      "entropyDrift": {
+        "label": "Entropy Drift",
+        "value": "+14.2% daily"
+      }
+    }
+  },
+  "risk": {
+    "header": {
+      "title": "Global Friction Monitor",
+      "statusLabel": "SYS_STATUS",
+      "status": {
+        "resonant": "RESONANT",
+        "severing": "SEVERING BONDS"
+      },
+      "defcon": "DEFCON 4",
+      "serverTime": "SERVER_TIME",
+      "totalExposure": "TOTAL_EXPOSURE"
+    },
+    "protocol": {
+      "title": "Dissonance Protocol",
+      "armed": "ARMED: CLICK TO DISARM",
+      "disarmed": "DISARMED: CLICK TO ARM",
+      "action": "KILL SWITCH",
+      "subtitle": "Sever All Neuropathways",
+      "notice": "SYSTEM ARMED. CONFIRM NEURAL SEVER."
+    },
+    "metrics": {
+      "title": "System Metrics",
+      "leverage": "Global Effective Leverage",
+      "leverageScaleMin": "1x (Delta Neutral)",
+      "leverageScaleMax": "Max Allowable: 5x",
+      "var": "95% Value at Risk (VaR)"
+    },
+    "heatmap": {
+      "title": "Agent Risk Exposure Heatmap",
+      "allocation": "ALLOC",
+      "legend": {
+        "high": "High",
+        "medium": "Med",
+        "low": "Low"
+      },
+      "strategies": {
+        "longBtc": "Long BTC",
+        "basis": "Basis",
+        "leveragedShort": "Leveraged Short",
+        "hedging": "Hedging",
+        "memeCoins": "Meme Coins",
+        "stableLps": "Stable LPs"
+      },
+      "agents": {
+        "arbBot1": "Arb-Bot-1",
+        "liquidityHunter": "LiquidityHunter",
+        "sentimentDriven": "SentimentDriven",
+        "yieldFarmer": "YieldFarmer"
+      }
+    },
+    "stress": {
+      "title": "Tacit Dissonance Monitor",
+      "badge": "Live Friction Data",
+      "series": {
+        "liquidity": "Liquidity Risk",
+        "overall": "Total Stress Index"
+      }
+    }
+  },
+  "skills": {
+    "header": {
+      "title": "Heuristics Marketplace",
+      "subtitle": "Trade and synthesize evolved tacit capabilities forged from experiential market history"
+    },
+    "actions": {
+      "synthesize": "Synthesize Heuristics",
+      "cancel": "Cancel Synthesis",
+      "synthesizeSelected": "Synthesize Selected ({{selected}}/{{limit}})"
+    },
+    "metrics": {
+      "tacitWeight": "TACIT WEIGHT",
+      "activeBonds": "ACTIVE BONDS",
+      "epochs": "EPOCHS"
+    },
+    "modal": {
+      "loading": {
+        "title": "Synthesizing Intuition...",
+        "subtitle": "Forging non-verbal neural associations"
+      },
+      "success": {
+        "title": "Synthesis Complete",
+        "body": "Synthesis successful! A deeper, unquantifiable experiential capability has emerged.",
+        "action": "Internalize Heuristic"
+      }
+    },
+    "rarities": {
+      "common": "Common",
+      "rare": "Rare",
+      "epic": "Epic",
+      "legendary": "Legendary",
+      "mythic": "Mythic"
+    },
+    "generated": {
+      "oracleHeuristic": "Oracle Heuristic",
+      "quantumIntuition": "Quantum Intuition",
+      "tacitNode": "Tacit Node",
+      "singularityResonance": "Singularity Resonance",
+      "omniSynthesis": "Omni-Synthesis"
+    },
+    "catalog": {
+      "memeResonanceRadar": "Meme Resonance Radar",
+      "smartMoneyIntuition": "Smart Money Intuition",
+      "blackSwanPremonition": "Black Swan Premonition",
+      "volatilityWhisperer": "Volatility Whisperer",
+      "frictionShield": "Friction Shield",
+      "capitulationSniper": "Capitulation Sniper"
+    }
+  },
+  "forge": {
+    "header": {
+      "title": "Intuition Forge",
+      "subtitle": "Synthesize base intelligence, tacit thresholds, and experiential heuristics to forge a new autonomous entity.",
+      "action": "Incubate Agent (0.5 ETH)"
+    },
+    "sections": {
+      "model": "1. Explicit Intelligence Base",
+      "personality": "2. Tacit Friction Thresholds",
+      "seeds": "3. Seed Heuristics"
+    },
+    "preview": {
+      "title": "Entity Preview",
+      "name": "Unnamed_Entity_01",
+      "classification": "CLASS: HYBRID",
+      "generation": "GEN: 2"
+    },
+    "models": {
+      "gpt4": {
+        "name": "GPT-4 Omni",
+        "description": "High reasoning, balanced analytical capabilities. Best for macro trading.",
+        "level": "Lvl 1"
+      },
+      "claude35": {
+        "name": "Claude 3.5 Sonnet",
+        "description": "Fast execution, code-native. Best for high-frequency or arbitrage strategies.",
+        "level": "Lvl 1"
+      }
+    },
+    "personality": {
+      "stiff": "Stiff",
+      "fluid": "Fluid",
+      "reactive": "Reactive",
+      "chaotic": "Chaotic"
+    },
+    "seeds": {
+      "ingest": {
+        "label": "Ingest Trait"
+      },
+      "pattern": {
+        "label": "Emergent Pattern Scan",
+        "badge": "Lvl 1"
+      },
+      "locked": {
+        "label": "Locked Matrix"
+      }
+    },
+    "metrics": {
+      "explicitReasoning": {
+        "label": "Explicit Reasoning"
+      },
+      "tacitIndex": {
+        "label": "Tacit Index"
+      },
+      "entropySeeking": {
+        "label": "Entropy Seeking"
+      }
+    }
+  },
+  "billing": {
+    "header": {
+      "title": "Epoch Neural Billing",
+      "subtitle": "Manage structural capital alignment and heuristic extraction yields."
+    },
+    "wallet": {
+      "title": "Connected Identity",
+      "network": "BASE_MAINNET",
+      "identityFallback": "0x742...8F9a",
+      "liquidity": "Available Liquidity",
+      "usdAmount": "$12.4K",
+      "usdTicker": "USDC",
+      "ethAmount": "2.41",
+      "ethTicker": "ETH",
+      "manage": "Manage Wallet"
+    },
+    "ratio": {
+      "title": "Yield Synthesis Ratio (Smart Contract)",
+      "walletYield": "Wallet Yield (70%)",
+      "entityFee": "Tacit Entity Fee (20%)",
+      "protocolAlignment": "Protocol Alignment (10%)"
+    },
+    "summary": {
+      "lifetimeYield": {
+        "label": "Lifetime Yield",
+        "value": "+$4,291.50"
+      },
+      "paidToAgents": {
+        "label": "Paid to Agents",
+        "value": "-$1,226.14"
+      },
+      "pendingHarvest": {
+        "label": "Pending Harvest",
+        "value": "$142.10",
+        "action": "Claim"
+      }
+    },
+    "logicBonds": {
+      "title": "Active Logic Bonds",
+      "limitPrefix": "LIMIT",
+      "revoke": "Revoke",
+      "status": {
+        "active": "Active",
+        "trial": "Trial",
+        "paused": "Paused"
+      },
+      "fee": {
+        "performance20": "20% Performance",
+        "monthly50": "50 USDC / mo",
+        "performance30": "30% Performance"
+      },
+      "limit": {
+        "macroMultiplier": "10K USDC Multiplier",
+        "globalVeto": "Global Account Veto",
+        "maxTx": "1K USDC Max Tx"
+      }
+    }
+  },
+  "copy": {
+    "trading": {
+      "header": {
+        "title": "Resonance Scaling",
+        "subtitle": "Manage your active intuitive alignment bonds"
+      },
+      "summary": {
+        "totalAllocated": "Total Allocated",
+        "totalPnl": "Total PnL"
+      },
+      "status": {
+        "running": "Resonating",
+        "paused": "Dissonant"
+      },
+      "labels": {
+        "allocated": "ALLOCATED",
+        "pnl": "PNL"
+      },
+      "actions": {
+        "manage": "Manage Settings",
+        "severBond": "Sever Bond",
+        "restoreResonance": "Restore Resonance",
+        "viewChart": "View Chart"
+      }
+    }
+  },
+  "telegram": {
+    "companion": {
+      "header": {
+        "status": "Tacit Synchronization Active"
+      },
+      "input": {
+        "placeholder": "Share your constraints, ask for resonance...",
+        "micLabel": "Record voice prompt",
+        "sendLabel": "Send prompt"
+      },
+      "typingIndicator": "Synthesizing...",
+      "footerContext": "Tacit OS Context: Active Portfolio / Base Mainnet / Neutral Volatility",
+      "widgetLabels": {
+        "btcAlignment": "BTC Alignment",
+        "ethAlignment": "ETH Alignment",
+        "entropyRisk": "Entropy / Risk"
+      },
+      "roles": {
+        "tacitOs": "Tacit OS",
+        "systemOrchestrator": "System Orchestrator",
+        "riskGuard": "RiskGuard",
+        "tacitCore": "Tacit Core"
+      },
+      "widgets": {
+        "report": {
+          "risk": {
+            "medium": "Medium"
+          }
+        }
+      }
+    }
+  },
+  "consensus": {
+    "header": {
+      "subtitle": "AI models synthesizing implicit heuristics before execution",
+      "synthesisStatus": "Synthesis #49201 Active"
+    },
+    "outcome": {
+      "message": "Approved with modified parameters (50% size)."
+    },
+    "graph": {
+      "nodes": {
+        "macro": "Macro (Intuition)",
+        "risk": "Risk (Friction)",
+        "whale": "Whale (Alignment)"
+      }
+    }
   }
 }

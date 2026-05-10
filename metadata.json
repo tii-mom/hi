@@ -1,6 +1,11 @@
 {
-  "name": "",
-  "description": "",
+  "name": "HI Protocol Frontend",
+  "description": "A living AI financial operating system frontend for HI Protocol.",
   "requestFramePermissions": [],
-  "majorCapabilities": []
+  "majorCapabilities": [
+    "AI-first terminal",
+    "mobile-first UI",
+    "Telegram WebApp shell",
+    "multilingual interface"
+  ]
 }

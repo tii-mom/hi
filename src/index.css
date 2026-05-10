@@ -58,6 +58,12 @@
   100% { transform: translateY(100%); opacity: 0;}
 }
 
+@keyframes dataFlow {
+  0% { transform: translateY(-100%); opacity: 0; }
+  50% { opacity: 0.5; }
+  100% { transform: translateY(100%); opacity: 0; }
+}
+
 @utility animate-breathe {
   animation: breathe 4s ease-in-out infinite;
 }
@@ -76,6 +82,10 @@
 
 @utility animate-scanline {
   animation: scanline 8s linear infinite;
+}
+
+@utility animate-data-flow {
+  animation: dataFlow 3s linear infinite;
 }
 
 /* Panel/glassmorphism utility */

@@ -1,5 +1,5 @@
-import { cn } from '@/src/lib/utils';
-import { useMemo } from 'react';
+import { cn } from '@/lib/utils';
+import { useMemo, type ReactNode } from 'react';
 
 export type AgentAvatarStyle = 'cosmic-explorer' | 'cyberpunk-chrome' | 'minimalist-ai';
 
@@ -25,10 +25,10 @@ function getStringHash(str: string) {
 export default function AgentAvatar({ seed, className, size = 40, styleType = 'cyberpunk-chrome' }: AgentAvatarProps) {
   const hash = useMemo(() => getStringHash(seed), [seed]);
 
-  let emoji = '';
-  let containerClasses = '';
-  let imgClasses = '';
-  let glowElement = null;
+  let emoji: string;
+  let containerClasses: string;
+  let imgClasses: string;
+  let glowElement: ReactNode;
 
   if (styleType === 'cosmic-explorer') {
     emoji = fruits[hash % fruits.length];
@@ -75,4 +75,3 @@ export default function AgentAvatar({ seed, className, size = 40, styleType = 'c
     </div>
   );
 }
-

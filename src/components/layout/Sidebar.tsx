@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { cn } from '@/src/lib/utils';
+import { cn } from '@/lib/utils';
 import { 
   Terminal, Users, Briefcase, Zap, 
   Copy, MessageSquare, ShieldAlert, Cpu, Hammer, CreditCard

@@ -1,0 +1,75 @@
+import { motion } from 'motion/react';
+import { Radio, Cpu, ShieldAlert, Zap, Layers, Activity } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
+import { terminalTimelineEvents } from '../data';
+import type { TerminalTimelineIcon } from '../types';
+
+const iconMap = {
+  activity: Activity,
+  shield: ShieldAlert,
+  zap: Zap,
+  layers: Layers,
+  cpu: Cpu,
+} satisfies Record<TerminalTimelineIcon, typeof Activity>;
+
+export default function AITimelineFeed() {
+  const { t } = useTranslation();
+
+  return (
+    <div className="flex flex-col h-full bg-black/40 border border-white/5 rounded-xl overflow-hidden backdrop-blur-md relative min-h-0">
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-accent-blue/5 to-transparent h-12 w-full animate-scanline pointer-events-none" />
+
+      <div className="p-3 border-b border-white/5 flex items-center justify-between bg-white/[0.02] shrink-0">
+        <div className="flex items-center gap-2">
+          <Radio className="w-3.5 h-3.5 text-accent-violet" />
+          <h3 className="text-[10px] font-bold uppercase tracking-widest text-text-secondary">{t('terminal.timeline.title')}</h3>
+        </div>
+        <div className="flex items-center gap-2">
+          <div className="w-1.5 h-1.5 rounded-full bg-accent-violet animate-pulse" />
+          <span className="text-[9px] uppercase text-accent-violet font-mono tracking-widest">{t('terminal.timeline.liveFeed')}</span>
+        </div>
+      </div>
+      <div className="flex-1 overflow-y-auto p-4 font-mono relative">
+        <div className="absolute left-6 top-4 bottom-4 w-px bg-white/5" />
+
+        <div className="space-y-4">
+          {terminalTimelineEvents.map((event, index) => {
+            const EventIcon = iconMap[event.icon];
+
+            return (
+              <motion.div
+                key={event.id}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: index * 0.15 }}
+                className="relative flex gap-4 group"
+              >
+                <div className="flex flex-col items-center mt-1 z-10 shrink-0">
+                  <div className="w-5 h-5 rounded-full bg-black border border-white/10 flex items-center justify-center group-hover:border-white/30 transition-colors shadow-lg">
+                    <EventIcon className={`w-2.5 h-2.5 ${event.colorClass}`} />
+                  </div>
+                </div>
+                <div className="flex-1 pb-1">
+                  <div className="flex items-baseline justify-between">
+                    <span className={`text-[10px] font-bold uppercase tracking-wider ${event.colorClass}`}>
+                      {t(`terminal.timeline.events.${event.id}.agent`, event.agent)}
+                    </span>
+                    <span className="text-[9px] text-text-secondary">{event.time}</span>
+                  </div>
+                  <p className="mt-1 text-[11px] text-white/70 leading-relaxed">
+                    {t(`terminal.timeline.events.${event.id}.text`, event.text)}
+                  </p>
+                  {event.badge && (
+                    <div className="mt-2 text-[9px] px-2 py-1 bg-accent-violet/10 text-accent-violet border border-accent-violet/20 rounded inline-block">
+                      {t(`terminal.timeline.events.${event.id}.badge`, event.badge)}
+                    </div>
+                  )}
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+}

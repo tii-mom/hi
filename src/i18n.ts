@@ -13,6 +13,8 @@ import hi from './locales/hi.json';
 import pt from './locales/pt.json';
 import es from './locales/es.json';
 
+export const supportedLanguages = ['en', 'zh', 'ru', 'ko', 'ja', 'tr', 'vi', 'hi', 'pt', 'es'] as const;
+
 i18n
   .use(LanguageDetector)
   .use(initReactI18next)
@@ -29,7 +31,14 @@ i18n
       pt: { translation: pt },
       es: { translation: es }
     },
+    supportedLngs: [...supportedLanguages],
+    load: 'languageOnly',
     fallbackLng: 'en',
+    detection: {
+      order: ['localStorage', 'navigator', 'htmlTag'],
+      caches: ['localStorage'],
+      lookupLocalStorage: 'i18nextLng'
+    },
     interpolation: {
       escapeValue: false
     }

@@ -1,29 +1,44 @@
-import { Bell, Search, User, Activity, Wallet, Globe } from 'lucide-react';
+import { Bell, Search, Wallet } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import AuthModal from '../ui/AuthModal';
-import { cn } from '@/src/lib/utils';
-import { useLiveData } from '../../hooks/useLiveData';
 import { useTranslation } from 'react-i18next';
+import AuthModal from '../ui/AuthModal';
+import { useAppState } from '@/app/state';
+import { cn } from '@/lib/utils';
+import { useLiveData } from '../../hooks/useLiveData';
 import LanguageSwitcher from '../ui/LanguageSwitcher';
 
 export default function Header() {
-  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const {
+    authModalOpen,
+    closeAuthModal,
+    connectedIdentityLabel,
+    openAuthModal,
+    walletStatus,
+  } = useAppState();
+  const { t } = useTranslation();
   const { value: sentiment } = useLiveData(78.4, 0.02, 2000);
   const { value: revenue } = useLiveData(14291.02, 0.005, 1000);
-  const { i18n } = useTranslation();
 
-  const [sysStatus, setSysStatus] = useState<'Active' | 'Lagging'>('Active');
+  const [sysStatus, setSysStatus] = useState<'active' | 'lagging'>('active');
 
   useEffect(() => {
     // Simulate dynamic system coordination status
     const interval = setInterval(() => {
-      setSysStatus(Math.random() > 0.85 ? 'Lagging' : 'Active');
+      setSysStatus(Math.random() > 0.85 ? 'lagging' : 'active');
     }, 4000);
     return () => clearInterval(interval);
   }, []);
 
-  const statusColor = sysStatus === 'Active' ? 'text-accent-emerald/80' : 'text-orange-500';
+  const statusColor = sysStatus === 'active' ? 'text-accent-emerald/80' : 'text-orange-500';
+  const walletLabel =
+    walletStatus === 'connected' && connectedIdentityLabel
+      ? connectedIdentityLabel
+      : walletStatus === 'connecting'
+        ? t('header.wallet.linking')
+        : t('header.wallet.connect');
+  const sentimentStateLabel =
+    sentiment > 75 ? t('header.metrics.bullish') : t('header.metrics.neutral');
 
   return (
     <>
@@ -34,8 +49,8 @@ export default function Header() {
           </Link>
           <div className="flex flex-col">
             <span className="text-sm font-bold tracking-tight">HI PROTOCOL</span>
-            <span className={cn("text-[10px] font-mono uppercase transition-colors duration-500", statusColor, sysStatus === 'Lagging' && "animate-pulse")}>
-              Sys_Ready // Agent_Coord: {sysStatus}
+            <span className={cn("text-[10px] font-mono uppercase transition-colors duration-500", statusColor, sysStatus === 'lagging' && "animate-pulse")}>
+              {t('header.status.systemReady')} // {t('header.status.agentCoord')}: {t(`header.status.${sysStatus}`)}
             </span>
           </div>
         </div>
@@ -43,14 +58,14 @@ export default function Header() {
         <div className="flex items-center gap-4 md:gap-6">
           <div className="hidden lg:flex gap-4 items-center text-[11px] font-mono mr-2">
             <div className="flex flex-col items-end">
-              <span className="text-text-secondary">GLOBAL_SENTIMENT</span>
+              <span className="text-text-secondary">{t('header.metrics.globalSentiment')}</span>
               <span className={sentiment > 75 ? "text-accent-emerald" : "text-text-secondary"}>
-                {sentiment.toFixed(1)} {sentiment > 75 ? 'BULLISH' : 'NEUTRAL'}
+                {sentiment.toFixed(1)} {sentimentStateLabel}
               </span>
             </div>
             <div className="w-[1px] h-6 bg-white/10"></div>
             <div className="flex flex-col items-end">
-              <span className="text-text-secondary">AGENT_REVENUE_24H</span>
+              <span className="text-text-secondary">{t('header.metrics.agentRevenue24h')}</span>
               <span className="text-accent-blue">
                 ${revenue.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
               </span>
@@ -61,26 +76,38 @@ export default function Header() {
             <LanguageSwitcher direction="down" />
           </div>
 
-          <button className="relative p-2 text-text-secondary hover:text-white transition-colors hidden sm:block">
+          <button
+            aria-label={t('header.actions.search')}
+            className="relative p-2 text-text-secondary hover:text-white transition-colors hidden sm:block"
+          >
             <Search className="w-4 h-4" />
           </button>
 
-          <button className="relative p-2 text-text-secondary hover:text-white transition-colors">
+          <button
+            aria-label={t('header.actions.notifications')}
+            className="relative p-2 text-text-secondary hover:text-white transition-colors"
+          >
             <Bell className="w-4 h-4" />
             <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-accent-blue rounded-full" />
           </button>
           
           <button 
-            onClick={() => setIsAuthModalOpen(true)}
-            className="flex items-center gap-2 h-8 px-3 rounded-lg bg-blue-600 hover:bg-blue-500 text-white transition-colors text-[10px] font-bold uppercase tracking-widest"
+            onClick={openAuthModal}
+            aria-label={t('header.actions.wallet')}
+            className={cn(
+              "flex items-center gap-2 h-8 px-3 rounded-lg text-white transition-colors text-[10px] font-bold uppercase tracking-widest",
+              walletStatus === 'connected'
+                ? "bg-accent-emerald/20 text-accent-emerald border border-accent-emerald/30 hover:bg-accent-emerald/30"
+                : "bg-blue-600 hover:bg-blue-500"
+            )}
           >
             <Wallet className="w-3 h-3" />
-            <span className="hidden sm:inline">Connect</span>
+            <span className="hidden sm:inline">{walletLabel}</span>
           </button>
         </div>
       </header>
       
-      <AuthModal isOpen={isAuthModalOpen} onClose={() => setIsAuthModalOpen(false)} />
+      <AuthModal isOpen={authModalOpen} onClose={closeAuthModal} />
     </>
   );
 }
