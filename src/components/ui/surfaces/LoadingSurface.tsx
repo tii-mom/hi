@@ -1,5 +1,6 @@
 import { cn } from '@/lib/utils';
 import type { HTMLAttributes, ReactNode } from 'react';
+import { Surface } from './Surface';
 
 interface LoadingSurfaceProps extends HTMLAttributes<HTMLDivElement> {
   title: string;
@@ -11,7 +12,7 @@ interface LoadingSurfaceProps extends HTMLAttributes<HTMLDivElement> {
 export function LoadingSurface({ title, subtitle, indicator, active = true, className, ...props }: LoadingSurfaceProps) {
   return (
     <div className={cn('flex min-h-[240px] w-full items-center justify-center bg-bg-base text-text-primary', className)} role="status" aria-live="polite" aria-busy="true" {...props}>
-      <div className="w-full max-w-sm rounded-xl border border-border bg-black/40 p-5 shadow-[0_0_40px_rgba(59,130,246,0.08)]">
+      <Surface variant="solid" className="w-full max-w-sm p-5 shadow-[0_0_40px_rgba(59,130,246,0.08)]">
         <div className="flex items-center gap-3 mb-4">
           {indicator}
           <div className="min-w-0">
@@ -22,7 +23,7 @@ export function LoadingSurface({ title, subtitle, indicator, active = true, clas
         <div className="h-1.5 w-full overflow-hidden rounded-full bg-white/5">
           <div className={cn('h-full w-1/2 rounded-full bg-accent-blue/80', active && 'animate-pulse')} />
         </div>
-      </div>
+      </Surface>
     </div>
   );
 }

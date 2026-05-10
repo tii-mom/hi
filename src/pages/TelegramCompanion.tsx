@@ -5,17 +5,15 @@ import { useTranslation } from 'react-i18next';
 import AgentAvatar from '../components/ui/AgentAvatar';
 import { cn } from '@/lib/utils';
 import { useTelegramShell } from '@/features/telegram';
-import { selectTelegramCompanionResponse, telegramCompanionViewModel } from '@/app/services/telegram';
-import type { TelegramCompanionCopy } from '@/features/telegram/companion';
+import { createTelegramCompanionViewModel, selectTelegramCompanionResponse } from '@/app/services/telegram';
 
 interface Message {
   id: string;
   sender: 'user' | 'agent';
-  text?: string;
-  textCopy?: TelegramCompanionCopy;
+  text: string;
   type?: 'text' | 'widget';
   timestamp: string;
-  agentRole?: TelegramCompanionCopy;
+  agentRole?: string;
   widgetData?: {
     values: {
       btc: string;
@@ -28,11 +26,12 @@ interface Message {
 export default function NeuralLinkInterface() {
   const { t } = useTranslation();
   const telegram = useTelegramShell();
+  const telegramCompanionViewModel = createTelegramCompanionViewModel(t);
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
       sender: 'agent',
-      textCopy: telegramCompanionViewModel.welcome.text,
+      text: telegramCompanionViewModel.welcome.text,
       timestamp: '09:41',
       agentRole: telegramCompanionViewModel.welcome.role,
     },
@@ -41,7 +40,6 @@ export default function NeuralLinkInterface() {
   const [isTyping, setIsTyping] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  const copy = (item: TelegramCompanionCopy) => t(item.key, item.fallback);
   const shellStyle = telegram.isTelegram && telegram.stableViewportHeight
     ? {
         minHeight: `${telegram.stableViewportHeight}px`,
@@ -73,11 +71,11 @@ export default function NeuralLinkInterface() {
 
     window.setTimeout(() => {
       setIsTyping(false);
-      const response = selectTelegramCompanionResponse(newMsg.text ?? '');
+      const response = selectTelegramCompanionResponse(t, newMsg.text);
       const reply: Message = {
         id: Date.now().toString(),
         sender: 'agent',
-        textCopy: response.text,
+        text: response.text,
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
         agentRole: response.role,
         ...(response.widgetData
@@ -87,7 +85,7 @@ export default function NeuralLinkInterface() {
                 values: {
                   btc: `${response.widgetData.btcChangePercent > 0 ? '+' : ''}${response.widgetData.btcChangePercent.toFixed(1)}%`,
                   eth: `${response.widgetData.ethChangePercent > 0 ? '+' : ''}${response.widgetData.ethChangePercent.toFixed(1)}%`,
-                  risk: copy(response.widgetData.risk),
+                  risk: response.widgetData.risk,
                 },
               },
             }
@@ -114,9 +112,9 @@ export default function NeuralLinkInterface() {
               <Activity className="w-5 h-5 text-accent-blue" />
             </div>
             <div className="min-w-0">
-              <h2 className="text-lg font-light text-white tracking-wide truncate">{copy(telegramCompanionViewModel.header.title)}</h2>
+              <h2 className="text-lg font-light text-white tracking-wide truncate">{telegramCompanionViewModel.header.title}</h2>
               <p className="text-[10px] uppercase tracking-widest text-text-secondary font-mono">
-                {copy(telegramCompanionViewModel.header.status)}
+                {telegramCompanionViewModel.header.status}
               </p>
             </div>
           </div>
@@ -125,8 +123,8 @@ export default function NeuralLinkInterface() {
         <div ref={scrollRef} className="flex-1 min-h-0 overflow-y-auto p-4 md:p-6 flex flex-col gap-6 md:gap-8 scroll-smooth">
           <AnimatePresence initial={false}>
             {messages.map((msg) => {
-              const roleLabel = msg.agentRole ? copy(msg.agentRole) : 'Agent';
-              const messageText = msg.sender === 'agent' && msg.textCopy ? copy(msg.textCopy) : (msg.text ?? '');
+              const roleLabel = msg.agentRole ?? 'Agent';
+              const messageText = msg.text;
 
               return (
                 <motion.div
@@ -156,15 +154,15 @@ export default function NeuralLinkInterface() {
                     {msg.type === 'widget' && msg.widgetData && (
                         <div className="mt-6 p-4 md:p-5 bg-white/5 backdrop-blur-md rounded-2xl border border-white/10 w-full min-w-0 space-y-4">
                           <div className="flex justify-between items-center gap-4 text-sm font-mono tracking-wide">
-                          <span className="text-text-secondary">{copy(telegramCompanionViewModel.widgetLabels.btcAlignment)}</span>
+                          <span className="text-text-secondary">{telegramCompanionViewModel.widgetLabels.btcAlignment}</span>
                           <span className="text-accent-emerald">{msg.widgetData.values.btc}</span>
                         </div>
                         <div className="flex justify-between items-center gap-4 text-sm font-mono tracking-wide">
-                          <span className="text-text-secondary">{copy(telegramCompanionViewModel.widgetLabels.ethAlignment)}</span>
+                          <span className="text-text-secondary">{telegramCompanionViewModel.widgetLabels.ethAlignment}</span>
                           <span className="text-red-400">{msg.widgetData.values.eth}</span>
                         </div>
                         <div className="pt-3 border-t border-white/5 flex justify-between items-center gap-4 text-sm font-mono tracking-wide">
-                          <span className="text-text-secondary">{copy(telegramCompanionViewModel.widgetLabels.entropyRisk)}</span>
+                          <span className="text-text-secondary">{telegramCompanionViewModel.widgetLabels.entropyRisk}</span>
                           <span className="text-orange-400 font-bold">{msg.widgetData.values.risk}</span>
                         </div>
                       </div>
@@ -179,7 +177,7 @@ export default function NeuralLinkInterface() {
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="self-start">
               <div className="flex gap-2 items-center text-white/40 mb-2">
                 <Sparkles className="w-4 h-4 animate-pulse" />
-                <span className="text-[10px] uppercase tracking-widest font-mono">{copy(telegramCompanionViewModel.typingIndicator)}</span>
+                <span className="text-[10px] uppercase tracking-widest font-mono">{telegramCompanionViewModel.typingIndicator}</span>
               </div>
             </motion.div>
           )}
@@ -198,7 +196,7 @@ export default function NeuralLinkInterface() {
                     handleSend();
                   }
                 }}
-                placeholder={copy(telegramCompanionViewModel.input.placeholder)}
+                placeholder={telegramCompanionViewModel.input.placeholder}
                 className="bg-transparent flex-1 min-w-0 outline-none text-base text-white placeholder-text-secondary w-full resize-none py-3 font-light"
                 rows={1}
                 style={{ minHeight: '48px', maxHeight: '120px' }}
@@ -206,7 +204,7 @@ export default function NeuralLinkInterface() {
               <div className="flex items-center gap-1 md:gap-2 mb-1 ml-1 md:ml-2 shrink-0">
                 <button
                   type="button"
-                  aria-label={copy(telegramCompanionViewModel.input.micLabel)}
+                  aria-label={telegramCompanionViewModel.input.micLabel}
                   className="w-10 h-10 rounded-full flex items-center justify-center text-text-secondary hover:text-white shrink-0 transition-colors"
                 >
                   <Mic className="w-5 h-5" />
@@ -214,7 +212,7 @@ export default function NeuralLinkInterface() {
                 <div className="w-px h-6 bg-white/10" />
                 <button
                   type="button"
-                  aria-label={copy(telegramCompanionViewModel.input.sendLabel)}
+                  aria-label={telegramCompanionViewModel.input.sendLabel}
                   onClick={handleSend}
                   disabled={!inputValue.trim()}
                   className={cn(
@@ -227,7 +225,7 @@ export default function NeuralLinkInterface() {
               </div>
             </div>
           </div>
-          <div className="text-center mt-3 text-[10px] text-text-secondary font-mono tracking-widest uppercase break-words">{copy(telegramCompanionViewModel.footerContext)}</div>
+          <div className="text-center mt-3 text-[10px] text-text-secondary font-mono tracking-widest uppercase break-words">{telegramCompanionViewModel.footerContext}</div>
         </div>
       </div>
     </div>

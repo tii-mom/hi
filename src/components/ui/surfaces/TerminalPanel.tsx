@@ -1,5 +1,6 @@
 import { cn } from '@/lib/utils';
 import type { HTMLAttributes, ReactNode } from 'react';
+import { Surface } from './Surface';
 
 interface TerminalPanelProps extends HTMLAttributes<HTMLDivElement> {
   title?: string;
@@ -10,9 +11,10 @@ interface TerminalPanelProps extends HTMLAttributes<HTMLDivElement> {
 
 export function TerminalPanel({ title, eyebrow, actions, className, children, ...props }: TerminalPanelProps) {
   return (
-    <section
+    <Surface
+      as="section"
       className={cn(
-        'glass rounded-xl flex flex-col relative overflow-hidden min-h-0 bg-black/25',
+        'flex flex-col relative overflow-hidden min-h-0',
         className,
       )}
       {...props}
@@ -27,6 +29,6 @@ export function TerminalPanel({ title, eyebrow, actions, className, children, ..
         </header>
       )}
       <div className="relative z-10 flex flex-col flex-1 min-h-0">{children}</div>
-    </section>
+    </Surface>
   );
 }

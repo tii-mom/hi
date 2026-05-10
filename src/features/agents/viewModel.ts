@@ -1,8 +1,8 @@
-import type { TFunction } from 'i18next';
 import { agentOverviewRanges, agentProfileTabs, agentRegistry, getAgentById as getAgentByIdData } from './data';
 import type { AgentCopy, AgentEntity, AgentProfileTab } from './types';
+import { translate, type FrontendTranslator } from '@/features/copy/viewModel';
 
-const copy = (t: TFunction, item: AgentCopy) => t(item.key, item.fallback);
+const copy = (t: FrontendTranslator, item: AgentCopy) => translate(t, item.key, item.fallback);
 
 export interface AgentMarketplaceViewModel {
   agents: AgentEntity[];
@@ -14,7 +14,7 @@ export interface AgentProfileViewModel {
   agent?: AgentEntity;
 }
 
-export function createAgentMarketplaceViewModel(t: TFunction): AgentMarketplaceViewModel {
+export function createAgentMarketplaceViewModel(t: FrontendTranslator): AgentMarketplaceViewModel {
   return {
     agents: agentRegistry.map((agent) => ({
       ...agent,
@@ -24,13 +24,13 @@ export function createAgentMarketplaceViewModel(t: TFunction): AgentMarketplaceV
   };
 }
 
-export function createAgentProfileViewModel(t: TFunction, id?: string): AgentProfileViewModel {
+export function createAgentProfileViewModel(t: FrontendTranslator, id?: string): AgentProfileViewModel {
   const agent = getAgentByIdData(id);
 
   return {
     tabs: agentProfileTabs.map((tab) => ({
       id: tab,
-      label: t(`agents.profile.tabs.${tab}`, tab),
+      label: translate(t, `agents.profile.tabs.${tab}`, tab),
     })),
     ranges: agentOverviewRanges,
     agent: agent

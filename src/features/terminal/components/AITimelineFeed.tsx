@@ -24,7 +24,7 @@ export default function AITimelineFeed() {
       actions={
         <div className="flex items-center gap-2">
           <Radio className="w-3.5 h-3.5 text-accent-violet" />
-          <StatusBadge tone="violet" className="border-0 bg-transparent px-0 text-[9px] text-accent-violet">
+          <StatusBadge tone="violet" variant="ghost">
             {t('terminal.timeline.liveFeed')}
           </StatusBadge>
         </div>
@@ -62,9 +62,9 @@ export default function AITimelineFeed() {
                     {t(`terminal.timeline.events.${event.id}.text`, event.text)}
                   </p>
                   {event.badge && (
-                    <div className="mt-2 text-[9px] px-2 py-1 bg-accent-violet/10 text-accent-violet border border-accent-violet/20 rounded inline-block">
+                    <StatusBadge tone="violet" className="mt-2 inline-flex py-1 normal-case tracking-normal">
                       {t(`terminal.timeline.events.${event.id}.badge`, event.badge)}
-                    </div>
+                    </StatusBadge>
                   )}
                 </div>
               </motion.div>

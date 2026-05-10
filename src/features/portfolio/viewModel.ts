@@ -1,8 +1,8 @@
-import type { TFunction } from 'i18next';
 import { portfolioViewModel as portfolioData } from './data';
 import type { PortfolioCopy, PortfolioPositionType, PortfolioViewModel } from './types';
+import { translate, type FrontendTranslator } from '@/features/copy/viewModel';
 
-const copy = (t: TFunction, item: PortfolioCopy) => t(item.key, { defaultValue: item.fallback });
+const copy = (t: FrontendTranslator, item: PortfolioCopy) => translate(t, item.key, { defaultValue: item.fallback });
 
 export interface PortfolioPageViewModel {
   title: string;
@@ -44,7 +44,7 @@ export interface PortfolioPageViewModel {
   }>;
 }
 
-export function createPortfolioViewModel(t: TFunction) {
+export function createPortfolioViewModel(t: FrontendTranslator) {
   return {
     ...portfolioData,
     title: copy(t, portfolioData.title),

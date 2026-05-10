@@ -3,6 +3,7 @@ import { Database, Clock } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { TerminalPanel } from '@/components/ui/surfaces/TerminalPanel';
 import { StatusBadge } from '@/components/ui/surfaces/StatusBadge';
+import { Surface } from '@/components/ui/surfaces/Surface';
 import { aiMemoryItems } from '../data';
 
 export default function AIMemoryModule() {
@@ -15,7 +16,7 @@ export default function AIMemoryModule() {
       actions={
         <div className="flex items-center gap-2">
           <Database className="w-3.5 h-3.5 text-text-secondary" />
-          <StatusBadge tone="blue" className="border-0 bg-transparent px-0 text-[9px] text-text-secondary">
+          <StatusBadge tone="blue" variant="ghost" className="text-text-secondary">
             {t('terminal.memory.scanning')}
           </StatusBadge>
         </div>
@@ -24,12 +25,14 @@ export default function AIMemoryModule() {
 
       <div className="flex-1 overflow-y-auto space-y-3 relative z-10 min-h-0 pr-1">
         {aiMemoryItems.map((item, index) => (
-          <motion.div
+          <Surface
+            as={motion.div}
             key={item.id}
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: index * 0.15 }}
-            className="bg-black/30 border border-white/5 p-3 rounded-lg relative overflow-hidden group hover:bg-black/50 transition-colors"
+            variant="inset"
+            className="bg-black/30 p-3 rounded-lg relative overflow-hidden group hover:bg-black/50 transition-colors"
           >
             <div className="flex items-start justify-between mb-2">
               <div className="flex items-center gap-2 text-[10px] text-text-secondary font-mono">
@@ -53,7 +56,7 @@ export default function AIMemoryModule() {
             <p className="text-[10px] text-white/50 leading-relaxed border-l-2 border-white/10 pl-2 mt-2">
               {t(`terminal.memory.items.${item.id}.insight`, item.insight)}
             </p>
-          </motion.div>
+          </Surface>
         ))}
       </div>
     </TerminalPanel>

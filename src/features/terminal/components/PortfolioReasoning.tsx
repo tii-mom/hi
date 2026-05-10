@@ -3,6 +3,7 @@ import { Briefcase, Brain } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { TerminalPanel } from '@/components/ui/surfaces/TerminalPanel';
 import { StatusBadge } from '@/components/ui/surfaces/StatusBadge';
+import { Surface } from '@/components/ui/surfaces/Surface';
 import { portfolioReasoningItems } from '../data';
 
 export default function PortfolioReasoning() {
@@ -24,12 +25,14 @@ export default function PortfolioReasoning() {
       </div>
       <div className="flex-1 overflow-y-auto space-y-3 relative z-10 min-h-0 pr-1">
         {portfolioReasoningItems.map((item, index) => (
-          <motion.div
+          <Surface
+            as={motion.div}
             key={item.asset}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1 }}
-            className="bg-black/40 border border-white/5 p-3 rounded-lg hover:border-white/20 transition-colors group relative overflow-hidden"
+            variant="inset"
+            className="p-3 rounded-lg hover:border-white/20 transition-colors group relative overflow-hidden"
           >
             <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
             <div className="flex justify-between items-start mb-2 relative z-10">
@@ -56,7 +59,7 @@ export default function PortfolioReasoning() {
                 </div>
               </div>
             </div>
-          </motion.div>
+          </Surface>
         ))}
       </div>
     </TerminalPanel>

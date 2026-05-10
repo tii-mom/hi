@@ -1,8 +1,8 @@
-import type { TFunction } from 'i18next';
 import { createSystemStressData, riskLevels, riskViewModel as riskData } from './data';
 import type { RiskCopy } from './types';
+import { translate, type FrontendTranslator } from '@/features/copy/viewModel';
 
-const copy = (t: TFunction, item: RiskCopy) => t(item.key, { defaultValue: item.fallback });
+const copy = (t: FrontendTranslator, item: RiskCopy) => translate(t, item.key, { defaultValue: item.fallback });
 
 export interface RiskPageViewModel {
   title: string;
@@ -42,7 +42,7 @@ export interface RiskPageViewModel {
   };
 }
 
-export function createRiskViewModel(t: TFunction) {
+export function createRiskViewModel(t: FrontendTranslator) {
   return {
     ...riskData,
     title: copy(t, riskData.title),

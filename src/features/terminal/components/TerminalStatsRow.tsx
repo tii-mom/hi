@@ -22,8 +22,9 @@ export default function TerminalStatsRow({ stats }: TerminalStatsRowProps) {
               <StatusBadge
                 tone={isPositive ? 'emerald' : 'neutral'}
                 className={cn(
-                  !isPositive && 'border-0 bg-transparent px-0 text-text-secondary',
+                  !isPositive && 'text-text-secondary',
                 )}
+                variant={isPositive ? 'default' : 'ghost'}
               >
                 {stat.change}
               </StatusBadge>
